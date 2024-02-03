@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DefaultNamespace.Level
 {
@@ -39,6 +40,19 @@ namespace DefaultNamespace.Level
             {
                 floatingObject.SetVelocityRate(_moon.MoonPosition);
             }
+
+            LimitRotation();
+        }
+
+        private void LimitRotation()
+        {
+            Vector3 euler = transform.eulerAngles;
+            
+            if (euler.z > 180) 
+                euler.z = euler.z - 360;
+            
+            euler.z = Mathf.Clamp(euler.z, -25, 25);
+            transform.eulerAngles = euler;
         }
     }
 }

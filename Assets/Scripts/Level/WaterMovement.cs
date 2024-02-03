@@ -14,11 +14,14 @@ public class WaterMovement : MonoBehaviour
     [Range(1f,10f)][SerializeField] private float length = 3f;
     [Range(0,10f)][SerializeField] private float speed = 3f;
     [Header("Water level settings")]
-    [Range(0,5f)][SerializeField] private float waterLevelSpeedChange = 1f;
+    [Range(0,5f)][SerializeField] private float minWaterLevelSpeedChange = 1f;
+    [Range(0,5f)][SerializeField] private float maxWaterLevelSpeedChange = 1f;
+    [Range(0,1f)][SerializeField] private float lerpVelocity = 0.1f;
     
     private float[] _initialVertexPosZ;
     private float _heightStep = 1f;
     private float _offset = 0f;
+    private float _waterLevelDir = 0;
     private void Awake()
     {
         int length = waterGraphic.mesh.vertices.Length;
@@ -39,6 +42,7 @@ public class WaterMovement : MonoBehaviour
     {
         UpdateWaveHeight();
         UpdateMesh();
+        UpdateWaterLevel();
     }
 
     private void UpdateMesh()
@@ -59,6 +63,13 @@ public class WaterMovement : MonoBehaviour
         _offset += Time.deltaTime * speed;
     }
 
+    private void UpdateWaterLevel()
+    {
+        waterLevel.transform.position = Vector3.Lerp(waterLevel.transform.position, new Vector3(0, 
+            Mathf.Clamp(waterLevel.transform.position.y + _heightStep * _waterLevelDir, downBorder.position.y , upBorder.position.y), 
+            0f), Time.deltaTime * lerpVelocity); 
+    }
+
     public Transform GetWaterLevel()
     {
         return waterLevel;
@@ -67,10 +78,14 @@ public class WaterMovement : MonoBehaviour
     public void ChangeWaterLevel(float changeValue)
     {
         changeValue = Mathf.Clamp(changeValue, -1f, 1f);
+
+        if (Mathf.Approximately(changeValue, 0))
+        {
+            _waterLevelDir = 0;
+            return;
+        }
         
-        waterLevel.transform.position = Vector3.Lerp(waterLevel.transform.position, new Vector3(0, 
-            Mathf.Clamp(downBorder.position.y + _heightStep * changeValue * 10, downBorder.position.y , upBorder.position.y), 
-            0f), Time.deltaTime * waterLevelSpeedChange); 
+        _waterLevelDir = Mathf.Clamp(_waterLevelDir + changeValue, -minWaterLevelSpeedChange, maxWaterLevelSpeedChange);
     }
 
     public float GetWaveHeight(float x)
@@ -78,3 +93,8 @@ public class WaterMovement : MonoBehaviour
         return amplitude * Mathf.Sin(x / length + _offset);
     }
 }
+/*
+  waterLevel.transform.position = Vector3.Lerp(waterLevel.transform.position, new Vector3(0, 
+            Mathf.Clamp(upBorder.position.y + _heightStep * _waterLevelDir, downBorder.position.y , upBorder.position.y), 
+            0f), Time.deltaTime * lerpVelocity); 
+ */

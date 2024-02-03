@@ -8,9 +8,12 @@ public class WaterMovement : MonoBehaviour
     
     [SerializeField] private MeshFilter meshFilter;
 
+    [Header("Wave settings")]
     [Range(0,10f)][SerializeField] private float amplitude = 3f;
     [Range(1f,10f)][SerializeField] private float length = 3f;
     [Range(0,10f)][SerializeField] private float speed = 3f;
+    [Header("Water level settings")]
+    [Range(0,1f)][SerializeField] private float waterLevelSpeedChange = 1f;
     
     private float[] _initialVertexPosZ;
     private float _heightStep;
@@ -68,7 +71,7 @@ public class WaterMovement : MonoBehaviour
         
         waterLevel.transform.position = Vector3.Lerp(waterLevel.transform.position, new Vector3(0, 
             Mathf.Clamp(downBorder.position.y + _heightStep * changeValue * 10, downBorder.position.y , upBorder.position.y), 
-            0f), Time.deltaTime); 
+            0f), Time.deltaTime * waterLevelSpeedChange); 
     }
 
     public float GetWaveHeight(float x)

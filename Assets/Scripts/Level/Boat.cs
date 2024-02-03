@@ -7,11 +7,18 @@ namespace DefaultNamespace.Level
     {
         private Moon _moon;
         private FloatingObject _floating;
+        private BoatSpawn _spawn;
 
         public void Construct()
         {
             _moon = FindAnyObjectByType<Moon>();
             _floating = FindAnyObjectByType<FloatingObject>();
+            _spawn = FindAnyObjectByType<BoatSpawn>();
+        }
+
+        public void Init()
+        {
+            transform.position = _spawn.transform.position;
         }
 
         public void UpdateLogic()

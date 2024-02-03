@@ -1,4 +1,7 @@
-﻿public class InputData
+﻿using System;
+
+[Serializable]
+public class InputData
 {
     public bool ClickDown;
     public bool ClickHold;

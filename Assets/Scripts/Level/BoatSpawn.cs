@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace.Level
+public class BoatSpawn : MonoBehaviour
 {
-    public class BoatSpawn : MonoBehaviour
-    {
-    }
 }

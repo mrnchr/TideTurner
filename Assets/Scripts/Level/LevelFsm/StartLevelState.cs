@@ -1,5 +1,4 @@
-﻿using DefaultNamespace.Level;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StartLevelState : LevelStateBase
 {

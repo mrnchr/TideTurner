@@ -33,14 +33,14 @@ public class Water : MonoBehaviour
         _heightStep = (upBorder.transform.position.y - downBorder.transform.position.y) / 10;
     }
 
-    private float g = 1;
+    //private float g = 1;
     private void Update()
     {
         UpdateWaveHeight();
         UpdateMesh();
 
-        g = Mathf.Clamp(g + Input.mouseScrollDelta.y / 10, 0, 1f);
-        ChangeWaterLevel(g);
+        //g = Mathf.Clamp(g + Input.mouseScrollDelta.y / 10, 0, 1f);
+        //ChangeWaterLevel(g);
     }
 
     private void UpdateMesh()

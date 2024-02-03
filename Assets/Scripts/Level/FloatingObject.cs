@@ -4,7 +4,7 @@ public class FloatingObject : MonoBehaviour
 {
     [SerializeField]private Rigidbody rb;
     [Header("Settings")]
-    [Range(1,10f)][SerializeField] private float displacementAmount = 1;
+    [Range(0,10f)][SerializeField] private float displacementAmount = 1;
     [Range(0.1f,2f)][SerializeField] private float waterDrag = 2f;
     [Range(0.1f,2f)][SerializeField] private float waterAngularDrag = 2f;
     [Range(0.1f,5f)][SerializeField] private float floaterCount = 2;
@@ -33,22 +33,46 @@ public class FloatingObject : MonoBehaviour
 
     private void Move()
     {
+        // go down.
         rb.AddForceAtPosition(Physics.gravity / floaterCount, transform.position, ForceMode.Acceleration);
 
         // get current sin value;
         _waveHeight = _waterMovement.GetWaveHeight(transform.position.x);
-        
-        if ( transform.position.y - _waterMovement.GetWaterLevel().position.y >  _waveHeight) 
+
+            
+        if (  transform.position.y - _waterMovement.GetWaterLevel().position.y >  _waveHeight) 
             return;
         
-        _displacementMultiplayer = Mathf.Clamp01( (_waveHeight - transform.position.y) / depthBefore ) * displacementAmount;
+        _displacementMultiplayer = Mathf.Clamp01( (_waveHeight - transform.position.y ) / depthBefore ) * displacementAmount;
             
-        // vector up * displace;
+        // Go up.
         Vector3 v = new Vector3(0f, Mathf.Abs(Physics.gravity.y) * _displacementMultiplayer, 0f);
             
         rb.AddForceAtPosition(v, transform.position, ForceMode.Acceleration);
             
         rb.AddForce(_displacementMultiplayer * -rb.velocity * waterDrag * Time.deltaTime, ForceMode.VelocityChange);
         rb.AddTorque(_displacementMultiplayer * -rb.angularVelocity * waterAngularDrag * Time.deltaTime, ForceMode.VelocityChange);
+    }
+
+    private void Move2()
+    {
+        if ( _waterMovement.GetWaterLevel().position.y <  transform.position.y) 
+            return;
+        
+        _waveHeight = _waterMovement.GetWaveHeight(transform.position.x);
+        
+        _displacementMultiplayer = Mathf.Clamp01( (_waveHeight - transform.position.y ) / depthBefore ) * displacementAmount;
+        
+        // Go up.
+        Vector3 v = new Vector3(0f, Physics.gravity.y, 0f);
+        
+        if ( _waterMovement.GetWaterLevel().position.y <  transform.position.y) 
+            rb.AddForceAtPosition(Physics.gravity / floaterCount, transform.position, ForceMode.Acceleration);
+        else
+            rb.AddForceAtPosition(v, transform.position, ForceMode.Acceleration);
+        
+        rb.AddForce(1 * -rb.velocity * waterDrag * Time.deltaTime, ForceMode.VelocityChange);
+        rb.AddTorque(1 * -rb.angularVelocity * waterAngularDrag * Time.deltaTime, ForceMode.VelocityChange);
+
     }
 }

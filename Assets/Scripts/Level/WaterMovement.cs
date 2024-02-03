@@ -8,15 +8,16 @@ public class WaterMovement : MonoBehaviour
     
     [SerializeField] private MeshFilter waterGraphic;
 
+
     [Header("Wave settings")]
     [Range(0,10f)][SerializeField] private float amplitude = 3f;
     [Range(1f,10f)][SerializeField] private float length = 3f;
     [Range(0,10f)][SerializeField] private float speed = 3f;
     [Header("Water level settings")]
-    [Range(0,1f)][SerializeField] private float waterLevelSpeedChange = 1f;
+    [Range(0,5f)][SerializeField] private float waterLevelSpeedChange = 1f;
     
     private float[] _initialVertexPosZ;
-    private float _heightStep;
+    private float _heightStep = 1f;
     private float _offset = 0f;
     private void Awake()
     {
@@ -62,7 +63,7 @@ public class WaterMovement : MonoBehaviour
     {
         return waterLevel;
     }
-
+    
     public void ChangeWaterLevel(float changeValue)
     {
         changeValue = Mathf.Clamp(changeValue, -1f, 1f);

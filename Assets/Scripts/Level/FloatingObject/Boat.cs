@@ -11,9 +11,9 @@ public class Boat : MonoBehaviour, ILevelUpdatable
     {
         _rb = GetComponent<Rigidbody>();
             
-        _rb.drag = 0;
-        _rb.angularDrag = 0;
-        _rb.useGravity = false;
+            _rb.drag = 1;
+            _rb.angularDrag = 1;
+            _rb.useGravity = false;
 
         _rb.constraints = RigidbodyConstraints.FreezeRotationX |
             RigidbodyConstraints.FreezeRotationY |

@@ -13,8 +13,8 @@ namespace DefaultNamespace.Level
         {
             _rb = GetComponent<Rigidbody>();
             
-            _rb.drag = 0;
-            _rb.angularDrag = 0;
+            _rb.drag = 1;
+            _rb.angularDrag = 1;
             _rb.useGravity = false;
 
             _rb.constraints = RigidbodyConstraints.FreezeRotationX |

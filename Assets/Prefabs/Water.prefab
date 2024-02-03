@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2639257760877584682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -100, z: 0}
+  m_LocalPosition: {x: 0, y: -40, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -126,10 +126,12 @@ MonoBehaviour:
   upBorder: {fileID: 6373011092440279638}
   downBorder: {fileID: 5095141817093459812}
   waterGraphic: {fileID: 5350555785921216026}
-  amplitude: 5
+  amplitude: 1
   length: 10
   speed: 1
-  waterLevelSpeedChange: 1
+  minWaterLevelSpeedChange: 5
+  maxWaterLevelSpeedChange: 5
+  lerpVelocity: 0.5
 --- !u!1 &6432080509209773926
 GameObject:
   m_ObjectHideFlags: 0

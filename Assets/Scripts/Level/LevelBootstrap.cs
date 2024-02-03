@@ -1,4 +1,5 @@
-﻿using DefaultNamespace.UI;
+﻿using DefaultNamespace.Level;
+using DefaultNamespace.UI;
 using UnityEngine;
 
 public class LevelBootstrap : MonoBehaviour

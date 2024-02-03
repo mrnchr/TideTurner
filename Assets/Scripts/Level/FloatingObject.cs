@@ -5,9 +5,6 @@ public class FloatingObject : MonoBehaviour
     [SerializeField]private Rigidbody rb;
     [Header("Settings")]
     [Range(1f,10f)][SerializeField] private float velocityMultiplier = 4;
-    [Range(1f,10f)][SerializeField] private float torque = 4;
-
-
     
     private WaterMovement _waterMovement;
     private float _displacementMultiplayer;
@@ -34,7 +31,7 @@ public class FloatingObject : MonoBehaviour
         Vector3 dir = new Vector3(
                           0, 
                           _waterMovement.GetWaterLevel().position.y + _waterMovement.GetWaveHeight(transform.position.x),
-                          0f) - transform.position;
+                          0f) - new Vector3(0, transform.position.y, 0f);
         rb.AddForce(dir, ForceMode.Force);
     }
 }

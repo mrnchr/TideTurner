@@ -290,6 +290,8 @@ GameObject:
   - component: {fileID: 478360855}
   - component: {fileID: 478360857}
   - component: {fileID: 478360856}
+  - component: {fileID: 478360859}
+  - component: {fileID: 478360858}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -345,6 +347,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &478360858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478360854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d25a8f2fa4b4567951a8508d3834c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floating: []
+--- !u!114 &478360859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478360854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a1b5666fef84304bba10595cb9a1f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  displacementAmount: 1
+  waterDrag: 1
+  waterAngularDrag: 1
+  floaterCount: 1
+  depthBefore: 1
+  velocityMultiplier: 0
 --- !u!1 &493543731
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,13 +507,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1b5666fef84304bba10595cb9a1f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   displacementAmount: 1
   waterDrag: 2
   waterAngularDrag: 2
   floaterCount: 5
   depthBefore: 1
   velocityMultiplier: 4
-  rb: {fileID: 0}
 --- !u!54 &500420524
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -649,6 +683,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1481830770634964511, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
     - {fileID: 1481830770634964504, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
+    - {fileID: 1481830770634964506, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
 --- !u!4 &639602377 stripped
 Transform:
@@ -823,6 +858,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1481830770634964511, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
     - {fileID: 1481830770634964504, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
+    - {fileID: 1481830770634964506, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
 --- !u!4 &799699903 stripped
 Transform:
@@ -1365,6 +1401,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1481830770634964511, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
     - {fileID: 1481830770634964504, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
+    - {fileID: 1481830770634964506, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
 --- !u!1 &2013767933
 GameObject:
@@ -1512,6 +1549,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1481830770634964511, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
     - {fileID: 1481830770634964504, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
+    - {fileID: 1481830770634964506, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c86c347dfdc5f1747bae5131096492ff, type: 3}
 --- !u!4 &2026181817 stripped
 Transform:

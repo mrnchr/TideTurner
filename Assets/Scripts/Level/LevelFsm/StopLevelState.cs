@@ -2,12 +2,12 @@
 
 public class StopLevelState : LevelStateBase
 {
-    private readonly Level _level;
+    private readonly LevelUpdater _updater;
     private readonly InputController _input;
 
     public StopLevelState(LevelStateMachine machine) : base(machine)
     {
-        _level = Object.FindAnyObjectByType<Level>();
+        _updater = Object.FindAnyObjectByType<LevelUpdater>();
         _input = Object.FindAnyObjectByType<InputController>();
     }
 
@@ -16,13 +16,13 @@ public class StopLevelState : LevelStateBase
         Cursor.lockState = CursorLockMode.Confined;
         Time.timeScale = 0;
         _input.SetPause(true);
-        _level.SetPause(true);
+        _updater.SetPause(true);
     }
 
     public override void Exit()
     {
         Time.timeScale = 1;
         _input.SetPause(false);
-        _level.SetPause(false);
+        _updater.SetPause(false);
     }
 }

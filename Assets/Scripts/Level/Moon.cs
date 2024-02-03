@@ -2,51 +2,20 @@
 
 public class Moon : MonoBehaviour, ILevelUpdatable
 {
-    public float MoonSize;
-    public float MoonPosition;
-
-    [SerializeField] private float _defaultMoonSize;
-    [SerializeField] private float _defaultMoonPosition;
-    [SerializeField] private float MoveSpeed;
-    [SerializeField] private float SizeSpeed;
     [SerializeField] private Vector2 BoundMoonSize;
     [SerializeField] private Transform _leftBound;
     [SerializeField] private Transform _rightBound;
-    private InputController _input;
-    private float _moonPosition;
-    private float _moonSize;
+    private MoonData _data;
 
-    public void Construct()
+    public void Construct(MoonData data)
     {
-        _input = FindAnyObjectByType<InputController>();
-        _input.OnInputHandled += Move;
-    }
-
-    private void OnDestroy()
-    {
-        _input.OnInputHandled -= Move;
+        _data = data;
     }
 
     public void Init()
     {
-        MoonPosition = _defaultMoonPosition;
-        _moonPosition = MoveLerp(MoonPosition);
         SetPosition();
-
-        MoonSize = _defaultMoonSize;
-        _moonSize = SizeLerp(MoonSize);
         SetSize();
-    }
-
-    private void Move(InputData data)
-    {
-        MoonPosition += data.MouseDeltaX * MoveSpeed;
-        MoonPosition = Mathf.Clamp(MoonPosition, -1, 1);
-        _moonPosition = MoveLerp(MoonPosition);
-
-        MoonSize += data.WheelDelta * SizeSpeed;
-        MoonSize = Mathf.Clamp(MoonSize, -1, 1);
-        _moonSize = SizeLerp(MoonSize);
     }
 
     public float MoveLerp(float value)
@@ -67,13 +36,13 @@ public class Moon : MonoBehaviour, ILevelUpdatable
 
     private void SetSize()
     {
-        transform.localScale = new Vector3(1, 1, 1) * _moonSize;
+        transform.localScale = new Vector3(1, 1, 1) * SizeLerp(_data.MoonSize);
     }
 
     private void SetPosition()
     {
         Vector3 pos = transform.position;
-        pos.x = _moonPosition;
+        pos.x = MoveLerp(_data.MoonPosition);
         transform.position = pos;
     }
 }

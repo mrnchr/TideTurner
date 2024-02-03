@@ -5,11 +5,11 @@ public class FloatingObject : MonoBehaviour
     [SerializeField]private Rigidbody rb;
     [Header("Settings")]
     [Range(1,10f)][SerializeField] private float displacementAmount = 1;
-    [Range(0.1f,2f)][SerializeField] private float waterDrag = 1f;
-    [Range(0.1f,2f)][SerializeField] private float waterAngularDrag = 1f;
-    [Range(0.1f,5f)][SerializeField] private float floaterCount = 1;
+    [Range(0.1f,2f)][SerializeField] private float waterDrag = 2f;
+    [Range(0.1f,2f)][SerializeField] private float waterAngularDrag = 2f;
+    [Range(0.1f,5f)][SerializeField] private float floaterCount = 2;
     [Range(0.1f,5f)][SerializeField] private float depthBefore = 1;
-    [Range(1f,10f)][SerializeField] private float velocityMultiplier;
+    [Range(1f,10f)][SerializeField] private float velocityMultiplier = 4;
     
     private WaterMovement _waterMovement;
     private float _displacementMultiplayer;
@@ -17,14 +17,6 @@ public class FloatingObject : MonoBehaviour
     private void Awake()
     {
         _waterMovement = FindObjectOfType<WaterMovement>();
-
-        rb.drag = 0;
-        rb.angularDrag = 0;
-        rb.useGravity = false;
-
-        rb.constraints = RigidbodyConstraints.FreezeRotationX |
-                          RigidbodyConstraints.FreezeRotationY |
-                          RigidbodyConstraints.FreezePositionZ;
     }
 
     private void Update()

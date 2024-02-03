@@ -4,8 +4,22 @@ namespace DefaultNamespace.Level
 {
     public class Boat : MonoBehaviour, ILevelUpdatable
     {
-        private Moon _moon;
         [SerializeField] private FloatingObject[] floating;
+
+        private Moon _moon;
+        private Rigidbody _rb;
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody>();
+            
+            _rb.drag = 0;
+            _rb.angularDrag = 0;
+            _rb.useGravity = false;
+
+            _rb.constraints = RigidbodyConstraints.FreezeRotationX |
+                             RigidbodyConstraints.FreezeRotationY |
+                             RigidbodyConstraints.FreezePositionZ;
+        }
 
         public void Construct()
         {

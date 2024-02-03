@@ -248,7 +248,7 @@ MonoBehaviour:
   amplitude: 5
   length: 10
   speed: 1
-  waterLevelSpeedChange: 1
+  waterLevelSpeedChange: 0.5
 --- !u!1001 &8819627843954464340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6823ef2035ffb04449f91b39fb495d13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.1
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6823ef2035ffb04449f91b39fb495d13, type: 3}
       propertyPath: m_LocalPosition.z

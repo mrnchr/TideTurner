@@ -11,13 +11,13 @@ public class FloatingObject : MonoBehaviour
     [SerializeField] private float velocityMultiplier;
     
     private Rigidbody _rb;
-    private Water _water;
+    private WaterMovement _waterMovement;
     private float _displacementMultiplayer;
     private float _waveHeight;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _water = FindObjectOfType<Water>();
+        _waterMovement = FindObjectOfType<WaterMovement>();
 
         _rb.drag = 1;
         _rb.angularDrag = 1;
@@ -43,7 +43,7 @@ public class FloatingObject : MonoBehaviour
     {
         _rb.AddForceAtPosition(Physics.gravity / floaterCount, transform.position, ForceMode.Acceleration);
 
-        _waveHeight = _water.GetWaveHeight(transform.position.x) + _water.GetWaterLevel().position.y;
+        _waveHeight = _waterMovement.GetWaveHeight(transform.position.x) + _waterMovement.GetWaterLevel().position.y;
         
         if (transform.position.y >  _waveHeight) 
             return;

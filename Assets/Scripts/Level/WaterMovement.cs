@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Water : MonoBehaviour
+public class WaterMovement : MonoBehaviour
 {
     [SerializeField] private Transform waterLevel;
     [SerializeField] private Transform upBorder;

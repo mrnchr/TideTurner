@@ -5,6 +5,8 @@ public class Moon : MonoBehaviour, ILevelUpdatable
     public float MoonSize;
     public float MoonPosition;
 
+    [SerializeField] private float _defaultMoonSize;
+    [SerializeField] private float _defaultMoonPosition;
     [SerializeField] private float MoveSpeed;
     [SerializeField] private float SizeSpeed;
     [SerializeField] private Vector2 BoundMoonSize;
@@ -27,9 +29,11 @@ public class Moon : MonoBehaviour, ILevelUpdatable
 
     public void Init()
     {
+        MoonPosition = _defaultMoonPosition;
         _moonPosition = MoveLerp(MoonPosition);
         SetPosition();
 
+        MoonSize = _defaultMoonSize;
         _moonSize = SizeLerp(MoonSize);
         SetSize();
     }

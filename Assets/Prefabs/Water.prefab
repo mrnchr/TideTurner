@@ -234,3 +234,15 @@ MonoBehaviour:
   length: 0.25
   speed: 1
   offset: 0
+--- !u!114 &3599150191852125470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161898290288642965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 202b430fb6d1444193d1234b4e55cb8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

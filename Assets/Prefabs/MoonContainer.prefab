@@ -98,6 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoonSize: 1
   MoonPosition: 0
+  _defaultMoonSize: 1
+  _defaultMoonPosition: 0
   MoveSpeed: 0.05
   SizeSpeed: 0.5
   BoundMoonSize: {x: 0.5, y: 2}

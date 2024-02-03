@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Moon : MonoBehaviour
+public class Moon : MonoBehaviour, ILevelUpdatable
 {
     public float MoonSize;
     public float MoonPosition;
@@ -18,6 +18,11 @@ public class Moon : MonoBehaviour
     {
         _input = FindAnyObjectByType<InputController>();
         _input.OnInputHandled += Move;
+    }
+
+    private void OnDestroy()
+    {
+        _input.OnInputHandled -= Move;
     }
 
     public void Init()
@@ -50,7 +55,7 @@ public class Moon : MonoBehaviour
         return Mathf.Lerp(BoundMoonSize.x, BoundMoonSize.y, value);
     }
 
-    private void Update()
+    public void UpdateLogic()
     {
         SetPosition();
         SetSize();

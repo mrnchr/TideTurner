@@ -5,4 +5,5 @@
     public bool ClickUp;
     public float MouseDeltaX;
     public float WheelDelta;
+    public bool IsPause;
 }

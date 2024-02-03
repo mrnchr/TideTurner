@@ -14,15 +14,10 @@ public class Moon : MonoBehaviour
     private float _moonPosition;
     private float _moonSize;
 
-    private void Awake()
+    public void Construct()
     {
         _input = FindAnyObjectByType<InputController>();
         _input.OnInputHandled += Move;
-    }
-
-    private void Start()
-    {
-        Init();
     }
 
     public void Init()

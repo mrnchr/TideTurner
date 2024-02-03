@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DefaultNamespace.Level;
 using DefaultNamespace.UI;
 using UnityEngine;
 
@@ -14,8 +13,9 @@ public class Level : MonoBehaviour, ILevelUpdatable
     private LoseWindow _lose;
     private bool _isPaused;
     private WinWindow _win;
+    private Cannon[] _cannons;
 
-    public void Construct(LevelStateMachine machine, Moon moon, Boat boat, Water water, LoseWindow lose, WinWindow win)
+    public void Construct(LevelStateMachine machine, Moon moon, Boat boat, Water water, LoseWindow lose, WinWindow win, Cannon[] cannons)
     {
         _machine = machine;
         _moon = moon;
@@ -23,6 +23,7 @@ public class Level : MonoBehaviour, ILevelUpdatable
         _water = water;
         _lose = lose;
         _win = win;
+        _cannons = cannons;
 
         _updatables.AddRange(new ILevelUpdatable[]
         {
@@ -37,6 +38,9 @@ public class Level : MonoBehaviour, ILevelUpdatable
         _moon.Init();
         _water.Init();
         _boat.Init();
+        
+        foreach (Cannon cannon in _cannons)
+            cannon.Init();
     }
 
     public void SetPause(bool value)
@@ -46,7 +50,7 @@ public class Level : MonoBehaviour, ILevelUpdatable
 
     public void Restart()
     {
-        _machine.ChangeState<StartLevelState>();
+        _machine.ChangeState<RestartLevelState>();
     }
 
     public void Lose()

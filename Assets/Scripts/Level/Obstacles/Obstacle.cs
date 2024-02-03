@@ -1,7 +1,6 @@
-﻿using DefaultNamespace.Level;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Corral : MonoBehaviour
+public class Obstacle : MonoBehaviour
 {
     private Level _level;
 
@@ -12,7 +11,7 @@ public class Corral : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.TryGetComponent(out Boat _))
+        if (other.gameObject.CompareTag("Boat"))
         {
             _level.Lose();
         }

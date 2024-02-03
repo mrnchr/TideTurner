@@ -5,39 +5,24 @@ using UnityEngine;
 
 public class Level : MonoBehaviour, ILevelUpdatable
 {
+    private readonly List<ILevelUpdatable> _updatables = new List<ILevelUpdatable>();
     private LevelStateMachine _machine;
     private Moon _moon;
     private Boat _boat;
-    private readonly List<ILevelUpdatable> _updatables = new List<ILevelUpdatable>();
-    private bool _isPaused;
     private PauseWindow _pause;
     private Water _water;
-    private Barrel _barrel;
     private LoseWindow _lose;
-    private Corral[] _corrals;
+    private bool _isPaused;
+    private WinWindow _win;
 
-    public void Construct()
+    public void Construct(LevelStateMachine machine, Moon moon, Boat boat, Water water, LoseWindow lose, WinWindow win)
     {
-        _machine = FindAnyObjectByType<LevelStateMachine>();
-        _moon = FindAnyObjectByType<Moon>();
-        _boat = FindAnyObjectByType<Boat>();
-        _water = FindAnyObjectByType<Water>();
-        _barrel = FindAnyObjectByType<Barrel>();
-        _pause = FindAnyObjectByType<PauseWindow>();
-        _lose = FindAnyObjectByType<LoseWindow>();
-        _corrals = FindObjectsByType<Corral>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-
-        _moon.Construct();
-        _boat.Construct();
-        _barrel.Construct();
-        _water.Construct();
-        _machine.Construct();
-        _pause.Construct();
-
-        foreach (Corral corral in _corrals)
-        {
-            corral.Construct(this);
-        }
+        _machine = machine;
+        _moon = moon;
+        _boat = boat;
+        _water = water;
+        _lose = lose;
+        _win = win;
 
         _updatables.AddRange(new ILevelUpdatable[]
         {
@@ -49,8 +34,9 @@ public class Level : MonoBehaviour, ILevelUpdatable
 
     public void Init()
     {
-        Debug.Log("Init");
-        _machine.ChangeState<StartLevelState>();
+        _moon.Init();
+        _water.Init();
+        _boat.Init();
     }
 
     public void SetPause(bool value)
@@ -72,9 +58,17 @@ public class Level : MonoBehaviour, ILevelUpdatable
         _machine.ChangeState<StopLevelState>();
     }
 
+    public void Win()
+    {
+        if (_machine.CurrentState is StopLevelState)
+            return;
+        
+        _win.SetActive(true);
+        _machine.ChangeState<StopLevelState>();
+    }
+
     private void Update()
     {
-        Debug.Log(_isPaused);
         if (!_isPaused)
             UpdateLogic();
     }

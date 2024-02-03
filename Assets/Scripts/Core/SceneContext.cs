@@ -8,13 +8,11 @@ public class SceneContext : MonoBehaviour
         if (!ctx)
             ctx = Instantiate(Resources.Load<ProjectContext>("Core"));
 
-        var level = FindAnyObjectByType<Level>();
-        if (level)
+        var bootstrap = FindAnyObjectByType<LevelBootstrap>();
+        if (bootstrap)
         {
-            level.Construct();
-            level.Init();
+            bootstrap.Construct();
+            bootstrap.Init();
         }
-
-        Debug.Log("Awake");
     }
 }

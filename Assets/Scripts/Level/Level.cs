@@ -13,6 +13,8 @@ public class Level : MonoBehaviour, ILevelUpdatable
     private PauseWindow _pause;
     private Water _water;
     private Barrel _barrel;
+    private LoseWindow _lose;
+    private Corral[] _corrals;
 
     public void Construct()
     {
@@ -22,6 +24,8 @@ public class Level : MonoBehaviour, ILevelUpdatable
         _water = FindAnyObjectByType<Water>();
         _barrel = FindAnyObjectByType<Barrel>();
         _pause = FindAnyObjectByType<PauseWindow>();
+        _lose = FindAnyObjectByType<LoseWindow>();
+        _corrals = FindObjectsByType<Corral>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         _moon.Construct();
         _boat.Construct();
@@ -29,6 +33,11 @@ public class Level : MonoBehaviour, ILevelUpdatable
         _water.Construct();
         _machine.Construct();
         _pause.Construct();
+
+        foreach (Corral corral in _corrals)
+        {
+            corral.Construct(this);
+        }
 
         _updatables.AddRange(new ILevelUpdatable[]
         {
@@ -40,6 +49,7 @@ public class Level : MonoBehaviour, ILevelUpdatable
 
     public void Init()
     {
+        Debug.Log("Init");
         _machine.ChangeState<StartLevelState>();
     }
 
@@ -48,8 +58,23 @@ public class Level : MonoBehaviour, ILevelUpdatable
         _isPaused = value;
     }
 
+    public void Restart()
+    {
+        _machine.ChangeState<StartLevelState>();
+    }
+
+    public void Lose()
+    {
+        if (_machine.CurrentState is StopLevelState)
+            return;
+        
+        _lose.SetActive(true);
+        _machine.ChangeState<StopLevelState>();
+    }
+
     private void Update()
     {
+        Debug.Log(_isPaused);
         if (!_isPaused)
             UpdateLogic();
     }

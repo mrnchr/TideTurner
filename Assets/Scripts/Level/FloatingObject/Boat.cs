@@ -6,10 +6,17 @@ namespace DefaultNamespace.Level
     {
         private Moon _moon;
         [SerializeField] private FloatingObject[] floating;
+        private BoatSpawn _spawn;
 
         public void Construct()
         {
             _moon = FindAnyObjectByType<Moon>();
+            _spawn = FindAnyObjectByType<BoatSpawn>();
+        }
+
+        public void Init()
+        {
+            transform.position = _spawn.transform.position;
         }
 
         public void UpdateLogic()

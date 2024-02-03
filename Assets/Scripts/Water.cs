@@ -58,7 +58,7 @@ public class Water : MonoBehaviour
         return waterLevel;
     }
 
-    public void ChangeWaterLevel( float changeValue)
+    public void ChangeWaterLevel(float changeValue)
     {
         waterLevel.transform.position = new Vector3(0, waterLevel.transform.position.y + changeValue, 0f);
     }

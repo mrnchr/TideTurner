@@ -5,9 +5,9 @@ public class Moon : MonoBehaviour
     public float MoonSize;
     public float MoonPosition;
 
-    public float MoveSpeed;
-    public float SizeSpeed;
-    public Vector2 BoundMoonSize;
+    [SerializeField] private float MoveSpeed;
+    [SerializeField] private float SizeSpeed;
+    [SerializeField] private Vector2 BoundMoonSize;
     [SerializeField] private Transform _leftBound;
     [SerializeField] private Transform _rightBound;
     private InputController _input;

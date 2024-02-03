@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Boat : MonoBehaviour
+public class FloatingObject : MonoBehaviour
 {
     private float waveHeight = 3;
     [Range(1,10f)][SerializeField] private float displacementAmount = 1;
@@ -9,10 +9,12 @@ public class Boat : MonoBehaviour
     [Range(1,2f)][SerializeField] private float waterAngularDrag = 1f;
     [Range(1,5f)][SerializeField] private float floaterCount = 1;
     [Range(1,5f)][SerializeField] private float depthBefore = 1;
+    [SerializeField] private float velocityMultiplier;
     
     private Rigidbody _rb;
     private Water _water;
     private float _displacementMultiplayer;
+    
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -33,9 +35,11 @@ public class Boat : MonoBehaviour
         //AddForce(new Vector2(-1, -1));
     }
 
-    public void AddForce(Vector2 dVector2)
+    public void SetVelocityRate(float velocity)
     {
-        _rb.AddForce(dVector2);
+        var vel = _rb.velocity;
+        vel.x = velocity * velocityMultiplier;
+        _rb.velocity = vel;
     }
 
     private void Move()

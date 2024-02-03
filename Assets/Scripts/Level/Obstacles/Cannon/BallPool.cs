@@ -9,9 +9,9 @@ public class BallPool : MonoBehaviour
     [SerializeField] private int _size;
     private BallFactory _factory;
 
-    public void Construct()
+    public void Construct(Level level)
     {
-        _factory = new BallFactory(_prefab, _ballParent);
+        _factory = new BallFactory(_prefab, _ballParent, level);
     }
 
     public void Init()

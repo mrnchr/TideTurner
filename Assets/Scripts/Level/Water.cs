@@ -2,12 +2,14 @@
 
 public class Water : MonoBehaviour, ILevelUpdatable
 {
-    private Moon _moon;
+    private MoonData _moon;
     private WaterMovement _waterMovement;
 
-    public void Construct()
+    public WaterMovement Movement => _waterMovement;
+
+    public void Construct(MoonData moon)
     {
-        _moon = FindAnyObjectByType<Moon>();
+        _moon = moon;
         _waterMovement = FindAnyObjectByType<WaterMovement>();
     }
 

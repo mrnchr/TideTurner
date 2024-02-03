@@ -4,10 +4,10 @@ public class Barrel : MonoBehaviour, ILevelUpdatable
 {
     [SerializeField] private FloatingObject[] floating;
     
-    private Moon _moon;
-    public void Construct()
+    private MoonData _moon;
+    public void Construct(MoonData moon)
     {
-        _moon = FindAnyObjectByType<Moon>();
+        _moon = moon;
     }
     
     public void UpdateLogic()

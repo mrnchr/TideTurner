@@ -5,7 +5,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable
     [SerializeField] private FloatingObject[] floating;
     private BoatSpawn _spawn;
 
-    private Moon _moon;
+    private MoonData _moon;
     private Rigidbody _rb;
     private void Awake()
     {
@@ -20,10 +20,10 @@ public class Boat : MonoBehaviour, ILevelUpdatable
             RigidbodyConstraints.FreezePositionZ;
     }
 
-    public void Construct()
+    public void Construct(MoonData moon, BoatSpawn spawn)
     {
-        _moon = FindAnyObjectByType<Moon>();
-        _spawn = FindAnyObjectByType<BoatSpawn>();
+        _moon = moon;
+        _spawn = spawn;
     }
 
     public void Init()
@@ -34,9 +34,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable
     public void UpdateLogic()
     {
         foreach (var floatingObject in floating)
-        {
             floatingObject.SetVelocityRate(_moon.MoonPosition);
-        }
 
         LimitRotation();
     }

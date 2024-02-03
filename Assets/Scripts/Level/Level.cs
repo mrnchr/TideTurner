@@ -1,51 +1,45 @@
-﻿using System.Collections.Generic;
-using DefaultNamespace.UI;
+﻿using DefaultNamespace.UI;
 using UnityEngine;
 
-public class Level : MonoBehaviour, ILevelUpdatable
+public class Level : MonoBehaviour
 {
-    private readonly List<ILevelUpdatable> _updatables = new List<ILevelUpdatable>();
     private LevelStateMachine _machine;
+    private MoonData _moonData;
     private Moon _moon;
     private Boat _boat;
-    private PauseWindow _pause;
     private Water _water;
     private LoseWindow _lose;
-    private bool _isPaused;
     private WinWindow _win;
     private Cannon[] _cannons;
 
-    public void Construct(LevelStateMachine machine, Moon moon, Boat boat, Water water, LoseWindow lose, WinWindow win, Cannon[] cannons)
+    public void Construct(LevelStateMachine machine,
+        MoonData moonData,
+        Moon moon,
+        Boat boat,
+        Water water,
+        LoseWindow lose,
+        WinWindow win,
+        Cannon[] cannons)
     {
         _machine = machine;
+        _moonData = moonData;
         _moon = moon;
         _boat = boat;
         _water = water;
         _lose = lose;
         _win = win;
         _cannons = cannons;
-
-        _updatables.AddRange(new ILevelUpdatable[]
-        {
-            _moon,
-            _boat,
-            _water
-        });
     }
 
     public void Init()
     {
+        _moonData.Init();
         _moon.Init();
         _water.Init();
         _boat.Init();
         
         foreach (Cannon cannon in _cannons)
             cannon.Init();
-    }
-
-    public void SetPause(bool value)
-    {
-        _isPaused = value;
     }
 
     public void Restart()
@@ -69,17 +63,5 @@ public class Level : MonoBehaviour, ILevelUpdatable
         
         _win.SetActive(true);
         _machine.ChangeState<StopLevelState>();
-    }
-
-    private void Update()
-    {
-        if (!_isPaused)
-            UpdateLogic();
-    }
-
-    public void UpdateLogic()
-    {
-        foreach (ILevelUpdatable updatable in _updatables)
-            updatable.UpdateLogic();
     }
 }

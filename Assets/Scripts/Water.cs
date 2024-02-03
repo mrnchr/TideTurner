@@ -3,16 +3,18 @@ using UnityEngine;
 public class Water : MonoBehaviour
 {
     [SerializeField] private Transform waterLevel;
+    [SerializeField] private Transform upBorder;
+    [SerializeField] private Transform downBorder;
 
-    [SerializeField] private float amplitute = 3f;
+    [SerializeField] private float amplitude = 3f;
     [SerializeField] private float length = 3f;
     [SerializeField] private float speed = 3f;
     
     [SerializeField] private float offset = 0f;
     
     private MeshFilter _meshFilter;
-
     private float[] _initialVertexPosZ;
+    private float _heightStep;
     private void Awake()
     {
         _meshFilter = GetComponent<MeshFilter>();
@@ -27,12 +29,18 @@ public class Water : MonoBehaviour
         {
             _initialVertexPosZ[i] = vertices[i].z;
         }
+
+        _heightStep = (upBorder.transform.position.y - downBorder.transform.position.y) / 10;
     }
 
+    private float g = 1;
     private void Update()
     {
         UpdateWaveHeight();
         UpdateMesh();
+
+        g = Mathf.Clamp(g + Input.mouseScrollDelta.y / 10, 0, 1f);
+        ChangeWaterLevel(g);
     }
 
     private void UpdateMesh()
@@ -60,11 +68,17 @@ public class Water : MonoBehaviour
 
     public void ChangeWaterLevel(float changeValue)
     {
-        waterLevel.transform.position = new Vector3(0, waterLevel.transform.position.y + changeValue, 0f);
+        Debug.Log(changeValue);
+
+        changeValue = Mathf.Clamp(changeValue, 0, 1f);
+        
+        waterLevel.transform.position = Vector3.Lerp(waterLevel.transform.position, new Vector3(0, 
+            Mathf.Clamp(downBorder.position.y + _heightStep * changeValue * 10, downBorder.position.y , upBorder.position.y), 
+            0f), Time.deltaTime); 
     }
 
     public float GetWaveHeight(float x)
     {
-        return amplitute * Mathf.Sin(x / length + offset);
+        return amplitude * Mathf.Sin(x / length + offset);
     }
 }

@@ -3,7 +3,7 @@
 namespace DefaultNamespace.Level
 {
     [RequireComponent(typeof(FloatingObject))]
-    public class Boat : MonoBehaviour
+    public class Boat : MonoBehaviour, ILevelUpdatable
     {
         private Moon _moon;
         private FloatingObject _floating;
@@ -14,7 +14,7 @@ namespace DefaultNamespace.Level
             _floating = FindAnyObjectByType<FloatingObject>();
         }
 
-        private void Update()
+        public void UpdateLogic()
         {
             _floating.SetVelocityRate(_moon.MoonPosition);
         }

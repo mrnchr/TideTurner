@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class FloatingObject : MonoBehaviour
 {
-    private float waveHeight = 3;
     [Range(1,10f)][SerializeField] private float displacementAmount = 1;
     [Range(1,2f)][SerializeField] private float waterDrag = 1f;
     [Range(1,2f)][SerializeField] private float waterAngularDrag = 1f;
@@ -14,7 +13,7 @@ public class FloatingObject : MonoBehaviour
     private Rigidbody _rb;
     private Water _water;
     private float _displacementMultiplayer;
-    
+    private float _waveHeight;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -31,8 +30,6 @@ public class FloatingObject : MonoBehaviour
     private void Update()
     {
         Move();
-
-        //AddForce(new Vector2(-1, -1));
     }
 
     public void SetVelocityRate(float velocity)
@@ -46,12 +43,12 @@ public class FloatingObject : MonoBehaviour
     {
         _rb.AddForceAtPosition(Physics.gravity / floaterCount, transform.position, ForceMode.Acceleration);
 
-        waveHeight = _water.GetWaveHeight(transform.position.x) + _water.GetWaterLevel().position.y;
+        _waveHeight = _water.GetWaveHeight(transform.position.x) + _water.GetWaterLevel().position.y;
         
-        if (transform.position.y >  waveHeight) 
+        if (transform.position.y >  _waveHeight) 
             return;
         
-        _displacementMultiplayer = Mathf.Clamp01( (waveHeight - transform.position.y) / depthBefore ) * displacementAmount;
+        _displacementMultiplayer = Mathf.Clamp01( (_waveHeight - transform.position.y) / depthBefore ) * displacementAmount;
             
         Vector3 v = new Vector3(0f, Mathf.Abs(Physics.gravity.y) * _displacementMultiplayer, 0f);
             

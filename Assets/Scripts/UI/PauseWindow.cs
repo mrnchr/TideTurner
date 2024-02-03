@@ -36,7 +36,7 @@ namespace DefaultNamespace.UI
             _isPause = value;
             if (_isPause)
             {
-                _machine.ChangeState<PauseLevelState>();
+                _machine.ChangeState<StopLevelState>();
             }
             else
             {

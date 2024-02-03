@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour, IInputController
 {
-    private InputData _data;
+    [SerializeField] private InputData _data;
     private bool _isPaused;
+    
     public InputData Data => _data;
 
     public event Action<InputData> OnInputHandled;

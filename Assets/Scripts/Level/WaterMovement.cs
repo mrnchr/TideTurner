@@ -68,7 +68,6 @@ public class WaterMovement : MonoBehaviour
 
     public void ChangeWaterLevel(float changeValue)
     {
-        Debug.Log(changeValue);
 
         changeValue = Mathf.Clamp(changeValue, 0, 1f);
         

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class PauseLevelState : LevelStateBase
+public class StopLevelState : LevelStateBase
 {
     private readonly Level _level;
     private readonly InputController _input;
 
-    public PauseLevelState(LevelStateMachine machine) : base(machine)
+    public StopLevelState(LevelStateMachine machine) : base(machine)
     {
         _level = Object.FindAnyObjectByType<Level>();
         _input = Object.FindAnyObjectByType<InputController>();

@@ -14,5 +14,7 @@ public class SceneContext : MonoBehaviour
             level.Construct();
             level.Init();
         }
+
+        Debug.Log("Awake");
     }
 }

@@ -12,6 +12,7 @@ public class Level : MonoBehaviour, ILevelUpdatable
     private bool _isPaused;
     private PauseWindow _pause;
     private Water _water;
+    private Barrel _barrel;
 
     public void Construct()
     {
@@ -19,10 +20,12 @@ public class Level : MonoBehaviour, ILevelUpdatable
         _moon = FindAnyObjectByType<Moon>();
         _boat = FindAnyObjectByType<Boat>();
         _water = FindAnyObjectByType<Water>();
+        _barrel = FindAnyObjectByType<Barrel>();
         _pause = FindAnyObjectByType<PauseWindow>();
 
         _moon.Construct();
         _boat.Construct();
+        _barrel.Construct();
         _water.Construct();
         _machine.Construct();
         _pause.Construct();

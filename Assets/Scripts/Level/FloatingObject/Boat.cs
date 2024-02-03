@@ -2,21 +2,22 @@
 
 namespace DefaultNamespace.Level
 {
-    [RequireComponent(typeof(FloatingObject))]
     public class Boat : MonoBehaviour, ILevelUpdatable
     {
         private Moon _moon;
-        private FloatingObject _floating;
+        [SerializeField] private FloatingObject[] floating;
 
         public void Construct()
         {
             _moon = FindAnyObjectByType<Moon>();
-            _floating = FindAnyObjectByType<FloatingObject>();
         }
 
         public void UpdateLogic()
         {
-            _floating.SetVelocityRate(_moon.MoonPosition);
+            foreach (var floatingObject in floating)
+            {
+                floatingObject.SetVelocityRate(_moon.MoonPosition);
+            }
         }
     }
 }

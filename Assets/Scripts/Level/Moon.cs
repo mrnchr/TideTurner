@@ -18,7 +18,6 @@ public class Moon : MonoBehaviour, ILevelUpdatable
 
     public void Construct()
     {
-        Debug.Log("Moon Construct");
         _input = FindAnyObjectByType<InputController>();
         _input.OnInputHandled += Move;
     }
@@ -41,13 +40,12 @@ public class Moon : MonoBehaviour, ILevelUpdatable
 
     private void Move(InputData data)
     {
-        Debug.Log("Move");
         MoonPosition += data.MouseDeltaX * MoveSpeed;
         MoonPosition = Mathf.Clamp(MoonPosition, -1, 1);
         _moonPosition = MoveLerp(MoonPosition);
 
         MoonSize += data.WheelDelta * SizeSpeed;
-        MoonSize = Mathf.Clamp(MoonSize, 0, 1);
+        MoonSize = Mathf.Clamp(MoonSize, -1, 1);
         _moonSize = SizeLerp(MoonSize);
     }
 
@@ -58,7 +56,7 @@ public class Moon : MonoBehaviour, ILevelUpdatable
 
     public float SizeLerp(float value)
     {
-        return Mathf.Lerp(BoundMoonSize.x, BoundMoonSize.y, value);
+        return Mathf.Lerp(BoundMoonSize.x, BoundMoonSize.y, (value + 1) / 2);
     }
 
     public void UpdateLogic()

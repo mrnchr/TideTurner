@@ -4,10 +4,10 @@ using UnityEngine;
 public class FloatingObject : MonoBehaviour
 {
     [Range(1,10f)][SerializeField] private float displacementAmount = 1;
-    [Range(1,2f)][SerializeField] private float waterDrag = 1f;
-    [Range(1,2f)][SerializeField] private float waterAngularDrag = 1f;
-    [Range(1,5f)][SerializeField] private float floaterCount = 1;
-    [Range(1,5f)][SerializeField] private float depthBefore = 1;
+    [Range(0.1f,2f)][SerializeField] private float waterDrag = 1f;
+    [Range(0.1f,2f)][SerializeField] private float waterAngularDrag = 1f;
+    [Range(0.1f,5f)][SerializeField] private float floaterCount = 1;
+    [Range(0.1f,5f)][SerializeField] private float depthBefore = 1;
     [SerializeField] private float velocityMultiplier;
     
     private Rigidbody _rb;
@@ -43,13 +43,15 @@ public class FloatingObject : MonoBehaviour
     {
         _rb.AddForceAtPosition(Physics.gravity / floaterCount, transform.position, ForceMode.Acceleration);
 
-        _waveHeight = _waterMovement.GetWaveHeight(transform.position.x) + _waterMovement.GetWaterLevel().position.y;
+        // get current sin value;
+        _waveHeight = _waterMovement.GetWaveHeight(transform.position.x); //+ _waterMovement.GetWaterLevel().position.y;
         
-        if (transform.position.y >  _waveHeight) 
+        if ( transform.position.y - _waterMovement.GetWaterLevel().position.y >  _waveHeight) 
             return;
         
         _displacementMultiplayer = Mathf.Clamp01( (_waveHeight - transform.position.y) / depthBefore ) * displacementAmount;
             
+        // vector up * displace;
         Vector3 v = new Vector3(0f, Mathf.Abs(Physics.gravity.y) * _displacementMultiplayer, 0f);
             
         _rb.AddForceAtPosition(v, transform.position, ForceMode.Acceleration);

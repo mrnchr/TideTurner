@@ -81,7 +81,7 @@ MonoBehaviour:
   waterDrag: 2
   waterAngularDrag: 2
   floaterCount: 5
-  depthBefore: 5
+  depthBefore: 1
   velocityMultiplier: 4
 --- !u!114 &1481830770634964506
 MonoBehaviour:

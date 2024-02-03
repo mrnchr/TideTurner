@@ -5,25 +5,23 @@ public class WaterMovement : MonoBehaviour
     [SerializeField] private Transform waterLevel;
     [SerializeField] private Transform upBorder;
     [SerializeField] private Transform downBorder;
+    
+    [SerializeField] private MeshFilter meshFilter;
 
-    [SerializeField] private float amplitude = 3f;
-    [SerializeField] private float length = 3f;
-    [SerializeField] private float speed = 3f;
+    [Range(0,10f)][SerializeField] private float amplitude = 3f;
+    [Range(1f,10f)][SerializeField] private float length = 3f;
+    [Range(0,10f)][SerializeField] private float speed = 3f;
     
-    [SerializeField] private float offset = 0f;
-    
-    private MeshFilter _meshFilter;
     private float[] _initialVertexPosZ;
     private float _heightStep;
+    private float _offset = 0f;
     private void Awake()
     {
-        _meshFilter = GetComponent<MeshFilter>();
-
-        int length = _meshFilter.mesh.vertices.Length;
+        int length = meshFilter.mesh.vertices.Length;
 
         _initialVertexPosZ = new float[length];
         
-        Vector3[] vertices = _meshFilter.mesh.vertices;
+        Vector3[] vertices = meshFilter.mesh.vertices;
         
         for (int i = 0; i < length; i++)
         {
@@ -33,32 +31,28 @@ public class WaterMovement : MonoBehaviour
         _heightStep = (upBorder.transform.position.y - downBorder.transform.position.y) / 10;
     }
 
-    //private float g = 1;
     private void Update()
     {
         UpdateWaveHeight();
         UpdateMesh();
-
-        //g = Mathf.Clamp(g + Input.mouseScrollDelta.y / 10, 0, 1f);
-        //ChangeWaterLevel(g);
     }
 
     private void UpdateMesh()
     {
-        Vector3[] vertices = _meshFilter.mesh.vertices;
+        Vector3[] vertices = meshFilter.mesh.vertices;
 
         for (int i = 0; i < vertices.Length; i++)
         {
-            vertices[i].z = _initialVertexPosZ[i] + GetWaveHeight( transform.position.x + vertices[i].x); //transform.position.x
+            vertices[i].z = _initialVertexPosZ[i] + GetWaveHeight( transform.position.x + vertices[i].x);
         }
 
-        _meshFilter.mesh.vertices = vertices;
-        _meshFilter.mesh.RecalculateNormals();
+        meshFilter.mesh.vertices = vertices;
+        meshFilter.mesh.RecalculateNormals();
     }
 
     private void UpdateWaveHeight()
     {
-        offset += Time.deltaTime * speed;
+        _offset += Time.deltaTime * speed;
     }
 
     public Transform GetWaterLevel()
@@ -68,7 +62,7 @@ public class WaterMovement : MonoBehaviour
 
     public void ChangeWaterLevel(float changeValue)
     {
-        Debug.Log(changeValue);
+        //Debug.Log(changeValue);
 
         changeValue = Mathf.Clamp(changeValue, 0, 1f);
         
@@ -79,6 +73,6 @@ public class WaterMovement : MonoBehaviour
 
     public float GetWaveHeight(float x)
     {
-        return amplitude * Mathf.Sin(x / length + offset);
+        return amplitude * Mathf.Sin(x / length + _offset);
     }
 }

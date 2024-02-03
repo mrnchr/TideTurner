@@ -14,7 +14,8 @@ public class LevelStateMachine : MonoBehaviour, IStateMachine<LevelStateBase>
         {
             new StartLevelState(this),
             new StayLevelState(this),
-            new StopLevelState(this)
+            new StopLevelState(this),
+            new RestartLevelState(this)
         });
     }
         

@@ -38,12 +38,15 @@ public class FloatingObject : MonoBehaviour
 
         // get current sin value;
         _waveHeight = _waterMovement.GetWaveHeight(transform.position.x);
-
-            
-        if (  transform.position.y - _waterMovement.GetWaterLevel().position.y >  _waveHeight) 
-            return;
         
-        _displacementMultiplayer = Mathf.Clamp01( (_waveHeight - transform.position.y ) / depthBefore ) * displacementAmount;
+        //if (  transform.position.y - _waterMovement.GetWaterLevel().position.y >  _waveHeight) 
+           // return;
+           
+           if ( _waterMovement.GetWaterLevel().position.y <  transform.position.y) 
+               return;
+        
+        //_displacementMultiplayer = Mathf.Clamp01( (_waveHeight - transform.position.y ) / depthBefore ) * displacementAmount;
+        _displacementMultiplayer = Mathf.Clamp( (_waterMovement.GetWaterLevel().position.y - _waveHeight - transform.position.y ) / depthBefore, -1f, 1f ) * displacementAmount;
             
         // Go up.
         Vector3 v = new Vector3(0f, Mathf.Abs(Physics.gravity.y) * _displacementMultiplayer, 0f);
@@ -52,27 +55,5 @@ public class FloatingObject : MonoBehaviour
             
         rb.AddForce(_displacementMultiplayer * -rb.velocity * waterDrag * Time.deltaTime, ForceMode.VelocityChange);
         rb.AddTorque(_displacementMultiplayer * -rb.angularVelocity * waterAngularDrag * Time.deltaTime, ForceMode.VelocityChange);
-    }
-
-    private void Move2()
-    {
-        if ( _waterMovement.GetWaterLevel().position.y <  transform.position.y) 
-            return;
-        
-        _waveHeight = _waterMovement.GetWaveHeight(transform.position.x);
-        
-        _displacementMultiplayer = Mathf.Clamp01( (_waveHeight - transform.position.y ) / depthBefore ) * displacementAmount;
-        
-        // Go up.
-        Vector3 v = new Vector3(0f, Physics.gravity.y, 0f);
-        
-        if ( _waterMovement.GetWaterLevel().position.y <  transform.position.y) 
-            rb.AddForceAtPosition(Physics.gravity / floaterCount, transform.position, ForceMode.Acceleration);
-        else
-            rb.AddForceAtPosition(v, transform.position, ForceMode.Acceleration);
-        
-        rb.AddForce(1 * -rb.velocity * waterDrag * Time.deltaTime, ForceMode.VelocityChange);
-        rb.AddTorque(1 * -rb.angularVelocity * waterAngularDrag * Time.deltaTime, ForceMode.VelocityChange);
-
     }
 }

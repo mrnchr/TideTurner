@@ -128,7 +128,7 @@ MonoBehaviour:
   upBorder: {fileID: 6373011092440279638}
   downBorder: {fileID: 5095141817093459812}
   waterGraphic: {fileID: 5350555785921216026}
-  amplitude: 1
+  amplitude: 0.1
   length: 10
   speed: 1
   minWaterLevelSpeedChange: 0.5
@@ -253,6 +253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6432080509209773927}
+  - component: {fileID: 332390240}
   m_Layer: 0
   m_Name: waterlevel
   m_TagString: Untagged
@@ -276,6 +277,32 @@ Transform:
   m_Father: {fileID: 6432080509154639618}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &332390240
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6432080509209773926}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.73687744, y: -5.894749}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 250.05324, y: 12.789498}
+  m_EdgeRadius: 0
 --- !u!1001 &8351063654529300164
 PrefabInstance:
   m_ObjectHideFlags: 0

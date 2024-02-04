@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Boat
   - Water
+  - DeathTrigger
   layers:
   - Default
   - TransparentFX

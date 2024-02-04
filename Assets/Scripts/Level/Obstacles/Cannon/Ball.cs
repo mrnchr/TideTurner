@@ -16,12 +16,13 @@ public class Ball : MonoBehaviour
         _pool = pool;
     }
     
-    public void SetVelocity(Vector3 value)
+    public void SetVelocity(Vector2 value)
     {
         _rb.velocity = value;
+        Debug.Log(value);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         _pool.Push(this);
     }

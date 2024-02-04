@@ -36,16 +36,16 @@ public class LevelBootstrap : MonoBehaviour
 
         moonData.Construct();
         moon.Construct(moonData);
-        boat.Construct(moonData, boatSpawn);
-        cameraMovement.Construct(boat);
         // _barrel.Construct();
         water.Construct(moonData);
+        boat.Construct(moonData, boatSpawn, water.Movement);
+        cameraMovement.Construct(boat);
         _machine.Construct();
         level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement);
         pause.Construct();
         _ballPool.Construct(level);
         _sharkContainer.Construct(sharkSpawns, water, updater, level);
-        _barrelContainer.Construct(barrelSpawns, moonData, updater);
+        _barrelContainer.Construct(barrelSpawns, moonData, updater, water.Movement);
 
         foreach (Obstacle obstacle in obstacles)
             obstacle.Construct(level);

@@ -10,6 +10,8 @@ public class Boat : MonoBehaviour, ILevelUpdatable
     private MoonData _moon;
     private Rigidbody2D _rb;
     private Level _level;
+    private WaterMovement _waterMovement;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -20,10 +22,11 @@ public class Boat : MonoBehaviour, ILevelUpdatable
         //_rb.gravityScale
     }
 
-    public void Construct(MoonData moon, BoatSpawn spawn)
+    public void Construct(MoonData moon, BoatSpawn spawn, WaterMovement waterMovement)
     {
         _moon = moon;
         _spawn = spawn;
+        _waterMovement = waterMovement;
     }
 
     public void Init()
@@ -34,25 +37,17 @@ public class Boat : MonoBehaviour, ILevelUpdatable
 
     public void UpdateLogic()
     {
+        CheckInWater();
+        
         foreach (var floatingObject in floating)
             floatingObject.SetVelocityRate(_inWater ? _moon.MoonPosition : 0);
 
         LimitRotation();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void CheckInWater()
     {
-        if (other.gameObject.CompareTag("Water"))
-            _inWater = true;
-
-        if (other.gameObject.CompareTag("DeathTrigger"))
-            _level.Lose();
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Water"))
-            _inWater = false;
+        _inWater = _waterMovement.GetWaterLevel().position.y > transform.position.y;
     }
 
     private void LimitRotation()

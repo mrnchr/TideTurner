@@ -10,12 +10,14 @@ public class Barrel : MonoBehaviour, ILevelUpdatable
     private MoonData _moon;
     private Obstacle _obstacle;
     private Rigidbody2D rb;
-    
-    public void Construct(MoonData moon)
+    private WaterMovement _waterMovement;
+
+    public void Construct(MoonData moon, WaterMovement waterMovement)
     {
         _obstacle = GetComponent<Obstacle>();
         rb = GetComponent<Rigidbody2D>();
         _moon = moon;
+        _waterMovement = waterMovement;
 
         _obstacle.OnPlayerCollision += SubsribeToObstacle;
     }
@@ -36,19 +38,14 @@ public class Barrel : MonoBehaviour, ILevelUpdatable
 
     public void UpdateLogic()
     {
+        CheckInWater();
+        
         foreach (var floatingObject in floating)
             floatingObject.SetVelocityRate(_inWater ? _moon.MoonPosition : 0);
     }
-    
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Water"))
-            _inWater = true;
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void CheckInWater()
     {
-        if (other.gameObject.CompareTag("Water"))
-            _inWater = false;
+        _inWater = _waterMovement.GetWaterLevel().position.y > transform.position.y;
     }
 }

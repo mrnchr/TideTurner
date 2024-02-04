@@ -3,40 +3,44 @@
 [RequireComponent(typeof(Rigidbody2D))]
 public class Shark : MonoBehaviour
 {
-    [SerializeField] private float _speed;
-    private Rigidbody2D _rb;
+    [Range(0f,3f)][SerializeField] private float _speed;
 
+    private Rigidbody2D _rb;
+    private SpriteRenderer _spriteRenderer;
+    private Vector3 _initalDir;
     public void Construct()
     {
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        _initalDir = transform.right;
+    }
+
+    private void OnEnable()
+    {
         _rb = GetComponent<Rigidbody2D>();
+
+        _rb.velocity = _initalDir * _speed;
+    }
+
+    private void OnDisable()
+    {
+        _rb.velocity = _initalDir * _speed;
     }
 
     public void Init()
     {
-        _rb.velocity = transform.right * _speed;
-        SetScaleX(Mathf.Sign(_rb.velocity.x));
+        _rb.velocity = _initalDir * _speed;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         ChangeDirection();
     }
 
     private void ChangeDirection()
     {
-        _rb.velocity = -transform.right * _speed;
-        ChangeScale();
-    }
-
-    private void ChangeScale()
-    {
-        SetScaleX(-transform.localScale.x);
-    }
-
-    public void SetScaleX(float value)
-    {
-        Vector3 scale = transform.localScale;
-        scale.x = value;
-        transform.localScale = scale;
+        _initalDir = -_initalDir;
+        _rb.velocity = _initalDir * _speed;
+        _spriteRenderer.flipX = !_spriteRenderer.flipX;
     }
 }

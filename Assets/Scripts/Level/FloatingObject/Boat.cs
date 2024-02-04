@@ -29,6 +29,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable
 
     public void Init()
     {
+        transform.rotation = Quaternion.identity;
         transform.position = _spawn.transform.position;
     }
 

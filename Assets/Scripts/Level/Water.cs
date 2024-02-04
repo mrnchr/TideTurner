@@ -15,6 +15,7 @@ public class Water : MonoBehaviour, ILevelUpdatable
 
     public void Init()
     {
+        _waterMovement.Init();
         _waterMovement.ChangeWaterLevel(_moon.MoonSize);
     }
         

@@ -38,6 +38,11 @@ public class WaterMovement : MonoBehaviour
         _heightStep = (upBorder.transform.position.y - downBorder.transform.position.y) / 10;
     }
 
+    public void Init()
+    {
+        waterLevel.transform.position = upBorder.transform.position;
+    }
+
     private void Update()
     {
         UpdateWaveHeight();

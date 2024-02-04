@@ -131,7 +131,7 @@ MonoBehaviour:
   speed: 1
   minWaterLevelSpeedChange: 5
   maxWaterLevelSpeedChange: 5
-  lerpVelocity: 0.5
+  lerpVelocity: 0.1
 --- !u!1 &6432080509209773926
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class Cannon : MonoBehaviour
         {
             if (shotSoundPlayer.IsPlaying == false)
             {
-                shotSoundPlayer.SetSoundState(true);
+                shotSoundPlayer.SetSoundState(SoundState.Play);
                 _pool.Pop(_ballSpawn, _ballSpeed);
                 yield return new WaitForSeconds(shotSoundPlayer.SoundLength);
             }

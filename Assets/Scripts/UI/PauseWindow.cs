@@ -22,7 +22,7 @@ public class PauseWindow : MonoBehaviour
 
     private void HandleInput(InputData data)
     {
-        if (data.IsPause)
+        if (data.IsPause && _machine.CurrentState is not StopLevelState)
             Pause(!_isPause);
     }
 

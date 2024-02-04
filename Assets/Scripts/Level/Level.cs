@@ -11,6 +11,7 @@ public class Level : MonoBehaviour
     private LoseWindow _lose;
     private WinWindow _win;
     private Cannon[] _cannons;
+    private CameraMovement _cameraMovement;
 
     public void Construct(LevelStateMachine machine,
         MoonData moonData,
@@ -19,7 +20,8 @@ public class Level : MonoBehaviour
         Water water,
         LoseWindow lose,
         WinWindow win,
-        Cannon[] cannons)
+        Cannon[] cannons,
+        CameraMovement cameraMovement)
     {
         _machine = machine;
         _moonData = moonData;
@@ -29,6 +31,7 @@ public class Level : MonoBehaviour
         _lose = lose;
         _win = win;
         _cannons = cannons;
+        _cameraMovement = cameraMovement;
     }
 
     public void Init()
@@ -37,6 +40,7 @@ public class Level : MonoBehaviour
         _moon.Init();
         _water.Init();
         _boat.Init();
+        _cameraMovement.Init();
         
         foreach (Cannon cannon in _cannons)
             cannon.Init();

@@ -28,14 +28,16 @@ public class LevelBootstrap : MonoBehaviour
         var beings = FindObjectsByType<WaterBeing>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         var sharkSpawns = FindObjectsByType<SharkSpawn>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         _sharkContainer = FindAnyObjectByType<SharkContainer>();
-            
+        var cameraMovement = FindAnyObjectByType<CameraMovement>();
+
         moonData.Construct();
         moon.Construct(moonData);
         boat.Construct(moonData, boatSpawn);
+        cameraMovement.Construct(boat);
         // _barrel.Construct();
         water.Construct(moonData);
         _machine.Construct();
-        level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons);
+        level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement);
         pause.Construct();
         _ballPool.Construct(level);
         _sharkContainer.Construct(sharkSpawns, water, updater, level);
@@ -49,7 +51,7 @@ public class LevelBootstrap : MonoBehaviour
         foreach (WaterBeing being in beings)
             being.Construct(water);
 
-        updater.AddRange(new ILevelUpdatable[]{ moon, boat, water}.Concat(beings));
+        updater.AddRange(new ILevelUpdatable[] { moon, boat, water, cameraMovement }.Concat(beings));
     }
 
     public void Init()

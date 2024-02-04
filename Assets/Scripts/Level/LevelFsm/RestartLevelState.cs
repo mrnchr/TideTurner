@@ -6,6 +6,7 @@ public class RestartLevelState : LevelStateBase
     private readonly Cannon[] _cannons;
     private readonly SharkContainer _sharkContainer;
     private readonly SoundRestarter _sound;
+    private readonly BarrelContainer _barrelContainer;
 
     public RestartLevelState(LevelStateMachine machine) : base(machine)
     {   
@@ -13,6 +14,7 @@ public class RestartLevelState : LevelStateBase
         _sharkContainer = Object.FindAnyObjectByType<SharkContainer>();
         _cannons = Object.FindObjectsByType<Cannon>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         _sound = Object.FindAnyObjectByType<SoundRestarter>();
+        _barrelContainer = Object.FindAnyObjectByType<BarrelContainer>();
     }
 
     public override void Enter()
@@ -20,6 +22,7 @@ public class RestartLevelState : LevelStateBase
         _sound.SoundAll(SoundState.Stop);
         _ballPool.Clear();
         _sharkContainer.Respawn();
+        _barrelContainer.Respawn();
         foreach (Cannon cannon in _cannons)
             cannon.Stop();
             

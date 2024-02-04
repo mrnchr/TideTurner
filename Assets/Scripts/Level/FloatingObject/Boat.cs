@@ -4,7 +4,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
     [SerializeField] private FloatingObject[] floating;
 
-    private bool _inWater;
+    [SerializeField] private bool _inWater;
 
     private BoatSpawn _spawn;
     private MoonData _moon;

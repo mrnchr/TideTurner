@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class FloatingObject : MonoBehaviour, ILevelUpdatable, IFixedUpdatable
@@ -11,7 +12,7 @@ public class FloatingObject : MonoBehaviour, ILevelUpdatable, IFixedUpdatable
 
 
     private WaterMovement _waterMovement;
-    private Vector3 dir;
+    private Vector3 depth;
     private float _velocityRate;
 
     public void Construct(WaterMovement waterMovement)
@@ -21,9 +22,9 @@ public class FloatingObject : MonoBehaviour, ILevelUpdatable, IFixedUpdatable
 
     public void FixedUpdateLogic()
     {
-        Move();
         AddHorizontalVelocity();
         ClampHorizontalVelocity();
+        Move();
     }
 
     private void ClampHorizontalVelocity()
@@ -44,11 +45,12 @@ public class FloatingObject : MonoBehaviour, ILevelUpdatable, IFixedUpdatable
 
     private void Move()
     {
-        dir = new Vector3(
-            0,
-            _waterMovement.GetWaterLevel().position.y + _waterMovement.GetWaveHeight(transform.position.x),
-            0f) - new Vector3(0, transform.position.y, 0f);
+        var up = _waterMovement.GetMeshWaterLevel(transform.position.x + rb.velocity.x * Time.fixedDeltaTime) - transform.position.y;
+        depth = new Vector3(0, up, 0);
 
-        rb.AddForceAtPosition(dir * verticalVelocityMultiplier, transform.position, ForceMode2D.Force);
+        if (depth.y < 0)
+            return;
+
+        rb.AddForceAtPosition(depth * verticalVelocityMultiplier, transform.position, ForceMode2D.Force);
     }
 }

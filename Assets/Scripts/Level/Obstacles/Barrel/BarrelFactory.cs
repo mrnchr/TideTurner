@@ -9,7 +9,12 @@ public class BarrelFactory
     private readonly WaterMovement _waterMovement;
     private readonly Level _level;
 
-    public BarrelFactory(Barrel prefab, Transform parent, MoonData moonData, LevelUpdater updater, WaterMovement waterMovement, Level level)
+    public BarrelFactory(Barrel prefab,
+        Transform parent,
+        MoonData moonData,
+        LevelUpdater updater,
+        WaterMovement waterMovement,
+        Level level)
     {
         _prefab = prefab;
         _parent = parent;
@@ -23,8 +28,14 @@ public class BarrelFactory
     {
         Barrel instance = Object.Instantiate(_prefab, spawn.position, Quaternion.identity, _parent);
         instance.Construct(_moonData, _waterMovement);
+        
+        var floating = instance.GetComponent<FloatingObject>();
+        floating.Construct(_waterMovement);
+        
         instance.GetComponent<Obstacle>().Construct(_level);
+        
         _updater.Add(instance);
+        _updater.Add(floating);
 
         return instance;
     }

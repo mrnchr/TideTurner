@@ -5,7 +5,6 @@ using UnityEngine;
 public class SoundPlayer : MonoBehaviour
 {
     [SerializeField] private bool isSound3D;
-    [SerializeField] private bool playOnAwake = false;
 
     public bool IsPlaying => _sound.isPlaying;
     public float SoundLength => _sound.clip.length;
@@ -15,8 +14,6 @@ public class SoundPlayer : MonoBehaviour
     private void Awake()
     {
         _sound = GetComponent<AudioSource>();
-
-        _sound.playOnAwake = playOnAwake;
         _sound.spatialBlend = isSound3D ? 1 : 0;
     }
 

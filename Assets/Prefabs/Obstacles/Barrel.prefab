@@ -81,7 +81,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 1
   m_AngularDrag: 1
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 7017277183631061934}
   horizontalVelocityMultiplier: 10
-  verticalVelocityMultiplier: 1
+  verticalVelocityMultiplier: 4
 --- !u!114 &4864227288713920930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,8 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45186b02eed39c745bdc2d77625fb8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSound3D: 0
-  playOnAwake: 0
+  isSound3D: 1
 --- !u!1 &8162193669250779814
 GameObject:
   m_ObjectHideFlags: 0

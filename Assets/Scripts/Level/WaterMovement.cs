@@ -11,7 +11,7 @@ public class WaterMovement : MonoBehaviour
 
     [Header("Wave settings")]
     [Range(0,10f)][SerializeField] private float amplitude = 3f;
-    [Range(1f,10f)][SerializeField] private float length = 3f;
+    [Range(0,10f)][SerializeField] private float length = 3f;
     [Range(0,10f)][SerializeField] private float speed = 3f;
     [Header("Water level settings")]
     [Range(0,5f)][SerializeField] private float minWaterLevelSpeedChange = 1f;
@@ -96,6 +96,11 @@ public class WaterMovement : MonoBehaviour
     public float GetWaveHeight(float x)
     {
         return amplitude * Mathf.Sin(x / length + _offset);
+    }
+
+    public float GetMeshWaterLevel(float x)
+    {
+        return waterLevel.position.y + GetWaveHeight(x);
     }
 }
 /*

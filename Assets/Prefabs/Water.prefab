@@ -243,7 +243,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSound3D: 0
-  playOnAwake: 1
 --- !u!1 &6432080509209773926
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f426b92450a1af4ebf7882579ac8799, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.15
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f426b92450a1af4ebf7882579ac8799, type: 3}
       propertyPath: m_LocalPosition.z

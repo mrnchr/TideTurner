@@ -24,6 +24,7 @@ public class MusicPlayer : MonoBehaviour
     {
         _music.playOnAwake = false;
         _music.spatialBlend = 0;
+        _music.loop = true;
         _music.Play();
     }
 

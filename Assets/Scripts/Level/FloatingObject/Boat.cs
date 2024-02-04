@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Boat : MonoBehaviour, ILevelUpdatable
+public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
     [SerializeField] private FloatingObject[] floating;
 

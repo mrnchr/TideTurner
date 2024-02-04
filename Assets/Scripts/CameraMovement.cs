@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class CameraMovement : MonoBehaviour, ILevelUpdatable
+public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
     private const float HALF = 1f / 2f;
     [Range(0, 1)] [SerializeField] private float _screenRate;
@@ -59,7 +59,7 @@ public class CameraMovement : MonoBehaviour, ILevelUpdatable
         float diffY = _boat.transform.position.y - transform.position.y;
         while (Mathf.Abs(diffY) > _approximation)
         {
-            var posY = transform.position.y + Mathf.Sign(diffY) * _speed * Time.deltaTime;
+            var posY = transform.position.y + Mathf.Sign(diffY) * Mathf.Clamp(_speed * Time.deltaTime, 0, Mathf.Abs(diffY));
             SetPositionY(posY);
             yield return null;
             diffY = _boat.transform.position.y - transform.position.y;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class WaterBeing : MonoBehaviour, ILevelUpdatable
+public class WaterBeing : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
     private Water _water;
 

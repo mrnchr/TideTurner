@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Moon : MonoBehaviour, ILevelUpdatable
+public class Moon : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
     [SerializeField] private Vector2 BoundMoonSize;
     [SerializeField] private Transform _leftBound;

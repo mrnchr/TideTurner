@@ -21,6 +21,12 @@ public class LevelUpdater : MonoBehaviour
         _isPaused = value;
     }
 
+    private void FixedUpdate()
+    {
+        if(!_isPaused)
+            FixedUpdateLogic();
+    }
+
     private void Update()
     {
         if (!_isPaused)
@@ -30,6 +36,12 @@ public class LevelUpdater : MonoBehaviour
     public void UpdateLogic()
     {
         foreach (ILevelUpdatable updatable in _updatables)
-            updatable.UpdateLogic();
+            (updatable as IUpdatable)?.UpdateLogic();
+    }
+    
+    public void FixedUpdateLogic()
+    {
+        foreach (ILevelUpdatable updatable in _updatables)
+            (updatable as IFixedUpdatable)?.FixedUpdateLogic();
     }
 }

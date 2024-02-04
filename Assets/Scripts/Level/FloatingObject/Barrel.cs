@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Barrel : MonoBehaviour, ILevelUpdatable
+public class Barrel : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
     [SerializeField] private FloatingObject[] floating;
     [SerializeField] private SoundPlayer boomSound;

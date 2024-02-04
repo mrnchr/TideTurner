@@ -43,7 +43,7 @@ public class WaterMovement : MonoBehaviour
         waterLevel.transform.position = upBorder.transform.position;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         UpdateWaveHeight();
         UpdateMesh();
@@ -65,14 +65,14 @@ public class WaterMovement : MonoBehaviour
 
     private void UpdateWaveHeight()
     {
-        _offset += Time.deltaTime * speed;
+        _offset += Time.fixedDeltaTime * speed;
     }
 
     private void UpdateWaterLevel()
     {
         waterLevel.transform.position = Vector3.Lerp(waterLevel.transform.position, new Vector3(0, 
             Mathf.Clamp(waterLevel.transform.position.y + _heightStep * _waterLevelDir, downBorder.position.y , upBorder.position.y), 
-            0f), Time.deltaTime * lerpVelocity); 
+            0f), Time.fixedDeltaTime * lerpVelocity); 
     }
 
     public Transform GetWaterLevel()

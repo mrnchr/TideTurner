@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Water : MonoBehaviour, ILevelUpdatable
+public class Water : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
     private MoonData _moon;
     private WaterMovement _waterMovement;

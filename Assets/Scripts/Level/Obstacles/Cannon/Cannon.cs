@@ -4,10 +4,13 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     [SerializeField] private Transform _ballSpawn;
-    [SerializeField] private float _ballSpeed;
-    [SerializeField] private float _shotDelay;
-    private BallPool _pool;
+    [Range(0f, 25f)][SerializeField] private float _ballSpeed;
+    [Range(0, 2f)][SerializeField] private float _shotDelay;
 
+    [SerializeField] private SoundPlayer shotSoundPlayer;
+
+
+    private BallPool _pool;
     public void Construct(BallPool pool)
     {
         _pool = pool;
@@ -22,8 +25,14 @@ public class Cannon : MonoBehaviour
     {
         while (true)
         {
-            _pool.Pop(_ballSpawn, _ballSpeed);
-            yield return new WaitForSeconds(_shotDelay);
+            if (shotSoundPlayer.IsPlaying == false)
+            {
+                shotSoundPlayer.SetSoundState(true);
+                _pool.Pop(_ballSpawn, _ballSpeed);
+                yield return new WaitForSeconds(shotSoundPlayer.SoundLength);
+            }
+
+            yield return new WaitForSeconds(0.01f);
         }
     }
 

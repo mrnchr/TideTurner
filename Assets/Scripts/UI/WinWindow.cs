@@ -10,8 +10,7 @@ namespace DefaultNamespace.UI
         public void SetActive(bool value)
         {
             _window.SetActive(value);
-
-            soundPlayer.SetSoundState(value);
+            soundPlayer.SetSoundState(value ? SoundState.Play : SoundState.Stop);
         }
     }
 }

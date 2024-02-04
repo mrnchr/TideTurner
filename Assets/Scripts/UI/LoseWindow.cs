@@ -9,7 +9,6 @@ public class LoseWindow : MonoBehaviour
     public void SetActive(bool value)
     {
         _window.SetActive(value);
-
-        deathSound.SetSoundState(value);
+        deathSound.SetSoundState(value ? SoundState.Play : SoundState.Stop);
     }
 }

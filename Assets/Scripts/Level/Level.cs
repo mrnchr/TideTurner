@@ -56,8 +56,8 @@ public class Level : MonoBehaviour
         if (_machine.CurrentState is StopLevelState)
             return;
         
-        _lose.SetActive(true);
         _machine.ChangeState<StopLevelState>();
+        _lose.SetActive(true);
     }
 
     public void Win()

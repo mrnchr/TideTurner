@@ -3,8 +3,8 @@
 public class Boat : MonoBehaviour, ILevelUpdatable
 {
     [SerializeField] private FloatingObject[] floating;
-    private BoatSpawn _spawn;
 
+    private BoatSpawn _spawn;
     private MoonData _moon;
     private Rigidbody2D _rb;
     private void Awake()

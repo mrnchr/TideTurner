@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Boat : MonoBehaviour, ILevelUpdatable
 {
@@ -47,19 +46,13 @@ public class Boat : MonoBehaviour, ILevelUpdatable
             _inWater = true;
 
         if (other.gameObject.CompareTag("DeathTrigger"))
-            StartCoroutine(StartDeathTimer());
+            _level.Lose();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Water"))
             _inWater = false;
-    }
-
-    private IEnumerator StartDeathTimer()
-    {
-        yield return new WaitForSeconds(1f);
-        _level.Lose();
     }
 
     private void LimitRotation()

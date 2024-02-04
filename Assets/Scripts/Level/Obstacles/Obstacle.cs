@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    private Level _level;
+    public event Action OnPlayerCollision;
 
+    private Level _level;
     public void Construct(Level level)
     {
         _level = level;
@@ -11,9 +13,10 @@ public class Obstacle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Boat"))
-        {
-            _level.Lose();
-        }
+        if (other.gameObject.CompareTag("Boat") == false)
+            return;
+
+        OnPlayerCollision?.Invoke();
+        _level.Lose();
     }
 }

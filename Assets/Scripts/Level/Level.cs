@@ -1,8 +1,11 @@
 using DefaultNamespace.UI;
+using System.Collections;
 using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    [SerializeField] private float deathDelay = 1f;
+
     private LevelStateMachine _machine;
     private MoonData _moonData;
     private Moon _moon;
@@ -12,7 +15,7 @@ public class Level : MonoBehaviour
     private WinWindow _win;
     private Cannon[] _cannons;
     private CameraMovement _cameraMovement;
-
+    private Coroutine _coroutine;
     public void Construct(LevelStateMachine machine,
         MoonData moonData,
         Moon moon,
@@ -53,11 +56,21 @@ public class Level : MonoBehaviour
 
     public void Lose()
     {
-        if (_machine.CurrentState is StopLevelState)
-            return;
         
+        if (_machine.CurrentState is StopLevelState || _coroutine != null)
+            return;
+
+        _coroutine = StartCoroutine(StartDeathTimer());        
+    }
+
+    private IEnumerator StartDeathTimer()
+    {
+        yield return new WaitForSeconds(deathDelay);
+
         _machine.ChangeState<StopLevelState>();
         _lose.SetActive(true);
+
+        _coroutine = null;
     }
 
     public void Win()

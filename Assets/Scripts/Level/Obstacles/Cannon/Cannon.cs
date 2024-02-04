@@ -9,7 +9,6 @@ public class Cannon : MonoBehaviour
 
     [SerializeField] private SoundPlayer shotSoundPlayer;
 
-
     private BallPool _pool;
     public void Construct(BallPool pool)
     {

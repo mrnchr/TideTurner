@@ -3,15 +3,28 @@ using UnityEngine;
 public class Barrel : MonoBehaviour, ILevelUpdatable
 {
     [SerializeField] private FloatingObject[] floating;
-    
+    [SerializeField] private SoundPlayer boomSound;
+    [SerializeField] private ParticleSystem boomEffect;
+
+    private bool _inWater;
     private MoonData _moon;
-    public bool _inWater;
-    
+    private Obstacle _obstacle;
     public void Construct(MoonData moon)
     {
+        _obstacle = GetComponent<Obstacle>();
         _moon = moon;
+
+        _obstacle.OnPlayerCollision += SubsribeToObstacle;
     }
-    
+
+    private void SubsribeToObstacle()
+    {
+        boomSound.SetSoundState(SoundState.Play);
+        boomEffect.gameObject.transform.parent = null;
+        boomEffect.Play();
+        gameObject.SetActive(false);
+    }
+
     public void UpdateLogic()
     {
         foreach (var floatingObject in floating)
@@ -20,13 +33,13 @@ public class Barrel : MonoBehaviour, ILevelUpdatable
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponentInParent<Water>())
+        if (other.gameObject.CompareTag("Water"))
             _inWater = true;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.GetComponentInParent<Water>())
+        if (other.gameObject.CompareTag("Water"))
             _inWater = false;
     }
 }

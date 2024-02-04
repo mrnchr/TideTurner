@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Shark : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    private Rigidbody _rb;
+    private Rigidbody2D _rb;
 
     public void Construct()
     {
-        _rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     public void Init()

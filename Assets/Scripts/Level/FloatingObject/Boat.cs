@@ -6,19 +6,15 @@ public class Boat : MonoBehaviour, ILevelUpdatable
     private BoatSpawn _spawn;
 
     private MoonData _moon;
-    [SerializeField] private Rigidbody _rb;
-
+    private Rigidbody2D _rb;
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody2D>();
 
         _rb.drag = 1;
         _rb.angularDrag = 1;
-        _rb.useGravity = false;
 
-        _rb.constraints = RigidbodyConstraints.FreezeRotationX |
-            RigidbodyConstraints.FreezeRotationY |
-            RigidbodyConstraints.FreezePositionZ;
+        //_rb.gravityScale
     }
 
     public void Construct(MoonData moon, BoatSpawn spawn)
@@ -29,8 +25,6 @@ public class Boat : MonoBehaviour, ILevelUpdatable
 
     public void Init()
     {
-        _rb = GetComponent<Rigidbody>();
-
         transform.position = _spawn.transform.position;
         transform.eulerAngles = Vector3.zero;
     }

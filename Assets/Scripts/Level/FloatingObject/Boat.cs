@@ -1,18 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Boat : MonoBehaviour, ILevelUpdatable
 {
     [SerializeField] private FloatingObject[] floating;
 
+    private bool _inWater;
+
     private BoatSpawn _spawn;
     private MoonData _moon;
     private Rigidbody2D _rb;
-    public bool _inWater;
-
+    private Level _level;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-
+        _level = FindAnyObjectByType<Level>();
         _rb.drag = 1;
         _rb.angularDrag = 1;
 
@@ -41,14 +43,23 @@ public class Boat : MonoBehaviour, ILevelUpdatable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponentInParent<Water>())
+        if (other.gameObject.CompareTag("Water"))
             _inWater = true;
+
+        if (other.gameObject.CompareTag("DeathTrigger"))
+            StartCoroutine(StartDeathTimer());
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.GetComponentInParent<Water>())
+        if (other.gameObject.CompareTag("Water"))
             _inWater = false;
+    }
+
+    private IEnumerator StartDeathTimer()
+    {
+        yield return new WaitForSeconds(1f);
+        _level.Lose();
     }
 
     private void LimitRotation()

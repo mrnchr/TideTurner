@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3832442706029602181}
   horizontalVelocityMultiplier: 7
-  verticalVelocityMultiplier: 2
+  verticalVelocityMultiplier: 4.5
 --- !u!1 &2431688068595948852
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3832442706029602181}
   horizontalVelocityMultiplier: 7
-  verticalVelocityMultiplier: 2
+  verticalVelocityMultiplier: 4.5
 --- !u!1 &3832442706029602183
 GameObject:
   m_ObjectHideFlags: 0

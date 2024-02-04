@@ -19,8 +19,9 @@ public class SharkFactory
 
     public Shark Create(Transform spawn)
     {
-        var instance = Object.Instantiate(_prefab, spawn.transform.position, Quaternion.identity, _parent);
+        var instance = Object.Instantiate(_prefab, spawn.position, Quaternion.identity, _parent);
         instance.Construct();
+        instance.SetDirection(spawn.right);
         
         instance.GetComponent<Obstacle>().Construct(_level);
         

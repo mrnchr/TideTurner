@@ -45,7 +45,7 @@ public class LevelBootstrap : MonoBehaviour
         pause.Construct();
         _ballPool.Construct(level);
         _sharkContainer.Construct(sharkSpawns, water, updater, level);
-        _barrelContainer.Construct(barrelSpawns, moonData, updater, water.Movement);
+        _barrelContainer.Construct(barrelSpawns, moonData, updater, water.Movement, level);
 
         foreach (Obstacle obstacle in obstacles)
             obstacle.Construct(level);

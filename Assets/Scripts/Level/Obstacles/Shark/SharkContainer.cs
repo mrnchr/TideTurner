@@ -29,16 +29,15 @@ public class SharkContainer : MonoBehaviour
     public void Respawn()
     {
         for (int i = 0; i < _spawns.Length; i++)
-        {
-            MoveToSpawn(_sharks[i], _spawns[i]);
-            _sharks[i].Init();
-        }
+            RespawnShark(_sharks[i], _spawns[i]);
 
         return;
 
-        void MoveToSpawn(Shark shark, SharkSpawn spawn)
+        void RespawnShark(Shark shark, SharkSpawn spawn)
         {
             shark.transform.position = spawn.transform.position;
+            shark.SetDirection(spawn.transform.right);
+            shark.Init();
         }
     }
 }

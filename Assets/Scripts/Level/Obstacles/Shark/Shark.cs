@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Shark : MonoBehaviour
@@ -7,29 +8,39 @@ public class Shark : MonoBehaviour
 
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
-    private Vector3 _initalDir;
+    private Vector3 _initialDir;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
+
     public void Construct()
     {
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
-        _initalDir = transform.right;
+        _initialDir = transform.right;
     }
 
     private void OnEnable()
     {
-        _rb = GetComponent<Rigidbody2D>();
-
-        _rb.velocity = _initalDir * _speed;
+        _rb.velocity = _initialDir * _speed;
     }
-
-    private void OnDisable()
-    {
-        _rb.velocity = _initalDir * _speed;
-    }
-
+    
     public void Init()
     {
-        _rb.velocity = _initalDir * _speed;
+        SetVelocity();
+    }
+
+    public void SetDirection(Vector3 direction)
+    {
+        _initialDir = direction;
+        SetVelocity();
+    }
+
+    private void SetVelocity()
+    {
+        _rb.velocity = _initialDir * _speed;
+        _spriteRenderer.flipX = _initialDir.x > 0;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -39,8 +50,6 @@ public class Shark : MonoBehaviour
 
     private void ChangeDirection()
     {
-        _initalDir = -_initalDir;
-        _rb.velocity = _initalDir * _speed;
-        _spriteRenderer.flipX = !_spriteRenderer.flipX;
+        SetDirection(-_initialDir);
     }
 }

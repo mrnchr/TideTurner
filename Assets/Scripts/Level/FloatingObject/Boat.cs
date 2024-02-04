@@ -6,7 +6,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable
     private BoatSpawn _spawn;
 
     private MoonData _moon;
-    private Rigidbody _rb;
+    [SerializeField] private Rigidbody _rb;
 
     private void Awake()
     {
@@ -29,8 +29,10 @@ public class Boat : MonoBehaviour, ILevelUpdatable
 
     public void Init()
     {
-        transform.rotation = Quaternion.identity;
+        _rb = GetComponent<Rigidbody>();
+
         transform.position = _spawn.transform.position;
+        transform.eulerAngles = Vector3.zero;
     }
 
     public void UpdateLogic()
@@ -46,9 +48,10 @@ public class Boat : MonoBehaviour, ILevelUpdatable
         Vector3 euler = transform.eulerAngles;
 
         if (euler.z > 180)
-            euler.z = euler.z - 360;
+            euler.z -= 360;
 
         euler.z = Mathf.Clamp(euler.z, -25, 25);
-        transform.eulerAngles = euler;
+        //transform.eulerAngles = Vector3.zero;
+        //transform.eulerAngles = euler;
     }
 }

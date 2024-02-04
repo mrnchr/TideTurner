@@ -209,12 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2420953337371871263}
-  displacementAmount: 1
-  waterDrag: 2
-  waterAngularDrag: 2
-  floaterCount: 2
-  depthBefore: 1
-  velocityMultiplier: 4
+  velocityMultiplier: 10
 --- !u!1 &3821428562690624981
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,9 +255,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2420953337371871263}
-  displacementAmount: 1
-  waterDrag: 2
-  waterAngularDrag: 2
-  floaterCount: 2
-  depthBefore: 1
-  velocityMultiplier: 4
+  velocityMultiplier: 10

@@ -32,6 +32,6 @@ public class FloatingObject : MonoBehaviour, ILevelUpdatable
             _waterMovement.GetWaterLevel().position.y + _waterMovement.GetWaveHeight(transform.position.x),
             0f) - new Vector3(0, transform.position.y, 0f);
 
-        rb.AddForce(dir, ForceMode2D.Force);
+        rb.AddForceAtPosition(dir, transform.position,ForceMode2D.Force);
     }
 }

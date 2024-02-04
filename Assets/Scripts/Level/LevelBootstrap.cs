@@ -7,6 +7,7 @@ public class LevelBootstrap : MonoBehaviour
     private BallPool _ballPool;
     private LevelStateMachine _machine;
     private SharkContainer _sharkContainer;
+    private BarrelContainer _barrelContainer;
 
     public void Construct()
     {
@@ -30,6 +31,8 @@ public class LevelBootstrap : MonoBehaviour
         _sharkContainer = FindAnyObjectByType<SharkContainer>();
         var cameraMovement = FindAnyObjectByType<CameraMovement>();
         var floatings = FindObjectsByType<FloatingObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        var barrelSpawns = FindObjectsByType<BarrelSpawn>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        _barrelContainer = FindAnyObjectByType<BarrelContainer>();
 
         moonData.Construct();
         moon.Construct(moonData);
@@ -42,6 +45,7 @@ public class LevelBootstrap : MonoBehaviour
         pause.Construct();
         _ballPool.Construct(level);
         _sharkContainer.Construct(sharkSpawns, water, updater, level);
+        _barrelContainer.Construct(barrelSpawns, moonData, updater);
 
         foreach (Obstacle obstacle in obstacles)
             obstacle.Construct(level);
@@ -64,6 +68,7 @@ public class LevelBootstrap : MonoBehaviour
     {
         _ballPool.Init();
         _sharkContainer.Init();
+        _barrelContainer.Init();
         _machine.ChangeState<StartLevelState>();
     }
 }

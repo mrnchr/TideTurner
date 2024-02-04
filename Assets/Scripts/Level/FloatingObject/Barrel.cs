@@ -9,12 +9,21 @@ public class Barrel : MonoBehaviour, ILevelUpdatable
     private bool _inWater;
     private MoonData _moon;
     private Obstacle _obstacle;
+    private Rigidbody2D rb;
+    
     public void Construct(MoonData moon)
     {
         _obstacle = GetComponent<Obstacle>();
+        rb = GetComponent<Rigidbody2D>();
         _moon = moon;
 
         _obstacle.OnPlayerCollision += SubsribeToObstacle;
+    }
+
+    public void Init()
+    {
+        transform.rotation = Quaternion.identity;
+        rb.velocity = Vector2.zero;
     }
 
     private void SubsribeToObstacle()

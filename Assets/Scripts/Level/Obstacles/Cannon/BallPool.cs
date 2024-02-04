@@ -34,7 +34,7 @@ public class BallPool : MonoBehaviour
     public void Push(Ball ball)
     {
         ball.gameObject.SetActive(false);
-        ball.SetVelocity(Vector3.zero);
+        ball.SetVelocity(Vector2.zero);
         ball.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
         
@@ -43,8 +43,8 @@ public class BallPool : MonoBehaviour
         var instance = _balls.Find(x => !x.gameObject.activeSelf);
         instance.transform.position = spawn.position;
         instance.transform.right = spawn.right;
-        instance.SetVelocity(velocity * spawn.right);
         instance.gameObject.SetActive(true);
+        instance.SetVelocity(velocity * spawn.right);
         return instance;
     }
         

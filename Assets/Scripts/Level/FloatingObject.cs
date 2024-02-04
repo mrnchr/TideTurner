@@ -1,19 +1,21 @@
 using UnityEngine;
 
-public class FloatingObject : MonoBehaviour
+public class FloatingObject : MonoBehaviour, ILevelUpdatable
 {
     [SerializeField] private Rigidbody2D rb;
+
     [Header("Settings")]
-    [Range(5f,15f)][SerializeField] private float velocityMultiplier = 10;
-    
+    [Range(5f, 15f)] [SerializeField] private float velocityMultiplier = 10;
+
     private WaterMovement _waterMovement;
     private Vector3 dir;
-    private void Awake()
+
+    public void Construct(WaterMovement waterMovement)
     {
-        _waterMovement = FindObjectOfType<WaterMovement>();
+        _waterMovement = waterMovement;
     }
 
-    private void Update()
+    public void UpdateLogic()
     {
         Move();
     }
@@ -26,9 +28,9 @@ public class FloatingObject : MonoBehaviour
     private void Move()
     {
         dir = new Vector3(
-                          0, 
-                          _waterMovement.GetWaterLevel().position.y + _waterMovement.GetWaveHeight(transform.position.x),
-                          0f) - new Vector3(0, transform.position.y, 0f);
+            0,
+            _waterMovement.GetWaterLevel().position.y + _waterMovement.GetWaveHeight(transform.position.x),
+            0f) - new Vector3(0, transform.position.y, 0f);
 
         rb.AddForce(dir, ForceMode2D.Force);
     }

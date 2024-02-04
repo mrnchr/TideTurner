@@ -19,7 +19,6 @@ public class Ball : MonoBehaviour
     public void SetVelocity(Vector2 value)
     {
         _rb.velocity = value;
-        Debug.Log(value);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

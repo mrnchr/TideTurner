@@ -5,6 +5,8 @@ public class Barrel : MonoBehaviour, ILevelUpdatable
     [SerializeField] private FloatingObject[] floating;
     
     private MoonData _moon;
+    public bool _inWater;
+    
     public void Construct(MoonData moon)
     {
         _moon = moon;
@@ -13,8 +15,18 @@ public class Barrel : MonoBehaviour, ILevelUpdatable
     public void UpdateLogic()
     {
         foreach (var floatingObject in floating)
-        {
-            floatingObject.SetVelocityRate(_moon.MoonPosition);
-        }
+            floatingObject.SetVelocityRate(_inWater ? _moon.MoonPosition : 0);
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponentInParent<Water>())
+            _inWater = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponentInParent<Water>())
+            _inWater = false;
     }
 }

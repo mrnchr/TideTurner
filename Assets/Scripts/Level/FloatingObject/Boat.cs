@@ -7,6 +7,8 @@ public class Boat : MonoBehaviour, ILevelUpdatable
     private BoatSpawn _spawn;
     private MoonData _moon;
     private Rigidbody2D _rb;
+    public bool _inWater;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -32,9 +34,21 @@ public class Boat : MonoBehaviour, ILevelUpdatable
     public void UpdateLogic()
     {
         foreach (var floatingObject in floating)
-            floatingObject.SetVelocityRate(_moon.MoonPosition);
+            floatingObject.SetVelocityRate(_inWater ? _moon.MoonPosition : 0);
 
         LimitRotation();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponentInParent<Water>())
+            _inWater = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponentInParent<Water>())
+            _inWater = false;
     }
 
     private void LimitRotation()

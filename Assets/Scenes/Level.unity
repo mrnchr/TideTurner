@@ -352,6 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _window: {fileID: 5939617983386063162}
+  deathSound: {fileID: 0}
 --- !u!1 &267880096
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +397,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0a756bfc7c047d28e7739b69b069028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &332390238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6432080509209773926, guid: 2536d80dfa4a12442bfa4b8d85f7b887, type: 3}
+  m_PrefabInstance: {fileID: 825001645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &332390240
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332390238}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.73687744, y: -5.894749}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 250.05324, y: 12.789498}
+  m_EdgeRadius: 0
 --- !u!1 &369714843
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +702,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1906457834}
     m_Modifications:
+    - target: {fileID: 3832442706029602181, guid: ecb835cb87f64e84a9e688455ac0bdd1, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3832442706029602182, guid: ecb835cb87f64e84a9e688455ac0bdd1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -728,12 +764,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 1906457834}
     m_Modifications:
     - target: {fileID: 2001499945, guid: 2536d80dfa4a12442bfa4b8d85f7b887, type: 3}
-      propertyPath: maxWaterLevelSpeedChange
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2001499945, guid: 2536d80dfa4a12442bfa4b8d85f7b887, type: 3}
-      propertyPath: minWaterLevelSpeedChange
-      value: 0.5
+      propertyPath: amplitude
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6432080509154639618, guid: 2536d80dfa4a12442bfa4b8d85f7b887, type: 3}
       propertyPath: m_RootOrder
@@ -1055,6 +1087,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 32928236}
+    - target: {fileID: 7919045662758529593, guid: 0f0cac8f175df6344b5b45501ee543bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919045662758529593, guid: 0f0cac8f175df6344b5b45501ee543bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PauseWindow, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f0cac8f175df6344b5b45501ee543bc, type: 3}
 --- !u!1 &1382619128 stripped
@@ -1282,6 +1322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _window: {fileID: 3094377306407996077}
+  soundPlayer: {fileID: 0}
 --- !u!1 &1906457833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1810,15 +1851,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 318415298987278176, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 318415298987278176, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 318415298987278176, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 318415298987278176, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2032,15 +2073,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4998217597136261927, guid: 4036b37c1fd40bd4eb6efa2da5d03093, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4998217597136261927, guid: 4036b37c1fd40bd4eb6efa2da5d03093, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4998217597136261927, guid: 4036b37c1fd40bd4eb6efa2da5d03093, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4998217597136261927, guid: 4036b37c1fd40bd4eb6efa2da5d03093, type: 3}
       propertyPath: m_AnchoredPosition.x

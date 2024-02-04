@@ -18,14 +18,17 @@ namespace DefaultNamespace.UI
         public void Open(Menu menu)
         {
             _menus.Peek().gameObject.SetActive(false);
-            
+
             menu.gameObject.SetActive(true);
             _menus.Push(menu);
         }
 
         public void Close()
         {
-            _menus.Pop().gameObject.SetActive(false);
+            if (_menus.Count > 0)
+                _menus.Pop().gameObject.SetActive(false);
+            if(_menus.Count > 0)
+                _menus.Peek().gameObject.SetActive(true);
         }
 
         private void OnDisable()

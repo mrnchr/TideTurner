@@ -147,6 +147,7 @@ MonoBehaviour:
   - {fileID: 2431688068449853504}
   - {fileID: 2431688068595948854}
   _inWater: 0
+  deathAngle: 80
 --- !u!50 &3832442706029602181
 Rigidbody2D:
   serializedVersion: 4

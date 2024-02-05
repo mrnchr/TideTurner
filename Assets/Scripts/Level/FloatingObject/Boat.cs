@@ -6,13 +6,16 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
 
     [SerializeField] private bool _inWater;
 
+    [Range(30,180)][SerializeField] private int deathAngle = 45;
+
     private BoatSpawn _spawn;
     private MoonData _moon;
     private Rigidbody2D _rb;
     private WaterMovement _waterMovement;
-
+    private Level _level;
     private void Awake()
     {
+        _level = FindAnyObjectByType<Level>();
         _rb = GetComponent<Rigidbody2D>();
         _rb.drag = 1;
         _rb.angularDrag = 1;
@@ -36,9 +39,19 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     public void UpdateLogic()
     {
         CheckInWater();
-        
+        Kill();
+
         foreach (var floatingObject in floating)
             floatingObject.SetVelocityRate(_inWater ? _moon.MoonPosition : 0);
+    }
+
+    private void Kill()
+    {
+        if ( Vector3.Angle(Vector3.up,transform.up) > deathAngle)
+        {
+            _level.Lose();
+            Debug.Log("Lose: " + Vector3.Angle(Vector3.up, transform.forward));
+        }
     }
 
     private void CheckInWater()

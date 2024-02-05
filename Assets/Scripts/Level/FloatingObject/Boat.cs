@@ -16,8 +16,6 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
         _rb = GetComponent<Rigidbody2D>();
         _rb.drag = 1;
         _rb.angularDrag = 1;
-
-        //_rb.gravityScale
     }
 
     public void Construct(MoonData moon, BoatSpawn spawn, WaterMovement waterMovement)
@@ -31,6 +29,8 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     {
         transform.position = _spawn.transform.position;
         transform.eulerAngles = Vector3.zero;
+
+        _rb.gravityScale = 1;
     }
 
     public void UpdateLogic()
@@ -39,8 +39,6 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
         
         foreach (var floatingObject in floating)
             floatingObject.SetVelocityRate(_inWater ? _moon.MoonPosition : 0);
-
-        LimitRotation();
     }
 
     private void CheckInWater()
@@ -48,15 +46,22 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
         _inWater = _waterMovement.GetWaterLevel().position.y > transform.position.y;
     }
 
-    private void LimitRotation()
+    public void SetLoseState()
     {
-        Vector3 euler = transform.eulerAngles;
-
-        if (euler.z > 180)
-            euler.z -= 360;
-
-        euler.z = Mathf.Clamp(euler.z, -25, 25);
-        //transform.eulerAngles = Vector3.zero;
-        //transform.eulerAngles = euler;
+        _rb.gravityScale = 5;
     }
 }
+
+/*
+private void LimitRotation()
+{
+    Vector3 euler = transform.eulerAngles;
+
+    if (euler.z > 180)
+        euler.z -= 360;
+
+    euler.z = Mathf.Clamp(euler.z, -25, 25);
+    //transform.eulerAngles = Vector3.zero;
+    //transform.eulerAngles = euler;
+}
+*/

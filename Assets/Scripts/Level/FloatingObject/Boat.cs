@@ -13,6 +13,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     private Rigidbody2D _rb;
     private WaterMovement _waterMovement;
     private Level _level;
+    private bool _isReset = false;
     private void Awake()
     {
         _level = FindAnyObjectByType<Level>();
@@ -31,9 +32,13 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     public void Init()
     {
         transform.position = _spawn.transform.position;
-        transform.eulerAngles = Vector3.zero;
 
         _rb.gravityScale = 1;
+        _rb.rotation = 0;
+        _rb.angularVelocity = 0;
+        _rb.velocity = Vector2.zero;
+        transform.eulerAngles = new Vector3(0, 0, 0);
+        _isReset = true;
     }
 
     public void UpdateLogic()
@@ -47,10 +52,11 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
 
     private void Kill()
     {
-        if ( Vector3.Angle(Vector3.up,transform.up) > deathAngle)
+        if ( Vector3.Angle(Vector3.up,transform.up) > deathAngle && _isReset == true)
         {
             _level.Lose();
-            Debug.Log("Lose: " + Vector3.Angle(Vector3.up, transform.forward));
+            _isReset = false;
+            //Debug.Log("Lose: " + Vector3.Angle(Vector3.up, transform.forward));
         }
     }
 

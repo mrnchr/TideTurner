@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class FloatingObject : MonoBehaviour, ILevelUpdatable, IFixedUpdatable
@@ -6,7 +5,7 @@ public class FloatingObject : MonoBehaviour, ILevelUpdatable, IFixedUpdatable
     [SerializeField] private Rigidbody2D rb;
 
     [Header("Settings")]
-    [Range(5f, 15f)] [SerializeField] private float horizontalVelocityMultiplier = 10;
+    [Range(1f, 15f)] [SerializeField] private float horizontalVelocityMultiplier = 10;
 
     [Range(1f, 25f)] [SerializeField] private float verticalVelocityMultiplier = 1f;
 

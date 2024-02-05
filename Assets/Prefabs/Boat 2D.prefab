@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3832442706029602181}
-  horizontalVelocityMultiplier: 7
+  horizontalVelocityMultiplier: 3
   verticalVelocityMultiplier: 2.25
 --- !u!1 &2431688068595948852
 GameObject:
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3832442706029602181}
-  horizontalVelocityMultiplier: 7
+  horizontalVelocityMultiplier: 3
   verticalVelocityMultiplier: 2.25
 --- !u!1 &3832442706029602183
 GameObject:
@@ -128,6 +128,7 @@ Transform:
   - {fileID: 2431688068449853511}
   - {fileID: 2431688068595948849}
   - {fileID: 5416306533115667960}
+  - {fileID: 168714331183287658}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -146,6 +147,7 @@ MonoBehaviour:
   floating:
   - {fileID: 2431688068449853504}
   - {fileID: 2431688068595948854}
+  _centerOfMass: {fileID: 168714331183287658}
   _inWater: 0
   deathAngle: 80
 --- !u!50 &3832442706029602181
@@ -279,3 +281,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4626918884812239456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 168714331183287658}
+  m_Layer: 0
+  m_Name: CenterOfMass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &168714331183287658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626918884812239456}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.063, y: 0.182, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3832442706029602182}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

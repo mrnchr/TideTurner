@@ -1,5 +1,6 @@
 using System.Linq;
 using DefaultNamespace.UI;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelBootstrap : MonoBehaviour
@@ -11,6 +12,7 @@ public class LevelBootstrap : MonoBehaviour
 
     public void Construct()
     {
+        var input = FindAnyObjectByType<InputController>();
         var updater = FindAnyObjectByType<LevelUpdater>();
         var level = FindAnyObjectByType<Level>();
         _machine = FindAnyObjectByType<LevelStateMachine>();
@@ -34,6 +36,7 @@ public class LevelBootstrap : MonoBehaviour
         var barrelSpawns = FindObjectsByType<BarrelSpawn>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         _barrelContainer = FindAnyObjectByType<BarrelContainer>();
 
+        input.Construct();
         moonData.Construct();
         moon.Construct(moonData);
         // _barrel.Construct();

@@ -7,11 +7,17 @@ public class InputController : MonoBehaviour, IInputController
     [Header("Runtime")]
     [SerializeField] private InputData _data;
     private bool _isPaused;
-    
+    private SettingData _settings;
+
     public InputData Data => _data;
 
     public event Action<InputData> OnInputHandled;
-        
+
+    public void Construct()
+    {
+        _settings = FindAnyObjectByType<SettingData>();
+    }
+
     private void Update()
     {
         HandleInput();
@@ -31,8 +37,8 @@ public class InputController : MonoBehaviour, IInputController
             _data.ClickDown = Input.GetKeyDown(KeyCode.Mouse0);
             _data.ClickHold = Input.GetKey(KeyCode.Mouse0);
             _data.ClickUp = Input.GetKeyUp(KeyCode.Mouse0);
-            _data.MouseDeltaX = Input.GetAxis(Idents.InputAxis.MouseX);
-            _data.WheelDelta = Input.GetAxis(Idents.InputAxis.ScrollWheel);
+            _data.MouseDeltaX = Input.GetAxis(Idents.InputAxis.MOUSE_X) * _settings.MouseSensitivity;
+            _data.WheelDelta = Input.GetAxis(Idents.InputAxis.SCROLL_WHEEL);
         }
 
         _data.IsPause = Input.GetKeyDown(KeyCode.Escape);

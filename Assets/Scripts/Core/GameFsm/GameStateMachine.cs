@@ -8,6 +8,15 @@ public class GameStateMachine : MonoBehaviour, IStateMachine<GameStateBase>
 
     public GameStateBase CurrentState => _current;
 
+    public void Construct()
+    {
+        _states.AddRange(new GameStateBase[]
+        {
+            new MenuGameState(this),
+            new LevelGameState(this)
+        });
+    }
+
     public void ChangeState<T>() where T : GameStateBase
     {
         _current?.Exit();

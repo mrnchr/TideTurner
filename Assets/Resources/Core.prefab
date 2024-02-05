@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56fa93830820e84e84a429ace143ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseSensivityX: 0
-  MouseSensivityY: 0
-  MusicVolume: 0
-  SoundVolume: 0
+  _mixer: {fileID: 24100000, guid: baa1970a09314ba4ea3e5fed6da083b9, type: 2}
+  _defaultMouseSensitivity: 1
+  _defaultMusicVolume: 0.5
+  _defaultSoundVolume: 0.5

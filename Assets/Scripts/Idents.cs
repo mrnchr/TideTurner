@@ -1,11 +1,14 @@
-﻿namespace DefaultNamespace
+﻿public static class Idents
 {
-    public static class Idents
+    public static class InputAxis
     {
-        public static class InputAxis
-        {
-            public static string MouseX = "Mouse X";
-            public static string ScrollWheel = "Mouse ScrollWheel";
-        }
+        public const string MOUSE_X = "Mouse X";
+        public const string SCROLL_WHEEL = "Mouse ScrollWheel";
+    }
+
+    public static class AudioMixerParameters
+    {
+        public const string MUSIC_VOLUME = "MusicVolume";
+        public const string SOUND_VOLUME = "SoundVolume";
     }
 }

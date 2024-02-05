@@ -1,3 +1,4 @@
+using System.Diagnostics.Tracing;
 using System.Linq;
 using DefaultNamespace.Core;
 using DefaultNamespace.UI;
@@ -38,6 +39,7 @@ public class LevelBootstrap : Bootstrap
         var freezer = FindAnyObjectByType<LevelFreezer>();
         var loader = FindAnyObjectByType<SceneLoader>();
         var buttons = FindObjectsByType<ButtonSoundCaller>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        var tentacles = FindObjectsByType<Tentacle>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         input.Construct();
         freezer.Construct(updater, input, restarter);
@@ -68,7 +70,10 @@ public class LevelBootstrap : Bootstrap
         foreach (ButtonSoundCaller button in buttons)
             button.Construct();
 
-        updater.AddRange(new ILevelUpdatable[] { moon, boat, water, cameraMovement }.Concat(beings).Concat(floatings));
+        foreach (Tentacle tentacle in tentacles)
+            tentacle.Construct(water);
+
+        updater.AddRange(new ILevelUpdatable[] { moon, boat, water, cameraMovement }.Concat(beings).Concat(floatings).Concat(tentacles));
     }
 
     public override void Init()

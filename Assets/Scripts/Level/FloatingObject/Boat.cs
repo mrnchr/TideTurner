@@ -5,6 +5,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     [SerializeField] private FloatingObject[] floating;
     [SerializeField] private Transform _centerOfMass;
     [SerializeField] private bool _inWater;
+    [SerializeField] private SoundPlayer _sound;
 
     [Range(30,180)][SerializeField] private int deathAngle = 45;
     [Range(1, 2)][SerializeField] private float deathHeight = 1;
@@ -78,5 +79,6 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     public void SetLoseState()
     {
         _rb.gravityScale = 5;
+        _sound.SetSoundState(SoundState.Play);
     }
 }

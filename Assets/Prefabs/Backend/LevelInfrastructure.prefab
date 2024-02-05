@@ -1255,6 +1255,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 7373561938204735586}
+    - target: {fileID: 3401972275616298072, guid: 4036b37c1fd40bd4eb6efa2da5d03093, type: 3}
+      propertyPath: m_fontSize
+      value: 62.55
+      objectReference: {fileID: 0}
     - target: {fileID: 3525584175683318608, guid: 4036b37c1fd40bd4eb6efa2da5d03093, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
@@ -1640,6 +1644,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7926399845446735903, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
+      propertyPath: m_fontSize
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 8204262521684746007, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
@@ -1837,6 +1845,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5216881883392374788, guid: 0f0cac8f175df6344b5b45501ee543bc, type: 3}
+      propertyPath: m_fontSize
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 6322290320633790220, guid: 0f0cac8f175df6344b5b45501ee543bc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -1888,6 +1900,14 @@ PrefabInstance:
     - target: {fileID: 6322290320633790220, guid: 0f0cac8f175df6344b5b45501ee543bc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650694233278840032, guid: 0f0cac8f175df6344b5b45501ee543bc, type: 3}
+      propertyPath: m_fontSize
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650694234762608913, guid: 0f0cac8f175df6344b5b45501ee543bc, type: 3}
+      propertyPath: m_fontSize
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 7389113669199530587, guid: 0f0cac8f175df6344b5b45501ee543bc, type: 3}
       propertyPath: m_AnchorMax.y

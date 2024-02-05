@@ -71,17 +71,3 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
         _rb.gravityScale = 5;
     }
 }
-
-/*
-private void LimitRotation()
-{
-    Vector3 euler = transform.eulerAngles;
-
-    if (euler.z > 180)
-        euler.z -= 360;
-
-    euler.z = Mathf.Clamp(euler.z, -25, 25);
-    //transform.eulerAngles = Vector3.zero;
-    //transform.eulerAngles = euler;
-}
-*/

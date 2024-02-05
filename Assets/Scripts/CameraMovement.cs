@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
-    private const float HALF = 1f / 2f;
     [Range(0, 1)] [SerializeField] private float _screenRate;
-    [SerializeField] private float _speed;
+    [Range(0, 5)] [SerializeField] private float _speed = 2;
 
-    [Range(0.001f, 0.01f)]
-    [SerializeField]
-    private float _approximation;
+    [Range(0.001f, 0.01f)][SerializeField] private float _approximation;
 
+    private const float HALF = 1f / 2f;
     private Boat _boat;
     private Vector3 _position;
     private Camera _camera;

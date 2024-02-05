@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Moon : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
+    [SerializeField] private Slider _slider;
     [SerializeField] private Vector2 BoundMoonSize;
-    [SerializeField] private Transform _leftBound;
-    [SerializeField] private Transform _rightBound;
     private MoonData _data;
 
     public void Construct(MoonData data)
@@ -16,11 +16,6 @@ public class Moon : MonoBehaviour, ILevelUpdatable, IUpdatable
     {
         SetPosition();
         SetSize();
-    }
-
-    public float MoveLerp(float value)
-    {
-        return Mathf.Lerp(_leftBound.position.x, _rightBound.position.x, (value + 1) / 2);
     }
 
     public float SizeLerp(float value)
@@ -41,8 +36,6 @@ public class Moon : MonoBehaviour, ILevelUpdatable, IUpdatable
 
     private void SetPosition()
     {
-        Vector3 pos = transform.position;
-        pos.x = MoveLerp(_data.MoonPosition);
-        transform.position = pos;
+        _slider.value = _data.MoonPosition;
     }
 }

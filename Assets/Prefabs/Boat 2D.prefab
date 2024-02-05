@@ -150,6 +150,7 @@ MonoBehaviour:
   _centerOfMass: {fileID: 168714331183287658}
   _inWater: 0
   deathAngle: 80
+  deathHeight: 1.25
 --- !u!50 &3832442706029602181
 Rigidbody2D:
   serializedVersion: 4
@@ -166,7 +167,7 @@ Rigidbody2D:
   m_LinearDrag: 1
   m_AngularDrag: 1
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 39e377c86bd557a45a5b1a2ad0612f53, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1

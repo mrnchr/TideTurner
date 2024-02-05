@@ -7,6 +7,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     [SerializeField] private bool _inWater;
 
     [Range(30,180)][SerializeField] private int deathAngle = 45;
+    [Range(1, 2)][SerializeField] private float deathHeight = 1;
 
     private BoatSpawn _spawn;
     private MoonData _moon;
@@ -53,11 +54,19 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
 
     private void Kill()
     {
-        if ( Vector3.Angle(Vector3.up,transform.up) > deathAngle && _isReset == true)
+        if (_isReset == false)
+            return;
+
+        if ( Vector3.Angle(Vector3.up,transform.up) > deathAngle)
         {
             _level.Lose();
             _isReset = false;
-            //Debug.Log("Lose: " + Vector3.Angle(Vector3.up, transform.forward));
+        }
+
+        if (_waterMovement.GetWaterLevel().position.y - deathHeight > transform.position.y)
+        {
+            _level.Lose();
+            _isReset = false;
         }
     }
 

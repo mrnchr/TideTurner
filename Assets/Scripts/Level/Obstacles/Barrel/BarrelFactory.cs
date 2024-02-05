@@ -29,7 +29,7 @@ public class BarrelFactory
         Barrel instance = Object.Instantiate(_prefab, spawn.position, Quaternion.identity, _parent);
         instance.Construct(_moonData, _waterMovement);
         
-        var floating = instance.GetComponent<FloatingObject>();
+        var floating = instance.GetComponentInChildren<FloatingObject>();
         floating.Construct(_waterMovement);
         
         instance.GetComponent<Obstacle>().Construct(_level);

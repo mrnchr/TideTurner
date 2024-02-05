@@ -60,6 +60,7 @@ public class Level : MonoBehaviour
         if (_machine.CurrentState is StopLevelState || _coroutine != null)
             return;
 
+        _boat.SetLoseState();
         _coroutine = StartCoroutine(StartDeathTimer());        
     }
 

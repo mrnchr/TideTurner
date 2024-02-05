@@ -9,5 +9,10 @@ namespace DefaultNamespace.Core
         {
             SceneManager.LoadScene(sceneName);
         }
+        
+        public void LoadScene(int buildIndex)
+        {
+            SceneManager.LoadScene(buildIndex);
+        }
     }
 }

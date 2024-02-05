@@ -8,37 +8,21 @@ public class MusicPlayer : MonoBehaviour
     public MusicType MusicType => type;
 
     private AudioSource _music;
+    private SoundPlayer _sound;
+
     private void Awake()
     {
-        _music = GetComponent<AudioSource>();
-
-        DontDestroyOnLoad(gameObject);
+        _sound = GetComponent<SoundPlayer>();
     }
 
-    private void Start()
+    public void SetState(SoundState state)
     {
-        _music.playOnAwake = false;
-        _music.spatialBlend = 0;
-        _music.loop = true;
-    }
-
-    public void SetState(bool state)
-    {
-        switch (state)
-        {
-            case true:
-                _music.Play();
-                break;
-            case false:
-                _music.Stop();
-                break;
-        }  
-    }
-
-    public void SetVolume(float volume)
-    {
-        _music.volume = Mathf.Clamp( volume, 0f, 1f);
+        _sound.SetSoundState(state);
     }
 }
 
-public enum MusicType { menu, level}
+public enum MusicType
+{
+    Menu,
+    Level
+}

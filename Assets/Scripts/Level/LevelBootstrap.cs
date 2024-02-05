@@ -1,16 +1,16 @@
 using System.Linq;
+using DefaultNamespace.Core;
 using DefaultNamespace.UI;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class LevelBootstrap : MonoBehaviour
+public class LevelBootstrap : Bootstrap
 {
     private BallPool _ballPool;
     private LevelStateMachine _machine;
     private SharkContainer _sharkContainer;
     private BarrelContainer _barrelContainer;
 
-    public void Construct()
+    public override void Construct()
     {
         var input = FindAnyObjectByType<InputController>();
         var updater = FindAnyObjectByType<LevelUpdater>();
@@ -21,7 +21,6 @@ public class LevelBootstrap : MonoBehaviour
         var boatSpawn = FindAnyObjectByType<BoatSpawn>();
         var boat = FindAnyObjectByType<Boat>();
         var water = FindAnyObjectByType<Water>();
-        // _barrel = FindAnyObjectByType<Barrel>();
         var pause = FindAnyObjectByType<PauseWindow>();
         var lose = FindAnyObjectByType<LoseWindow>();
         var win = FindAnyObjectByType<WinWindow>();
@@ -35,16 +34,20 @@ public class LevelBootstrap : MonoBehaviour
         var floatings = FindObjectsByType<FloatingObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         var barrelSpawns = FindObjectsByType<BarrelSpawn>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         _barrelContainer = FindAnyObjectByType<BarrelContainer>();
+        var restarter = FindAnyObjectByType<SoundRestarter>();
+        var freezer = FindAnyObjectByType<LevelFreezer>();
+        var loader = FindAnyObjectByType<SceneLoader>();
+        var buttons = FindObjectsByType<ButtonSoundCaller>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         input.Construct();
+        freezer.Construct(updater, input, restarter);
         moonData.Construct();
         moon.Construct(moonData);
-        // _barrel.Construct();
         water.Construct(moonData);
         boat.Construct(moonData, boatSpawn, water.Movement);
         cameraMovement.Construct(boat);
         _machine.Construct();
-        level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement);
+        level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement, loader);
         pause.Construct();
         _ballPool.Construct(level);
         _sharkContainer.Construct(sharkSpawns, water, updater, level);
@@ -60,14 +63,15 @@ public class LevelBootstrap : MonoBehaviour
             being.Construct(water);
 
         foreach (FloatingObject floating in floatings)
-        {
             floating.Construct(water.Movement);
-        }
+
+        foreach (ButtonSoundCaller button in buttons)
+            button.Construct();
 
         updater.AddRange(new ILevelUpdatable[] { moon, boat, water, cameraMovement }.Concat(beings).Concat(floatings));
     }
 
-    public void Init()
+    public override void Init()
     {
         _ballPool.Init();
         _sharkContainer.Init();

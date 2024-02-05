@@ -19,7 +19,7 @@ public class RestartLevelState : LevelStateBase
 
     public override void Enter()
     {
-        _sound.SoundAll(SoundState.Stop);
+        _sound.SetSoundAllPlayed(SoundState.Stop);
         _ballPool.Clear();
         _sharkContainer.Respawn();
         _barrelContainer.Respawn();

@@ -1,5 +1,6 @@
 using DefaultNamespace.UI;
 using System.Collections;
+using DefaultNamespace.Core;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -16,6 +17,8 @@ public class Level : MonoBehaviour
     private Cannon[] _cannons;
     private CameraMovement _cameraMovement;
     private Coroutine _coroutine;
+    private SceneLoader _sceneLoader;
+
     public void Construct(LevelStateMachine machine,
         MoonData moonData,
         Moon moon,
@@ -24,7 +27,8 @@ public class Level : MonoBehaviour
         LoseWindow lose,
         WinWindow win,
         Cannon[] cannons,
-        CameraMovement cameraMovement)
+        CameraMovement cameraMovement,
+        SceneLoader sceneLoader)
     {
         _machine = machine;
         _moonData = moonData;
@@ -35,6 +39,7 @@ public class Level : MonoBehaviour
         _win = win;
         _cannons = cannons;
         _cameraMovement = cameraMovement;
+        _sceneLoader = sceneLoader;
     }
 
     public void Init()
@@ -49,6 +54,12 @@ public class Level : MonoBehaviour
             cannon.Init();
     }
 
+    public void ToMenu()
+    {
+        _machine.ChangeState<StayLevelState>();
+        _sceneLoader.LoadScene(0);
+    }
+
     public void Restart()
     {
         _machine.ChangeState<RestartLevelState>();
@@ -56,8 +67,7 @@ public class Level : MonoBehaviour
 
     public void Lose()
     {
-        
-        if (_machine.CurrentState is StopLevelState || _coroutine != null)
+        if (_machine.CurrentState is LoseLevelState || _coroutine != null)
             return;
 
         _boat.SetLoseState();
@@ -68,18 +78,16 @@ public class Level : MonoBehaviour
     {
         yield return new WaitForSeconds(deathDelay);
 
-        _machine.ChangeState<StopLevelState>();
-        _lose.SetActive(true);
+        _machine.ChangeState<LoseLevelState>();
 
         _coroutine = null;
     }
 
     public void Win()
     {
-        if (_machine.CurrentState is StopLevelState)
+        if (_machine.CurrentState is WinLevelState)
             return;
         
-        _win.SetActive(true);
-        _machine.ChangeState<StopLevelState>();
+        _machine.ChangeState<WinLevelState>();
     }
 }

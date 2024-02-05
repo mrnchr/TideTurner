@@ -24,14 +24,17 @@ public class Barrel : MonoBehaviour, ILevelUpdatable, IUpdatable
 
     public void Init()
     {
+        gameObject.SetActive(true);
         transform.rotation = Quaternion.identity;
         rb.velocity = Vector2.zero;
+        boomEffect.transform.parent = transform;
+        boomEffect.transform.position = Vector3.zero;
     }
 
     private void SubsribeToObstacle()
     {
         boomSound.SetSoundState(SoundState.Play);
-        boomEffect.gameObject.transform.parent = null;
+        boomEffect.transform.parent = null;
         boomEffect.Play();
         gameObject.SetActive(false);
     }

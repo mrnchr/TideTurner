@@ -422,6 +422,14 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19842296, guid: a0040bf7072bc2f4e82d887d50a9c5e2, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19842296, guid: a0040bf7072bc2f4e82d887d50a9c5e2, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0040bf7072bc2f4e82d887d50a9c5e2, type: 3}
 --- !u!4 &77318491 stripped

@@ -67,12 +67,14 @@ public class Level : MonoBehaviour
 
     public void Lose()
     {
-        if (_machine.CurrentState is LoseLevelState || _coroutine != null)
+        if (IsLose() || _machine.CurrentState is WinLevelState)
             return;
 
         _boat.SetLoseState();
         _coroutine = StartCoroutine(StartDeathTimer());        
     }
+
+    public bool IsLose() => _machine.CurrentState is LoseLevelState || _coroutine != null;
 
     private IEnumerator StartDeathTimer()
     {
@@ -85,7 +87,7 @@ public class Level : MonoBehaviour
 
     public void Win()
     {
-        if (_machine.CurrentState is WinLevelState)
+        if (_machine.CurrentState is WinLevelState || IsLose())
             return;
         
         _machine.ChangeState<WinLevelState>();

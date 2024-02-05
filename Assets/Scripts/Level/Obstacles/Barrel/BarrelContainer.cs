@@ -36,7 +36,6 @@ public class BarrelContainer : MonoBehaviour
         for (int i = 0; i < _spawns.Length; i++)
         {
             MoveToSpawn(_barrels[i], _spawns[i]);
-            _barrels[i].gameObject.SetActive(true);
             _barrels[i].Init();
         }
 

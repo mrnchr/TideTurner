@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4895753523954182549}
   - component: {fileID: 2331367847284190038}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CoralGraphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7258527888826208899}
   - component: {fileID: 5220207186800670973}
   - component: {fileID: 5233469876987496777}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}

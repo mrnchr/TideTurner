@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6234533760877706235}
   - component: {fileID: 6436048328346960136}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SharkGraphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5227678423024075106}
   - component: {fileID: 3464118216977252092}
   - component: {fileID: 3290947945728423693}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shark
   m_TagString: Untagged
   m_Icon: {fileID: 0}

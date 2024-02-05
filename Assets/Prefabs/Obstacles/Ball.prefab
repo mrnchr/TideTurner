@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2502347217497996548}
   - component: {fileID: 7501046967360371474}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BallCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 21304899393932286}
   - component: {fileID: 7756116827035311879}
   - component: {fileID: 3509082058483125748}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}

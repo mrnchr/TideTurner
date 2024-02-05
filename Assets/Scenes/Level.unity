@@ -493,6 +493,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1906457834}
     m_Modifications:
+    - target: {fileID: 2001499945, guid: 2536d80dfa4a12442bfa4b8d85f7b887, type: 3}
+      propertyPath: lerpVelocity
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001499945, guid: 2536d80dfa4a12442bfa4b8d85f7b887, type: 3}
+      propertyPath: maxWaterLevelSpeedChange
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001499945, guid: 2536d80dfa4a12442bfa4b8d85f7b887, type: 3}
+      propertyPath: minWaterLevelSpeedChange
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6432080509154639618, guid: 2536d80dfa4a12442bfa4b8d85f7b887, type: 3}
       propertyPath: m_RootOrder
       value: 4

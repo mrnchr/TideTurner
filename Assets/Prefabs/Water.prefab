@@ -131,9 +131,9 @@ MonoBehaviour:
   amplitude: 0.2
   length: 1
   speed: 3
-  minWaterLevelSpeedChange: 1
-  maxWaterLevelSpeedChange: 1
-  lerpVelocity: 0.2
+  minWaterLevelSpeedChange: 0.8
+  maxWaterLevelSpeedChange: 0.8
+  lerpVelocity: 0.1
 --- !u!82 &1516879100
 AudioSource:
   m_ObjectHideFlags: 0

@@ -2,17 +2,20 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class Shark : MonoBehaviour
 {
     [Range(0f,3f)][SerializeField] private float _speed;
 
     private Rigidbody2D _rb;
+    private BoxCollider2D _box;
     private SpriteRenderer _spriteRenderer;
     private Vector3 _initialDir;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _box = GetComponent<BoxCollider2D>();
     }
 
     public void Construct()
@@ -28,6 +31,7 @@ public class Shark : MonoBehaviour
     
     public void Init()
     {
+        _box.enabled = true;
         SetVelocity();
     }
 
@@ -45,6 +49,13 @@ public class Shark : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.gameObject.CompareTag("Boat"))
+        {
+            _rb.velocity = Vector3.zero;
+            _box.enabled = false;
+            return;
+        }
+
         ChangeDirection();
     }
 

@@ -160,8 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45186b02eed39c745bdc2d77625fb8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSound3D: 0
-  playOnAwake: 0
+  isSound3D: 1
 --- !u!1 &3671867501530719398
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,13 +9,11 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     private BoatSpawn _spawn;
     private MoonData _moon;
     private Rigidbody2D _rb;
-    private Level _level;
     private WaterMovement _waterMovement;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _level = FindAnyObjectByType<Level>();
         _rb.drag = 1;
         _rb.angularDrag = 1;
 

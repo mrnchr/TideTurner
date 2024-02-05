@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3671867500538523614}
   - component: {fileID: 6628523283874935231}
   - component: {fileID: 1674897123140993929}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3671867501530719397}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5117925601971841674}
   - component: {fileID: 7483171555617819735}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cannon Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

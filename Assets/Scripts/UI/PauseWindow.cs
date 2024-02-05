@@ -22,7 +22,7 @@ public class PauseWindow : MonoBehaviour
 
     private void HandleInput(InputData data)
     {
-        if (data.IsPause && _machine.CurrentState is not StopLevelState)
+        if (data.IsPause)
             Pause(!_isPause);
     }
 
@@ -34,7 +34,7 @@ public class PauseWindow : MonoBehaviour
         _isPause = value;
         if (_isPause)
         {
-            _machine.ChangeState<StopLevelState>();
+            _machine.ChangeState<PauseLevelState>();
         }
         else
         {

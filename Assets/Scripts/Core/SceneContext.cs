@@ -3,7 +3,7 @@
 public class SceneContext : MonoBehaviour
 {
     private ProjectContext _ctx;
-    private LevelBootstrap _bootstrap;
+    private Bootstrap _bootstrap;
     private SettingsController _settings;
     private GameStateMachine _gameMachine;
 
@@ -13,7 +13,7 @@ public class SceneContext : MonoBehaviour
         if (!_ctx)
             _ctx = Instantiate(Resources.Load<ProjectContext>("Core"));
 
-        _bootstrap = FindAnyObjectByType<LevelBootstrap>();
+        _bootstrap = FindAnyObjectByType<Bootstrap>();
         if (_bootstrap)
             _bootstrap.Construct();
 
@@ -31,7 +31,7 @@ public class SceneContext : MonoBehaviour
         
         if (_gameMachine)
         {
-            if(_bootstrap)
+            if(_bootstrap is LevelBootstrap)
                 _gameMachine.ChangeState<LevelGameState>();
             else 
                 _gameMachine.ChangeState<MenuGameState>();

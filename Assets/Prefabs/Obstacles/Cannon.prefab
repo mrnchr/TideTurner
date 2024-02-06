@@ -51,7 +51,7 @@ MonoBehaviour:
   _ballSpawn: {fileID: 3671867501530719397}
   _ballSpeed: 5
   _startTime: {x: 1, y: 5}
-  _shotDelay: 0
+  _shotDelay: 5
   shotSoundPlayer: {fileID: 1674897123140993929}
 --- !u!82 &6628523283874935231
 AudioSource:

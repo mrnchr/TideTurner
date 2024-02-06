@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6234533760877706235}
   - component: {fileID: 6436048328346960136}
+  - component: {fileID: 6198624402124223832}
   m_Layer: 7
   m_Name: SharkGraphic
   m_TagString: Untagged
@@ -84,6 +85,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6198624402124223832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041555047538461483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -1.9280523, y: -0.29303178, z: 0}
+  - {x: -1.9381894, y: 1.1847011, z: 0}
+  - {x: 2.032349, y: 0.91881514, z: 0}
+  - {x: 2.0174499, y: -0.3973291, z: 0}
+  m_ShapePathHash: 1557297311
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -377928
 --- !u!1 &7384269027140110328
 GameObject:
   m_ObjectHideFlags: 0

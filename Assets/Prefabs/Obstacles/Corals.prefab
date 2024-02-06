@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 5233469876987496777}
   - component: {fileID: 9013876322437856101}
   m_Layer: 7
-  m_Name: Tentacles
+  m_Name: Corals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -7,9 +7,11 @@ public class PauseWindow : MonoBehaviour
     private InputController _input;
     private LevelStateMachine _machine;
     private bool _isPause;
+    private Level _level;
 
     public void Construct()
     {
+        _level = FindAnyObjectByType<Level>();
         _input = FindAnyObjectByType<InputController>();
         _machine = FindAnyObjectByType<LevelStateMachine>();
         _input.OnInputHandled += HandleInput;
@@ -22,7 +24,7 @@ public class PauseWindow : MonoBehaviour
 
     private void HandleInput(InputData data)
     {
-        if (data.IsPause && _machine.CurrentState is not LoseLevelState and not WinLevelState)
+        if (data.IsPause && _machine.CurrentState is not WinLevelState && !_level.IsLose())
             Pause(!_isPause);
     }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class MoonData : MonoBehaviour
 {
@@ -33,7 +34,14 @@ public class MoonData : MonoBehaviour
         MoonPosition += data.MouseDeltaX * _moveSpeed;
         MoonPosition = Mathf.Clamp(MoonPosition, -1, 1);
 
+        if (CheckForChangeDirection(data))
+            MoonSize = _defaultMoonSize;
+        
         MoonSize += data.WheelDelta * _sizeSpeed;
         MoonSize = Mathf.Clamp(MoonSize, -1, 1);
     }
+
+    private bool CheckForChangeDirection(InputData data) => data.WheelDelta != 0 && !IsEqualSign(data.WheelDelta, MoonSize);
+
+    private bool IsEqualSign(float a, float b) => Math.Abs(Mathf.Sign(a) - Mathf.Sign(b)) < 0.0001f; 
 }

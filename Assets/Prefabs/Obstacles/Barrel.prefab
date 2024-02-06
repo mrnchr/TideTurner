@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379f939dc9a74a846ba20cca5c7c6fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxVelocity: 10
   floating:
   - {fileID: 8803400572162075115}
   boomSound: {fileID: 1304602302401700492}
@@ -160,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7017277183631061934}
-  horizontalVelocityMultiplier: 10
+  horizontalVelocityMultiplier: 3
   verticalVelocityMultiplier: 5
 --- !u!114 &1141859078
 MonoBehaviour:

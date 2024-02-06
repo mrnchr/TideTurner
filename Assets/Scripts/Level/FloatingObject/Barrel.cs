@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Barrel : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
+    [SerializeField] private float _maxVelocity;
     [SerializeField] private FloatingObject[] floating;
     [SerializeField] private SoundPlayer boomSound;
     [SerializeField] private ParticleSystem boomEffect;
@@ -47,6 +48,8 @@ public class Barrel : MonoBehaviour, ILevelUpdatable, IUpdatable
         
         foreach (var floatingObject in floating)
             floatingObject.SetVelocityRate(_inWater ? _moon.MoonPosition : 0);
+
+        rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -_maxVelocity, _maxVelocity));
     }
 
     private void CheckInWater()

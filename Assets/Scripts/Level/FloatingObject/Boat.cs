@@ -89,7 +89,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
 
     public void SetLoseState()
     {
-        _rb.gravityScale = 5;
+        _rb.gravityScale = deathGravity;
         _sound.SetSoundState(SoundState.Play);
     }
 }

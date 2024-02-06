@@ -69,13 +69,8 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
         if (_isReset == false)
             return;
 
-        if ( Vector3.Angle(Vector3.up,transform.up) > deathAngle)
-        {
-            _level.Lose();
-            _isReset = false;
-        }
-
-        if (_waterMovement.GetWaterLevel().position.y - deathHeight > transform.position.y)
+        if (Vector3.Angle(Vector3.up, transform.up) > deathAngle ||
+            _waterMovement.GetWaterLevel().position.y - deathHeight > transform.position.y)
         {
             _level.Lose();
             _isReset = false;

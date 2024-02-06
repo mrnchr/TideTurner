@@ -36,6 +36,7 @@ public class BarrelFactory
         
         _updater.Add(instance);
         _updater.Add(floating);
+        _updater.Add(floating.GetComponent<FloatingConstant>());
 
         return instance;
     }

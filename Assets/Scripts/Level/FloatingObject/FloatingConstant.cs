@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FloatingConstant : MonoBehaviour
+public class FloatingConstant : MonoBehaviour, ILevelUpdatable, IFixedUpdatable
 {
     [SerializeField] private Transform _parent;
     private FloatingObject _floating;
@@ -16,7 +16,7 @@ public class FloatingConstant : MonoBehaviour
         _position = _floating.transform.localPosition;
     }
 
-    private void FixedUpdate()
+    public void FixedUpdateLogic()
     {
         _floating.transform.position = _parent.position + _position;
     }

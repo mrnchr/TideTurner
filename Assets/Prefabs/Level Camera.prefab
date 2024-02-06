@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1775923081860010573}
   - component: {fileID: 1775923081860010570}
   - component: {fileID: 1775923081860010575}
-  - component: {fileID: 6349731021353778454}
+  - component: {fileID: 817802508}
   m_Layer: 0
   m_Name: Level Camera
   m_TagString: MainCamera
@@ -45,7 +45,7 @@ Camera:
   m_GameObject: {fileID: 1775923081860010571}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 1, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -60,7 +60,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
   orthographic: 1
   orthographic size: 5.4
@@ -102,7 +102,7 @@ MonoBehaviour:
   _screenRate: 0.4
   _speed: 2
   _approximation: 0.005
---- !u!114 &6349731021353778454
+--- !u!114 &817802508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,7 +125,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5437719304735934014}
   - component: {fileID: 6921961116992542612}
-  - component: {fileID: -7520473659402281213}
+  - component: {fileID: 817802509}
   m_Layer: 0
   m_Name: Camera3D
   m_TagString: Untagged
@@ -177,7 +177,7 @@ Camera:
   m_GameObject: {fileID: 5913554515195016550}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -211,7 +211,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &-7520473659402281213
+--- !u!114 &817802509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -234,7 +234,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

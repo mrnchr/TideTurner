@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ballSpawn: {fileID: 3671867501530719397}
-  _ballSpeed: 10
+  _ballSpeed: 5
   _shotDelay: {x: 4, y: 8}
   shotSoundPlayer: {fileID: 1674897123140993929}
 --- !u!82 &6628523283874935231

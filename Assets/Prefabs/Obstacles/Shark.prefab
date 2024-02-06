@@ -94,7 +94,7 @@ MonoBehaviour:
   - {x: 0.62722605, y: -0.40825477, z: 0}
   m_ShapePathHash: 842285303
   m_Mesh: {fileID: 0}
-  m_InstanceId: 183872
+  m_InstanceId: 241430
 --- !u!1 &2041555047538461483
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,9 +242,9 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensityEnabled: 0
   m_ShadowIntensity: 0.75
-  m_ShadowVolumeIntensityEnabled: 1
+  m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_Vertices:
   - position: {x: 0.9985302, y: 0.9985302, z: 0}
@@ -386,7 +386,7 @@ MonoBehaviour:
   - {x: 0.62722605, y: -0.40825477, z: 0}
   m_ShapePathHash: 842285303
   m_Mesh: {fileID: 0}
-  m_InstanceId: 183854
+  m_InstanceId: 241408
 --- !u!1 &7384269027140110328
 GameObject:
   m_ObjectHideFlags: 0

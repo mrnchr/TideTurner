@@ -9,6 +9,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
 
     [Range(30,180)][SerializeField] private int deathAngle = 45;
     [Range(1, 2)][SerializeField] private float deathHeight = 1;
+    [Range(2, 5)][SerializeField] private float deathGravity = 3;
 
     private BoatSpawn _spawn;
     private MoonData _moon;

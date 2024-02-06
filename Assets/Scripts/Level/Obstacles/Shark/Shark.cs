@@ -7,6 +7,8 @@ public class Shark : MonoBehaviour
 {
     [Range(0f,3f)][SerializeField] private float _speed;
 
+    [SerializeField] private GameObject[] shadows;
+
     private Rigidbody2D _rb;
     private BoxCollider2D _box;
     private SpriteRenderer _spriteRenderer;
@@ -45,6 +47,8 @@ public class Shark : MonoBehaviour
     {
         _rb.velocity = _initialDir * _speed;
         _spriteRenderer.flipX = _initialDir.x > 0;
+        shadows[0].SetActive(_initialDir.x > 0);
+        shadows[1].SetActive(_initialDir.x <= 0);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

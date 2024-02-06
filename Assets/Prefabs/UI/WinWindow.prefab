@@ -930,7 +930,9 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4281479730
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6611599362208399843, guid: 03299a70b3c232143b2924d66cefc182, type: 3}
+    - {fileID: 7833705250574788287, guid: 03299a70b3c232143b2924d66cefc182, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03299a70b3c232143b2924d66cefc182, type: 3}
 --- !u!224 &3785581102143769730 stripped
 RectTransform:

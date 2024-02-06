@@ -984,10 +984,6 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 844185222708726176, guid: 03299a70b3c232143b2924d66cefc182, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 864140895360564881, guid: 03299a70b3c232143b2924d66cefc182, type: 3}
       propertyPath: m_Name
       value: Start

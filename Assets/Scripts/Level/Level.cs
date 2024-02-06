@@ -69,6 +69,9 @@ public class Level : MonoBehaviour
         _boat.ResetLogic();
         _water.Movement.SetWaterLevel(last.transform.position);
         _cameraMovement.Init();
+        
+        foreach (Cannon cannon in _cannons)
+            cannon.Init();
     }
 
     public void CallReborn()

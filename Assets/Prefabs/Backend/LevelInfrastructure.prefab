@@ -1637,6 +1637,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2214951471607913733, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 601
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172050011095112058, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e9fdac1a797f7c45b501fd7c7cb5757, type: 3}
     - target: {fileID: 5440408641834600994, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 

@@ -18,7 +18,6 @@ public class Water : MonoBehaviour, ILevelUpdatable, IUpdatable
     public void Init()
     {
         _waterMovement.Init();
-        _waterMovement.ChangeWaterLevel(_moon.MoonSize);
         _sound.SetSoundState(SoundState.Play);
     }
         

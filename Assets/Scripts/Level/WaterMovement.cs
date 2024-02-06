@@ -40,7 +40,12 @@ public class WaterMovement : MonoBehaviour
 
     public void Init()
     {
-        waterLevel.transform.position = upBorder.transform.position;
+        SetWaterLevel(upBorder.transform.position);
+    }
+
+    public void SetWaterLevel(Vector3 position)
+    {
+        waterLevel.transform.position = position;
     }
 
     private void FixedUpdate()

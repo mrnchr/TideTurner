@@ -268,6 +268,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 3471405760197395448, guid: 9404bc88ce1b0fc448fb249e74fba235, type: 3}
   _parent: {fileID: 1999920310}
+--- !u!1 &6258208231592996407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2578782685828976097}
+  - component: {fileID: 1151215251884409074}
+  m_Layer: 0
+  m_Name: CheckHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2578782685828976097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258208231592996407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7373561938325333986}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1151215251884409074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258208231592996407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50080e9ca01496c9bbbe584f9c9272d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6287609684532457526
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +943,7 @@ Transform:
   - {fileID: 1504767903947957160}
   - {fileID: 2118815706}
   - {fileID: 8051911958729486839}
+  - {fileID: 2578782685828976097}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1643,6 +1688,22 @@ PrefabInstance:
     - target: {fileID: 5440408641834600994, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606617199690420537, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606617199690420537, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7373561938204735586}
+    - target: {fileID: 7606617199690420537, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CallReborn
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606617199690420537, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Level, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7926399845446735903, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
       propertyPath: m_fontSize

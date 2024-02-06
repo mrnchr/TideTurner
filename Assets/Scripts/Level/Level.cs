@@ -18,6 +18,7 @@ public class Level : MonoBehaviour
     private CameraMovement _cameraMovement;
     private Coroutine _coroutine;
     private SceneLoader _sceneLoader;
+    private CheckPointHandler _handler;
 
     public void Construct(LevelStateMachine machine,
         MoonData moonData,
@@ -28,7 +29,8 @@ public class Level : MonoBehaviour
         WinWindow win,
         Cannon[] cannons,
         CameraMovement cameraMovement,
-        SceneLoader sceneLoader)
+        SceneLoader sceneLoader,
+        CheckPointHandler handler)
     {
         _machine = machine;
         _moonData = moonData;
@@ -40,6 +42,7 @@ public class Level : MonoBehaviour
         _cannons = cannons;
         _cameraMovement = cameraMovement;
         _sceneLoader = sceneLoader;
+        _handler = handler;
     }
 
     public void Init()
@@ -49,9 +52,31 @@ public class Level : MonoBehaviour
         _water.Init();
         _boat.Init();
         _cameraMovement.Init();
-        
+
         foreach (Cannon cannon in _cannons)
             cannon.Init();
+
+        _handler.Init();
+    }
+
+    public void Reborn()
+    {
+        CheckPoint last = _handler.GetLastCheck();
+        
+        _moonData.Init();
+        _moon.Init();
+        _boat.SetPosition(last.transform.position);
+        _boat.ResetLogic();
+        _water.Movement.SetWaterLevel(last.transform.position);
+        _cameraMovement.Init();
+    }
+
+    public void CallReborn()
+    {
+        if (!_handler.GetLastCheck())
+            Restart();
+        else
+            _machine.ChangeState<RebornLevelState>();
     }
 
     public void ToMenu()
@@ -71,7 +96,7 @@ public class Level : MonoBehaviour
             return;
 
         _boat.SetLoseState();
-        _coroutine = StartCoroutine(StartDeathTimer());        
+        _coroutine = StartCoroutine(StartDeathTimer());
     }
 
     public bool IsLose() => _machine.CurrentState is LoseLevelState || _coroutine != null;
@@ -89,7 +114,7 @@ public class Level : MonoBehaviour
     {
         if (_machine.CurrentState is WinLevelState || IsLose())
             return;
-        
+
         _machine.ChangeState<WinLevelState>();
     }
 }

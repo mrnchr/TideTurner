@@ -34,8 +34,18 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
 
     public void Init()
     {
-        transform.position = _spawn.transform.position;
+        SetPosition(_spawn.transform.position);
 
+        ResetLogic();
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
+
+    public void ResetLogic()
+    {
         _rb.gravityScale = 1;
         _rb.rotation = 0;
         _rb.angularVelocity = 0;

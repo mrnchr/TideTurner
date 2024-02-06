@@ -1,5 +1,6 @@
 using System.Diagnostics.Tracing;
 using System.Linq;
+using System.Xml.Schema;
 using DefaultNamespace.Core;
 using DefaultNamespace.UI;
 using UnityEngine;
@@ -40,6 +41,8 @@ public class LevelBootstrap : Bootstrap
         var loader = FindAnyObjectByType<SceneLoader>();
         var buttons = FindObjectsByType<ButtonSoundCaller>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         var tentacles = FindObjectsByType<Tentacle>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        var checks = FindObjectsByType<CheckPoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        var checkHandler = FindAnyObjectByType<CheckPointHandler>();
 
         input.Construct();
         freezer.Construct(updater, input, restarter);
@@ -49,11 +52,12 @@ public class LevelBootstrap : Bootstrap
         boat.Construct(moonData, boatSpawn, water.Movement);
         cameraMovement.Construct(boat);
         _machine.Construct();
-        level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement, loader);
+        level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement, loader, checkHandler);
         pause.Construct();
         _ballPool.Construct(level);
         _sharkContainer.Construct(sharkSpawns, water, updater, level);
         _barrelContainer.Construct(barrelSpawns, moonData, updater, water.Movement, level);
+        checkHandler.Construct(checks, level);
 
         foreach (Obstacle obstacle in obstacles)
             obstacle.Construct(level);

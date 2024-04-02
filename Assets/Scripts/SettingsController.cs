@@ -8,11 +8,13 @@ public class SettingsController : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider soundVolumeSlider;
 
+    [SerializeField] private Slider brightness;
+
     private SettingData _settingData;
 
     public void Construct()
     {
-        _settingData = FindObjectOfType<SettingData>();
+        _settingData = FindFirstObjectByType<SettingData>();
     }
 
     public void Init()

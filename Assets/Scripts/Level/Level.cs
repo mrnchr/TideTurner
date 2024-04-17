@@ -88,7 +88,7 @@ public class Level : MonoBehaviour
         _sceneLoader.LoadScene(0);
     }
 
-    public void Restart()
+    private void Restart()
     {
         _machine.ChangeState<RestartLevelState>();
     }

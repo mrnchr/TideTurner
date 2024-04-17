@@ -12,12 +12,14 @@ public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
     private Boat _boat;
     private Vector3 _position;
     private Camera _camera;
+    private Camera _childCamera;
     private Coroutine _coroutine;
-
+    private const float PORTRAITFOV = 12f, OTHERFOV = 5.4f;
     public void Construct(Boat boat)
     {
         _boat = boat;
         _camera = GetComponent<Camera>();
+        _childCamera = transform.GetChild(0).GetComponent<Camera>();
     }
 
     public void Init()
@@ -26,7 +28,7 @@ public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
         SetPositionY(_boat.transform.position.y);
     }
 
-    public void SetPositionY(float value)
+    private void SetPositionY(float value)
     {
         _position.y = value;
         transform.position = _position;
@@ -36,6 +38,21 @@ public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
     {
         if (_coroutine == null && IsOutOfRate())
             _coroutine = StartCoroutine(MoveToBoat());
+    }
+
+    private void HandleOrientationData()
+    {
+        if (Screen.orientation == ScreenOrientation.Portrait && Application.isMobilePlatform == true)
+        {
+            _camera.orthographicSize = PORTRAITFOV;
+            _childCamera.orthographicSize = PORTRAITFOV;
+            
+        }
+        else if (Screen.orientation != ScreenOrientation.Portrait)
+        {
+            _camera.orthographicSize = OTHERFOV;
+            _childCamera.orthographicSize = OTHERFOV;
+        }
     }
 
     private bool IsOutOfRate()

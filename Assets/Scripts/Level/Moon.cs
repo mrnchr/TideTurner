@@ -18,7 +18,7 @@ public class Moon : MonoBehaviour, ILevelUpdatable, IUpdatable
         SetSize();
     }
 
-    public float SizeLerp(float value)
+    private float SizeLerp(float value)
     {
         return Mathf.Lerp(BoundMoonSize.x, BoundMoonSize.y, (value + 1) / 2);
     }

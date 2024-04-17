@@ -15,7 +15,8 @@ public class LevelFreezer : MonoBehaviour
 
     public void Freeze()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        if (Application.isMobilePlatform == false) 
+            Cursor.lockState = CursorLockMode.Confined;
         Time.timeScale = 0;
         _input.SetPause(true);
         _updater.SetPause(true);

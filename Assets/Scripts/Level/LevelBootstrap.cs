@@ -1,6 +1,4 @@
-using System.Diagnostics.Tracing;
 using System.Linq;
-using System.Xml.Schema;
 using DefaultNamespace.Core;
 using DefaultNamespace.UI;
 using UnityEngine;

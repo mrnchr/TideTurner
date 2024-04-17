@@ -5,7 +5,7 @@ public class DebugStuff : MonoBehaviour
 {
     private string _myLog = "";
     private string _output;
-    private bool _isEnabled = false;
+    private bool _isEnabled = true;
     private void OnEnable()
     {
         Application.logMessageReceived += Log;
@@ -30,9 +30,10 @@ public class DebugStuff : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log($"Unbiased: {Input.gyro.rotationRateUnbiased.x} rotationRate: {Input.gyro.rotationRate}\n");
-            Debug.Log($"{Screen.orientation}\n");
-            yield return new WaitForSeconds(5);
+            _myLog = "";
+            Debug.Log($"Screen.orientation: {Screen.orientation} Application.isMobilePlatform: {Application.isMobilePlatform}");
+            Debug.Log($"rotationRateUnbiased: {Input.gyro.rotationRateUnbiased}");
+            yield return new WaitForSeconds(2.5f);
         }
     }
 

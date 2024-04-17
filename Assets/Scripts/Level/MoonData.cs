@@ -17,13 +17,11 @@ public class MoonData : MonoBehaviour
         _input = FindAnyObjectByType<InputController>();
         
         _input.OnInputHandled += Move;
-        _input.OnOrientationChange += Init;
     }
 
     private void OnDestroy()
     {
         _input.OnInputHandled -= Move;
-        _input.OnOrientationChange -= Init;
     }
         
     public void Init()

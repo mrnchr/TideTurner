@@ -41,6 +41,7 @@ public class LevelBootstrap : Bootstrap
         var tentacles = FindObjectsByType<Tentacle>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         var checks = FindObjectsByType<CheckPoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         var checkHandler = FindAnyObjectByType<CheckPointHandler>();
+        var mobileScreenOrientation = FindAnyObjectByType<MobileScreenOrientation>();
 
         input.Construct();
         freezer.Construct(updater, input, restarter);
@@ -56,6 +57,7 @@ public class LevelBootstrap : Bootstrap
         _sharkContainer.Construct(sharkSpawns, water, updater, level);
         _barrelContainer.Construct(barrelSpawns, moonData, updater, water.Movement, level);
         checkHandler.Construct(checks, level);
+        mobileScreenOrientation.Construct(moonData, input, cameraMovement);
 
         foreach (Obstacle obstacle in obstacles)
             obstacle.Construct(level);

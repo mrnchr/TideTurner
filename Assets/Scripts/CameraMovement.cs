@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
+    [SerializeField] private Camera childCamera;
+    
     [Range(0, 1)] [SerializeField] private float _screenRate;
     [Range(0, 5)] [SerializeField] private float _speed = 2;
 
@@ -12,14 +14,12 @@ public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
     private Boat _boat;
     private Vector3 _position;
     private Camera _camera;
-    private Camera _childCamera;
     private Coroutine _coroutine;
-    private const float PORTRAITFOV = 12f, OTHERFOV = 5.4f;
+    private const float Portraitfov = 12f, Normalfov = 5.4f;
     public void Construct(Boat boat)
     {
         _boat = boat;
         _camera = GetComponent<Camera>();
-        _childCamera = transform.GetChild(0).GetComponent<Camera>();
     }
 
     public void Init()
@@ -40,18 +40,18 @@ public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
             _coroutine = StartCoroutine(MoveToBoat());
     }
 
-    private void HandleOrientationData()
+    public void ChangeOrthographicSize(OrthographicSizeType type)
     {
-        if (Screen.orientation == ScreenOrientation.Portrait && Application.isMobilePlatform == true)
+        switch (type)
         {
-            _camera.orthographicSize = PORTRAITFOV;
-            _childCamera.orthographicSize = PORTRAITFOV;
-            
-        }
-        else if (Screen.orientation != ScreenOrientation.Portrait)
-        {
-            _camera.orthographicSize = OTHERFOV;
-            _childCamera.orthographicSize = OTHERFOV;
+            case OrthographicSizeType.PORTAIT:
+                _camera.orthographicSize = Portraitfov;
+                childCamera.orthographicSize = Portraitfov;
+                break;
+            default:
+                _camera.orthographicSize = Normalfov;
+                childCamera.orthographicSize = Normalfov;
+                break;
         }
     }
 

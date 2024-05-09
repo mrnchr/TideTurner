@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using DefaultNamespace.Core;
 using DefaultNamespace.UI;
@@ -16,8 +17,10 @@ public class LevelBootstrap : Bootstrap
         var updater = FindAnyObjectByType<LevelUpdater>();
         var level = FindAnyObjectByType<Level>();
         _machine = FindAnyObjectByType<LevelStateMachine>();
-        var moonData = FindAnyObjectByType<MoonData>();
-        var moon = FindAnyObjectByType<Moon>();
+        
+        AbstractMoon moon = FindFirstObjectByType<AbstractMoon>();
+        AbstractMoonData moonData = FindFirstObjectByType<AbstractMoonData>();
+        
         var boatSpawn = FindAnyObjectByType<BoatSpawn>();
         var boat = FindAnyObjectByType<Boat>();
         var water = FindAnyObjectByType<Water>();
@@ -45,20 +48,33 @@ public class LevelBootstrap : Bootstrap
 
         input.Construct();
         freezer.Construct(updater, input, restarter);
+
         moonData.Construct();
-        moon.Construct(moonData);
+        switch (moon)
+        {
+            case Moon m:
+                m.Construct((MoonData)moonData);
+                break;
+            case MobileMoon:
+                mobileScreenOrientation.Construct(moonData, input, cameraMovement);
+                break;
+            default:
+                throw new Exception("Unknown moon");
+        }
+        
         water.Construct(moonData);
         boat.Construct(moonData, boatSpawn, water.Movement);
         cameraMovement.Construct(boat);
         _machine.Construct();
+
         level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement, loader, checkHandler);
+        
         pause.Construct();
         _ballPool.Construct(level);
         _sharkContainer.Construct(sharkSpawns, water, updater, level);
         _barrelContainer.Construct(barrelSpawns, moonData, updater, water.Movement, level);
         checkHandler.Construct(checks, level);
-        mobileScreenOrientation.Construct(moonData, input, cameraMovement);
-
+        
         foreach (Obstacle obstacle in obstacles)
             obstacle.Construct(level);
 

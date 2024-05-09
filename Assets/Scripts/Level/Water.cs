@@ -4,12 +4,12 @@ public class Water : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
     [SerializeField] private SoundPlayer _sound;
     
-    private MoonData _moon;
+    private AbstractMoonData _moon;
     private WaterMovement _waterMovement;
 
     public WaterMovement Movement => _waterMovement;
 
-    public void Construct(MoonData moon)
+    public void Construct(AbstractMoonData moon)
     {
         _moon = moon;
         _waterMovement = FindAnyObjectByType<WaterMovement>();

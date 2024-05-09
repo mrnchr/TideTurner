@@ -1,18 +1,16 @@
 ﻿using System;
 using UnityEngine;
 
-public class MoonData : MonoBehaviour
+public class MoonData : AbstractMoonData
 {
-    public float MoonSize;
-    public float MoonPosition;
-
     [SerializeField] private float _defaultMoonSize;
     [SerializeField] private float _defaultMoonPosition;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _sizeSpeed;
     
     private InputController _input;
-    public void Construct()
+    
+    public override void Construct()
     {
         _input = FindAnyObjectByType<InputController>();
         
@@ -24,7 +22,7 @@ public class MoonData : MonoBehaviour
         _input.OnInputHandled -= Move;
     }
         
-    public void Init()
+    public override void Init()
     {
         MoonPosition = _defaultMoonPosition;
         MoonSize = _defaultMoonSize;

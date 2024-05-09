@@ -5,7 +5,7 @@ public class DebugStuff : MonoBehaviour
 {
     private string _myLog = "";
     private string _output;
-    private bool _isEnabled = true;
+    private bool _isEnabled;
     private void OnEnable()
     {
         Application.logMessageReceived += Log;

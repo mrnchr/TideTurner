@@ -4,14 +4,15 @@ public class BarrelFactory
 {
     private readonly Barrel _prefab;
     private readonly Transform _parent;
-    private readonly MoonData _moonData;
+    private readonly AbstractMoonData _moonData;
     private readonly LevelUpdater _updater;
     private readonly WaterMovement _waterMovement;
     private readonly Level _level;
 
-    public BarrelFactory(Barrel prefab,
+    public BarrelFactory(
+        Barrel prefab,
         Transform parent,
-        MoonData moonData,
+        AbstractMoonData moonData,
         LevelUpdater updater,
         WaterMovement waterMovement,
         Level level)

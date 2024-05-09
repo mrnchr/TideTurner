@@ -8,12 +8,12 @@ public class Barrel : MonoBehaviour, ILevelUpdatable, IUpdatable
     [SerializeField] private ParticleSystem boomEffect;
 
     private bool _inWater;
-    private MoonData _moon;
+    private AbstractMoonData _moon;
     private Obstacle _obstacle;
     private Rigidbody2D rb;
     private WaterMovement _waterMovement;
 
-    public void Construct(MoonData moon, WaterMovement waterMovement)
+    public void Construct(AbstractMoonData moon, WaterMovement waterMovement)
     {
         _obstacle = GetComponent<Obstacle>();
         rb = GetComponent<Rigidbody2D>();

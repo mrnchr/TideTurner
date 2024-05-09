@@ -11,8 +11,9 @@ public class BarrelContainer : MonoBehaviour
     private BarrelFactory _factory;
     private BarrelSpawn[] _spawns;
 
-    public void Construct(BarrelSpawn[] spawns,
-        MoonData moonData,
+    public void Construct(
+        BarrelSpawn[] spawns,
+        AbstractMoonData moonData,
         LevelUpdater updater,
         WaterMovement waterMovement,
         Level level)

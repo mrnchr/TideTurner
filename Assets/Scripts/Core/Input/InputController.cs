@@ -8,9 +8,11 @@ public class InputController : MonoBehaviour, IInputController
 
     private bool _isPaused;
     private SettingData _settings;
+    private MobileMoon _mobileMoon;
     public void Construct()
     {
         _settings = FindAnyObjectByType<SettingData>();
+        _mobileMoon = FindAnyObjectByType<MobileMoon>();
         
         Data.Platform = Application.isMobilePlatform ? DeviceType.Handheld : DeviceType.Desktop;
 
@@ -25,7 +27,7 @@ public class InputController : MonoBehaviour, IInputController
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
-        }
+        } 
     }
 
     private void Update()
@@ -62,15 +64,14 @@ public class InputController : MonoBehaviour, IInputController
         if (_isPaused || Data.Platform != DeviceType.Handheld) 
             return;
             
+        Data.VerticalInput = _mobileMoon.slider.value;
         switch (Screen.orientation)
         {
             case ScreenOrientation.Portrait:
                 Data.HorizontalInput = -Input.gyro.rotationRateUnbiased.z;
-                Data.VerticalInput = -Input.gyro.rotationRateUnbiased.x;
                 break;
             default:
                 Data.HorizontalInput = -Input.gyro.rotationRateUnbiased.z ;
-                Data.VerticalInput = Input.gyro.rotationRateUnbiased.y;
                 break;
         }
     }

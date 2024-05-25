@@ -3,12 +3,21 @@ using UnityEngine;
 
 public class DebugStuff : MonoBehaviour
 {
+    [Range(0f, 10f)][SerializeField] private float delayUpdate = 2.5f;
+    
     private string _myLog = "";
     private string _output;
     private bool _isEnabled;
+    private InputController _input;
+    
     private void OnEnable()
     {
+        if (_isEnabled == false)
+            return;
+        
         Application.logMessageReceived += Log;
+
+        _input = FindAnyObjectByType<InputController>();
         
         StartCoroutine(StartLog());
     }
@@ -20,7 +29,7 @@ public class DebugStuff : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F5))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             _isEnabled = !_isEnabled;
         }
@@ -31,9 +40,15 @@ public class DebugStuff : MonoBehaviour
         while (true)
         {
             _myLog = "";
-            Debug.Log($"Screen.orientation: {Screen.orientation} Application.isMobilePlatform: {Application.isMobilePlatform}");
-            Debug.Log($"rotationRateUnbiased: {Input.gyro.rotationRateUnbiased}");
-            yield return new WaitForSeconds(2.5f);
+            
+            Debug.Log($"Screen.orientation: {Screen.orientation}\n");
+            
+            Debug.Log($"Input.acceleration.x: {Input.acceleration.x}\n");
+            Debug.Log($"Input.acceleration.y: {Input.acceleration.y}\n");
+            
+            Debug.Log($"_input.Data.IsPause: {_input.Data.IsPause}\n");
+            Debug.Log($"_input.Data.HorizontalInput: {_input.Data.HorizontalInput}\n");
+            yield return new WaitForSeconds(delayUpdate);
         }
     }
 
@@ -52,6 +67,6 @@ public class DebugStuff : MonoBehaviour
         if (_isEnabled == false)
             return;
         
-        _myLog = GUI.TextArea(new Rect(10, 10, Screen.width / 2, Screen.height / 4), _myLog);
+        _myLog = GUI.TextArea(new Rect(Screen.width / 2, 10, Screen.width / 4, Screen.height / 2), _myLog);
     }
 }

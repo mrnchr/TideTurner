@@ -8,8 +8,7 @@ public class FloatingObject : MonoBehaviour, ILevelUpdatable, IFixedUpdatable
     [Range(1f, 15f)] [SerializeField] private float horizontalVelocityMultiplier = 10;
 
     [Range(1f, 25f)] [SerializeField] private float verticalVelocityMultiplier = 1f;
-
-
+    
     private WaterMovement _waterMovement;
     private Vector3 depth;
     private float _velocityRate;

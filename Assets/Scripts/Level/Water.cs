@@ -5,24 +5,23 @@ public class Water : MonoBehaviour, ILevelUpdatable, IUpdatable
     [SerializeField] private SoundPlayer _sound;
     
     private AbstractMoonData _moon;
-    private WaterMovement _waterMovement;
 
-    public WaterMovement Movement => _waterMovement;
+    public WaterMovement Movement { get; private set; }
 
     public void Construct(AbstractMoonData moon)
     {
         _moon = moon;
-        _waterMovement = FindAnyObjectByType<WaterMovement>();
+        Movement = FindAnyObjectByType<WaterMovement>();
     }
 
     public void Init()
     {
-        _waterMovement.Init();
+        Movement.Init();
         _sound.SetSoundState(SoundState.Play);
     }
         
     public void UpdateLogic()
     {
-        _waterMovement.ChangeWaterLevel(_moon.MoonSize);
+        Movement.ChangeWaterLevel(_moon.MoonSize);
     }
 }

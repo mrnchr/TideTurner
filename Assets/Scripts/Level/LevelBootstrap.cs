@@ -47,7 +47,7 @@ public class LevelBootstrap : Bootstrap
         var mobileScreenOrientation = FindAnyObjectByType<MobileScreenOrientation>();
 
         input.Construct();
-        freezer.Construct(updater, input, restarter);
+        freezer.Construct(updater, restarter);
 
         moonData.Construct();
         switch (moon)

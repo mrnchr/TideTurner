@@ -1,0 +1,1 @@
+public enum OrthographicSizeType {PORTAIT, NORMAL}

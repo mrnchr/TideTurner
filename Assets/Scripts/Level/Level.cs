@@ -8,21 +8,22 @@ public class Level : MonoBehaviour
     [SerializeField] private float deathDelay = 1f;
 
     private LevelStateMachine _machine;
-    private MoonData _moonData;
-    private Moon _moon;
+    private AbstractMoonData _moonData;
+    private AbstractMoon _moon;
     private Boat _boat;
     private Water _water;
-    private LoseWindow _lose;
-    private WinWindow _win;
     private Cannon[] _cannons;
     private CameraMovement _cameraMovement;
     private Coroutine _coroutine;
     private SceneLoader _sceneLoader;
     private CheckPointHandler _handler;
+    
+    private LoseWindow _lose;
+    private WinWindow _win;
 
     public void Construct(LevelStateMachine machine,
-        MoonData moonData,
-        Moon moon,
+        AbstractMoonData moonData,
+        AbstractMoon abstractMoon,
         Boat boat,
         Water water,
         LoseWindow lose,
@@ -34,7 +35,7 @@ public class Level : MonoBehaviour
     {
         _machine = machine;
         _moonData = moonData;
-        _moon = moon;
+        _moon = abstractMoon;
         _boat = boat;
         _water = water;
         _lose = lose;
@@ -88,7 +89,7 @@ public class Level : MonoBehaviour
         _sceneLoader.LoadScene(0);
     }
 
-    public void Restart()
+    private void Restart()
     {
         _machine.ChangeState<RestartLevelState>();
     }

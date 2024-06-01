@@ -33,13 +33,13 @@ public class LevelUpdater : MonoBehaviour
             UpdateLogic();
     }
 
-    public void UpdateLogic()
+    private void UpdateLogic()
     {
         foreach (ILevelUpdatable updatable in _updatables)
             (updatable as IUpdatable)?.UpdateLogic();
     }
-    
-    public void FixedUpdateLogic()
+
+    private void FixedUpdateLogic()
     {
         foreach (ILevelUpdatable updatable in _updatables)
             (updatable as IFixedUpdatable)?.FixedUpdateLogic();

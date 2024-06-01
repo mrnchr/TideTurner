@@ -12,11 +12,11 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     [Range(2, 5)][SerializeField] private float deathGravity = 3;
 
     private BoatSpawn _spawn;
-    private MoonData _moon;
+    private AbstractMoonData _moon;
     private Rigidbody2D _rb;
     private WaterMovement _waterMovement;
     private Level _level;
-    private bool _isReset = false;
+    private bool _isReset;
     private void Awake()
     {
         _level = FindAnyObjectByType<Level>();
@@ -26,7 +26,7 @@ public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
         _rb.centerOfMass = _centerOfMass.position;
     }
 
-    public void Construct(MoonData moon, BoatSpawn spawn, WaterMovement waterMovement)
+    public void Construct(AbstractMoonData moon, BoatSpawn spawn, WaterMovement waterMovement)
     {
         _moon = moon;
         _spawn = spawn;

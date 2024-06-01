@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Moon : MonoBehaviour, ILevelUpdatable, IUpdatable
+public class Moon : AbstractMoon, IUpdatable
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private Vector2 BoundMoonSize;
@@ -12,13 +12,13 @@ public class Moon : MonoBehaviour, ILevelUpdatable, IUpdatable
         _data = data;
     }
 
-    public void Init()
+    public override void Init()
     {
         SetPosition();
         SetSize();
     }
 
-    public float SizeLerp(float value)
+    private float SizeLerp(float value)
     {
         return Mathf.Lerp(BoundMoonSize.x, BoundMoonSize.y, (value + 1) / 2);
     }

@@ -540,6 +540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f64513f7188458da60612130d44ed79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PCscene: New Level 1
+  MobileScene: MobileScene
 --- !u!4 &1932706181
 Transform:
   m_ObjectHideFlags: 0
@@ -555,6 +557,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2025891043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4029404666341758632, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
+  m_PrefabInstance: {fileID: 2900121241404951052}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2025891049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025891043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca0a2c81ed8cb749bd93856c2c0c8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &127745261244723619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -713,17 +732,24 @@ PrefabInstance:
       value: Menu
       objectReference: {fileID: 0}
     - target: {fileID: 7481683177348606426, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481683177348606426, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1932706180}
     - target: {fileID: 7481683177348606426, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: New Level 1
+      value: MobileScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4029404666341758632, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2025891049}
   m_SourcePrefab: {fileID: 100100000, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

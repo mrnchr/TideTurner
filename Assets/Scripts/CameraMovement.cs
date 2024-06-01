@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
 {
+    [SerializeField] private Camera childCamera;
+    
     [Range(0, 1)] [SerializeField] private float _screenRate;
     [Range(0, 5)] [SerializeField] private float _speed = 2;
 
@@ -13,7 +15,7 @@ public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
     private Vector3 _position;
     private Camera _camera;
     private Coroutine _coroutine;
-
+    private const float Portraitfov = 12f, Normalfov = 5.4f;
     public void Construct(Boat boat)
     {
         _boat = boat;
@@ -26,7 +28,7 @@ public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
         SetPositionY(_boat.transform.position.y);
     }
 
-    public void SetPositionY(float value)
+    private void SetPositionY(float value)
     {
         _position.y = value;
         transform.position = _position;
@@ -36,6 +38,21 @@ public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
     {
         if (_coroutine == null && IsOutOfRate())
             _coroutine = StartCoroutine(MoveToBoat());
+    }
+
+    public void ChangeOrthographicSize(OrthographicSizeType type)
+    {
+        switch (type)
+        {
+            case OrthographicSizeType.PORTAIT:
+                _camera.orthographicSize = Portraitfov;
+                childCamera.orthographicSize = Portraitfov;
+                break;
+            default:
+                _camera.orthographicSize = Normalfov;
+                childCamera.orthographicSize = Normalfov;
+                break;
+        }
     }
 
     private bool IsOutOfRate()

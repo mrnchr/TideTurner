@@ -4,9 +4,8 @@ using UnityEngine;
 public class GameStateMachine : MonoBehaviour, IStateMachine<GameStateBase>
 {
     private readonly List<GameStateBase> _states = new List<GameStateBase>();
-    private GameStateBase _current;
 
-    public GameStateBase CurrentState => _current;
+    public GameStateBase CurrentState { get; private set; }
 
     public void Construct()
     {
@@ -19,9 +18,9 @@ public class GameStateMachine : MonoBehaviour, IStateMachine<GameStateBase>
 
     public void ChangeState<T>() where T : GameStateBase
     {
-        _current?.Exit();
+        CurrentState?.Exit();
 
-        _current = _states.Find(x => x is T);
-        _current?.Enter();
+        CurrentState = _states.Find(x => x is T);
+        CurrentState?.Enter();
     }
 }

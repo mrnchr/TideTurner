@@ -8,7 +8,8 @@ public class StayLevelState : LevelStateBase
 
     public override void Enter()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        if (Application.isMobilePlatform == false)
+            Cursor.lockState = CursorLockMode.Locked;
     }
 
     public override void Exit()

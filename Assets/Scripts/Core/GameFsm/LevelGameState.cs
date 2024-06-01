@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LevelGameState : GameStateBase
 {
@@ -9,7 +8,8 @@ public class LevelGameState : GameStateBase
 
     public override void Enter()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        if (Application.isMobilePlatform == false)
+            Cursor.lockState = CursorLockMode.Locked;
     }
 
     public override void Exit()

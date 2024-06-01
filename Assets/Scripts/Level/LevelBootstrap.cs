@@ -1,6 +1,5 @@
-using System.Diagnostics.Tracing;
+using System;
 using System.Linq;
-using System.Xml.Schema;
 using DefaultNamespace.Core;
 using DefaultNamespace.UI;
 using UnityEngine;
@@ -18,8 +17,10 @@ public class LevelBootstrap : Bootstrap
         var updater = FindAnyObjectByType<LevelUpdater>();
         var level = FindAnyObjectByType<Level>();
         _machine = FindAnyObjectByType<LevelStateMachine>();
-        var moonData = FindAnyObjectByType<MoonData>();
-        var moon = FindAnyObjectByType<Moon>();
+        
+        AbstractMoon moon = FindFirstObjectByType<AbstractMoon>();
+        AbstractMoonData moonData = FindFirstObjectByType<AbstractMoonData>();
+        
         var boatSpawn = FindAnyObjectByType<BoatSpawn>();
         var boat = FindAnyObjectByType<Boat>();
         var water = FindAnyObjectByType<Water>();
@@ -43,22 +44,37 @@ public class LevelBootstrap : Bootstrap
         var tentacles = FindObjectsByType<Tentacle>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         var checks = FindObjectsByType<CheckPoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         var checkHandler = FindAnyObjectByType<CheckPointHandler>();
+        var mobileScreenOrientation = FindAnyObjectByType<MobileScreenOrientation>();
 
         input.Construct();
-        freezer.Construct(updater, input, restarter);
+        freezer.Construct(updater, restarter);
+
         moonData.Construct();
-        moon.Construct(moonData);
+        switch (moon)
+        {
+            case Moon m:
+                m.Construct((MoonData)moonData);
+                break;
+            case MobileMoon:
+                mobileScreenOrientation.Construct(moonData, input, cameraMovement);
+                break;
+            default:
+                throw new Exception("Unknown moon");
+        }
+        
         water.Construct(moonData);
         boat.Construct(moonData, boatSpawn, water.Movement);
         cameraMovement.Construct(boat);
         _machine.Construct();
+
         level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement, loader, checkHandler);
+        
         pause.Construct();
         _ballPool.Construct(level);
         _sharkContainer.Construct(sharkSpawns, water, updater, level);
         _barrelContainer.Construct(barrelSpawns, moonData, updater, water.Movement, level);
         checkHandler.Construct(checks, level);
-
+        
         foreach (Obstacle obstacle in obstacles)
             obstacle.Construct(level);
 

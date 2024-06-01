@@ -8,7 +8,8 @@ public class MenuGameState : GameStateBase
 
     public override void Enter()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        if (Application.isMobilePlatform == false)
+            Cursor.lockState = CursorLockMode.Confined;
     }
 
     public override void Exit()

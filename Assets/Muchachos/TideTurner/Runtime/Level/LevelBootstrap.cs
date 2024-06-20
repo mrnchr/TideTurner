@@ -51,7 +51,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             var restarter = FindAnyObjectByType<SoundRestarter>();
             var freezer = FindAnyObjectByType<LevelFreezer>();
             var loader = FindAnyObjectByType<SceneLoader>();
-            var buttons = FindObjectsByType<ButtonSoundCaller>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             var tentacles = FindObjectsByType<Tentacle>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             var checks = FindObjectsByType<CheckPoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
             var checkHandler = FindAnyObjectByType<CheckPointHandler>();
@@ -96,9 +95,6 @@ namespace Muchachos.TideTurner.Runtime.Level
 
             foreach (FloatingObject floating in floatings)
                 floating.Construct(water.Movement);
-
-            foreach (ButtonSoundCaller button in buttons)
-                button.Construct();
 
             foreach (Tentacle tentacle in tentacles)
                 tentacle.Construct(water);

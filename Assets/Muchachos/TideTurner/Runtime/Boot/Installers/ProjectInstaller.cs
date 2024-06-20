@@ -17,17 +17,29 @@ namespace Muchachos.TideTurner.Runtime.Boot
         [SerializeField]
         private AudioMixer _mixer;
 
+        [SerializeField]
+        private ButtonSoundPlayer _soundPlayer;
+
         public override void InstallBindings()
         {
             BindConfigProvider();
             BindSettingData();
 
             BindAudioMixerProvider();
+            BindButtonSoundPlayer();
 
             BindStateFactory();
             BindGameStateMachine();
 
             BindProjectInitializer();
+        }
+
+        private void BindButtonSoundPlayer()
+        {
+            Container
+                .Bind<IButtonSoundPlayer>()
+                .FromInstance(_soundPlayer)
+                .AsSingle();
         }
 
         private void BindStateFactory()

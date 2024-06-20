@@ -1,5 +1,4 @@
 using System.Collections;
-using Muchachos.TideTurner.Runtime.Core.Input;
 using UnityEngine;
 
 namespace Muchachos.TideTurner.Runtime
@@ -11,7 +10,6 @@ namespace Muchachos.TideTurner.Runtime
         private string _myLog = "";
         private string _output;
         private bool _isEnabled;
-        private InputController _input;
     
         private void OnEnable()
         {
@@ -20,7 +18,6 @@ namespace Muchachos.TideTurner.Runtime
         
             Application.logMessageReceived += Log;
 
-            _input = FindAnyObjectByType<InputController>();
         
             StartCoroutine(StartLog());
         }
@@ -49,8 +46,6 @@ namespace Muchachos.TideTurner.Runtime
                 Debug.Log($"Input.acceleration.x: {Input.acceleration.x}\n");
                 Debug.Log($"Input.acceleration.y: {Input.acceleration.y}\n");
             
-                Debug.Log($"_input.Data.IsPause: {_input.Data.IsPause}\n");
-                Debug.Log($"_input.Data.HorizontalInput: {_input.Data.HorizontalInput}\n");
                 yield return new WaitForSeconds(delayUpdate);
             }
         }

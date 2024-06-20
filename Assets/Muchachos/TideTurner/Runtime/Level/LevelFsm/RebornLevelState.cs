@@ -7,14 +7,16 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
 {
     public class RebornLevelState : LevelStateBase
     {
+        private readonly LevelStateMachine _machine;
         private readonly BallPool _ballPool;
         private readonly Cannon[] _cannons;
         private readonly SharkContainer _sharkContainer;
         private readonly BarrelContainer _barrelContainer;
         private readonly Level _level;
 
-        public RebornLevelState(LevelStateMachine machine) : base(machine)
+        public RebornLevelState(LevelStateMachine machine)
         {
+            _machine = machine;
             _ballPool = Object.FindAnyObjectByType<BallPool>();
             _sharkContainer = Object.FindAnyObjectByType<SharkContainer>();
             _cannons = Object.FindObjectsByType<Cannon>(FindObjectsInactive.Include, FindObjectsSortMode.None);

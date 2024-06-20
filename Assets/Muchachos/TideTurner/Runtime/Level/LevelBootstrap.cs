@@ -1,9 +1,7 @@
 using System;
 using System.Linq;
 using Muchachos.TideTurner.Runtime.Core;
-using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Level.FloatingObjects;
-using Muchachos.TideTurner.Runtime.Level.LevelFsm;
 using Muchachos.TideTurner.Runtime.Level.Obstacles;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
@@ -12,22 +10,26 @@ using Muchachos.TideTurner.Runtime.Level.Savings;
 using Muchachos.TideTurner.Runtime.Mobile;
 using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level
 {
     public class LevelBootstrap : Bootstrap
     {
         private BallPool _ballPool;
-        private LevelStateMachine _machine;
         private SharkContainer _sharkContainer;
         private BarrelContainer _barrelContainer;
+        private ILevelUpdater _updater;
+
+        [Inject]
+        public void Construct(ILevelUpdater updater)
+        {
+            _updater = updater;
+        }
 
         public override void Construct()
         {
-            var input = FindAnyObjectByType<InputController>();
-            var updater = FindAnyObjectByType<LevelUpdater>();
             var level = FindAnyObjectByType<Level>();
-            _machine = FindAnyObjectByType<LevelStateMachine>();
         
             AbstractMoon moon = FindFirstObjectByType<AbstractMoon>();
             AbstractMoonData moonData = FindFirstObjectByType<AbstractMoonData>();
@@ -36,8 +38,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             var boat = FindAnyObjectByType<Boat>();
             var water = FindAnyObjectByType<Water>();
             var pause = FindAnyObjectByType<PauseWindow>();
-            var lose = FindAnyObjectByType<LoseWindow>();
-            var win = FindAnyObjectByType<WinWindow>();
             _ballPool = FindAnyObjectByType<BallPool>();
             var obstacles = FindObjectsByType<Obstacle>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             var cannons = FindObjectsByType<Cannon>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -55,16 +55,15 @@ namespace Muchachos.TideTurner.Runtime.Level
             var checkHandler = FindAnyObjectByType<CheckPointHandler>();
             var mobileScreenOrientation = FindAnyObjectByType<MobileScreenOrientation>();
 
-            freezer.Construct(updater, restarter);
+            freezer.Construct(restarter);
 
-            moonData.Construct();
             switch (moon)
             {
                 case Moon m:
                     m.Construct((MoonData)moonData);
                     break;
                 case MobileMoon:
-                    mobileScreenOrientation.Construct(moonData, input, cameraMovement);
+                    mobileScreenOrientation.Construct(moonData, cameraMovement);
                     break;
                 default:
                     throw new Exception("Unknown moon");
@@ -73,14 +72,13 @@ namespace Muchachos.TideTurner.Runtime.Level
             water.Construct(moonData);
             boat.Construct(moonData, boatSpawn, water.Movement);
             cameraMovement.Construct(boat);
-            _machine.Construct();
 
-            level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement, checkHandler);
+            level.Construct(moonData, moon, boat, water, cannons, cameraMovement, checkHandler);
         
             pause.Construct();
             _ballPool.Construct(level);
-            _sharkContainer.Construct(sharkSpawns, water, updater, level);
-            _barrelContainer.Construct(barrelSpawns, moonData, updater, water.Movement, level);
+            _sharkContainer.Construct(sharkSpawns, water, level);
+            _barrelContainer.Construct(barrelSpawns, moonData, water.Movement, level);
             checkHandler.Construct(checks, level);
         
             foreach (Obstacle obstacle in obstacles)
@@ -98,7 +96,7 @@ namespace Muchachos.TideTurner.Runtime.Level
             foreach (Tentacle tentacle in tentacles)
                 tentacle.Construct(water);
 
-            updater.AddRange(new ILevelUpdatable[] { moon, boat, water, cameraMovement }.Concat(beings).Concat(floatings).Concat(tentacles));
+            _updater.AddRange(new ILevelUpdatable[] { moon, boat, water, cameraMovement }.Concat(beings).Concat(floatings).Concat(tentacles));
         }
 
         public override void Init()
@@ -106,7 +104,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             _ballPool.Init();
             _sharkContainer.Init();
             _barrelContainer.Init();
-            _machine.ChangeState<StartLevelState>();
         }
     }
 }

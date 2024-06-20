@@ -1,6 +1,7 @@
 using System;
 using Muchachos.TideTurner.Runtime.Core.Input;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Mobile
 {
@@ -11,12 +12,12 @@ namespace Muchachos.TideTurner.Runtime.Mobile
         [SerializeField] private float moveSpeed = 1;
         [SerializeField] private float sizeSpeed = 1;
 
-        private InputController _input;
+        private IInputController _input;
 
-        public override void Construct()
+        [Inject]
+        public void Construct(IInputController input)
         {
-            _input = FindAnyObjectByType<InputController>();
-        
+            _input = input;
             _input.OnInputHandled += Move;
         }
 

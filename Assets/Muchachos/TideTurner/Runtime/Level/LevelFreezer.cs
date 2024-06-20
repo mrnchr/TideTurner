@@ -1,17 +1,23 @@
 ﻿using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level
 {
     public class LevelFreezer : MonoBehaviour
     {
-        private LevelUpdater _updater;
+        private ILevelUpdater _updater;
         private SoundRestarter _sound;
 
-        public void Construct(LevelUpdater updater, SoundRestarter sound)
+        [Inject]
+        public void Construct(ILevelUpdater updater)
         {
             _updater = updater;
+        }
+
+        public void Construct(SoundRestarter sound)
+        {
             _sound = sound;
         }
 

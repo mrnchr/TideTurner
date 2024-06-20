@@ -5,7 +5,6 @@ using Muchachos.TideTurner.Runtime.Level.LevelFsm;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon;
 using Muchachos.TideTurner.Runtime.Level.Savings;
 using Muchachos.TideTurner.Runtime.Mobile;
-using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +14,7 @@ namespace Muchachos.TideTurner.Runtime.Level
     {
         [SerializeField] private float deathDelay = 1f;
 
-        private LevelStateMachine _machine;
+        private LevelStateMachine _levelMachine;
         private AbstractMoonData _moonData;
         private AbstractMoon _moon;
         private Boat _boat;
@@ -26,33 +25,25 @@ namespace Muchachos.TideTurner.Runtime.Level
         private ISceneLoader _sceneLoader;
         private CheckPointHandler _handler;
     
-        private LoseWindow _lose;
-        private WinWindow _win;
-
         [Inject]
-        public void Construct(ISceneLoader sceneLoader)
+        public void Construct(ISceneLoader sceneLoader, LevelStateMachine levelMachine)
         {
             _sceneLoader = sceneLoader;
+            _levelMachine = levelMachine;
         }
 
-        public void Construct(LevelStateMachine machine,
-            AbstractMoonData moonData,
+        public void Construct(AbstractMoonData moonData,
             AbstractMoon abstractMoon,
             Boat boat,
             Water water,
-            LoseWindow lose,
-            WinWindow win,
             Cannon[] cannons,
             CameraMovement cameraMovement,
             CheckPointHandler handler)
         {
-            _machine = machine;
             _moonData = moonData;
             _moon = abstractMoon;
             _boat = boat;
             _water = water;
-            _lose = lose;
-            _win = win;
             _cannons = cannons;
             _cameraMovement = cameraMovement;
             _handler = handler;
@@ -90,48 +81,43 @@ namespace Muchachos.TideTurner.Runtime.Level
         public void CallReborn()
         {
             if (!_handler.GetLastCheck())
-                Restart();
+                _levelMachine.ChangeState<RestartLevelState>();
             else
-                _machine.ChangeState<RebornLevelState>();
+                _levelMachine.ChangeState<RebornLevelState>();
         }
 
         public void ToMenu()
         {
-            _machine.ChangeState<StayLevelState>();
+            _levelMachine.ChangeState<StayLevelState>();
             _sceneLoader.LoadScene(SceneType.Menu);
-        }
-
-        private void Restart()
-        {
-            _machine.ChangeState<RestartLevelState>();
         }
 
         public void Lose()
         {
-            if (IsLose() || _machine.CurrentState is WinLevelState)
+            if (IsLose() || _levelMachine.CurrentState is WinLevelState)
                 return;
 
             _boat.SetLoseState();
             _coroutine = StartCoroutine(StartDeathTimer());
         }
 
-        public bool IsLose() => _machine.CurrentState is LoseLevelState || _coroutine != null;
+        public bool IsLose() => _levelMachine.CurrentState is LoseLevelState || _coroutine != null;
 
         private IEnumerator StartDeathTimer()
         {
             yield return new WaitForSeconds(deathDelay);
 
-            _machine.ChangeState<LoseLevelState>();
+            _levelMachine.ChangeState<LoseLevelState>();
 
             _coroutine = null;
         }
 
         public void Win()
         {
-            if (_machine.CurrentState is WinLevelState || IsLose())
+            if (_levelMachine.CurrentState is WinLevelState || IsLose())
                 return;
 
-            _machine.ChangeState<WinLevelState>();
+            _levelMachine.ChangeState<WinLevelState>();
         }
     }
 }

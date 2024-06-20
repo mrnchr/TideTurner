@@ -1,6 +1,7 @@
 using System;
 using Muchachos.TideTurner.Runtime.Core.Input;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Mobile
 {
@@ -9,23 +10,28 @@ namespace Muchachos.TideTurner.Runtime.Mobile
         public event Action OnScreenOrientationChange;
 
         private AbstractMoonData _data;
-        private InputController _inputController;
         private CameraMovement _cameraMovement;
         private ScreenOrientation _temp;
+        private IInputController _input;
 
-        public void Construct(AbstractMoonData data, InputController inputController, CameraMovement cameraMovement)
+        [Inject]
+        public void Construct(IInputController input)
+        {
+            _input = input;
+            _input.OnInputHandled += UpdateLogic;
+        }
+
+        public void Construct(AbstractMoonData data, CameraMovement cameraMovement)
         {
             _data = data;
-            _inputController = inputController;
             _cameraMovement = cameraMovement;
         
-            _inputController.OnInputHandled += UpdateLogic;
             OnScreenOrientationChange += _data.Init;
         }
     
         private void OnDisable()
         {
-            _inputController.OnInputHandled -= UpdateLogic;
+            _input.OnInputHandled -= UpdateLogic;
             OnScreenOrientationChange -= _data.Init;
         }
 

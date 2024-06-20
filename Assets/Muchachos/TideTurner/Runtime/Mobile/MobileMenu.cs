@@ -1,4 +1,4 @@
-using Muchachos.TideTurner.Runtime.Core.Input;
+using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,14 +9,14 @@ namespace Muchachos.TideTurner.Runtime.Mobile
         [SerializeField] private Button menuButton;
         [SerializeField] private Button continueButton;
     
-        private InputController _input;
-    
+        private PauseWindow _pauseWindow;
+
         private void Awake()
         {
-            _input = FindAnyObjectByType<InputController>();
-        
-            menuButton.onClick.AddListener(_input.ChangePauseState);
-            continueButton.onClick.AddListener(_input.ChangePauseState);
+            _pauseWindow = FindAnyObjectByType<PauseWindow>();
+            
+            menuButton.onClick.AddListener(() => _pauseWindow.Pause(true));
+            continueButton.onClick.AddListener(() => _pauseWindow.Pause(false));
         }
     }
 }

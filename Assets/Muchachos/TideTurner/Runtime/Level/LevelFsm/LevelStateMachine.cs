@@ -1,36 +1,41 @@
 ﻿using System.Collections.Generic;
 using Muchachos.TideTurner.Runtime.Common.Fsm;
-using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
 {
-    public class LevelStateMachine : MonoBehaviour, IStateMachine<LevelStateBase>
+    public class LevelStateMachine : IStateMachine<LevelStateBase>, IInitializable
     {
+        private readonly ILevelStateFactory _factory;
         private readonly List<LevelStateBase> _states = new List<LevelStateBase>();
-        private LevelStateBase _current;
 
-        public LevelStateBase CurrentState => _current;
+        public LevelStateBase CurrentState { get; private set; }
 
-        public void Construct()
+        public LevelStateMachine(ILevelStateFactory factory)
+        {
+            _factory = factory;
+        }
+
+        public void Initialize()
         {
             _states.AddRange(new LevelStateBase[]
             {
-                new StartLevelState(this),
-                new StayLevelState(this),
-                new PauseLevelState(this),
-                new RestartLevelState(this),
-                new LoseLevelState(this),
-                new WinLevelState(this),
-                new RebornLevelState(this)
+                _factory.Create<StartLevelState>(),
+                _factory.Create<StayLevelState>(),
+                _factory.Create<PauseLevelState>(),
+                _factory.Create<RestartLevelState>(),
+                _factory.Create<LoseLevelState>(),
+                _factory.Create<WinLevelState>(),
+                _factory.Create<RebornLevelState>()
             });
         }
-        
+
         public void ChangeState<T>() where T : LevelStateBase
         {
-            _current?.Exit();
+            CurrentState?.Exit();
 
-            _current = _states.Find(x => x is T);
-            _current?.Enter();
+            CurrentState = _states.Find(x => x is T);
+            CurrentState?.Enter();
         }
     }
 }

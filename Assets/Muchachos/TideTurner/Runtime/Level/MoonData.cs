@@ -2,6 +2,7 @@
 using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Mobile;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level
 {
@@ -12,15 +13,15 @@ namespace Muchachos.TideTurner.Runtime.Level
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _sizeSpeed;
     
-        private InputController _input;
-    
-        public override void Construct()
+        private IInputController _input;
+
+        [Inject]
+        public void Construct(IInputController input)
         {
-            _input = FindAnyObjectByType<InputController>();
-        
+            _input = input;
             _input.OnInputHandled += Move;
         }
-
+    
         private void OnDestroy()
         {
             _input.OnInputHandled -= Move;
@@ -44,7 +45,8 @@ namespace Muchachos.TideTurner.Runtime.Level
             MoonSize = Mathf.Clamp(MoonSize, -1, 1);
         }
 
-        private bool CheckForChangeDirection(InputData data) => data.VerticalInput != 0 && !IsEqualSign(data.VerticalInput, MoonSize);
+        private bool CheckForChangeDirection(InputData data) =>
+            data.VerticalInput != 0 && !IsEqualSign(data.VerticalInput, MoonSize);
 
         private bool IsEqualSign(float a, float b) => Math.Abs(Mathf.Sign(a) - Mathf.Sign(b)) < 0.0001f; 
     }

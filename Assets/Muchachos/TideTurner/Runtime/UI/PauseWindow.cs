@@ -1,6 +1,7 @@
 ﻿using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Level.LevelFsm;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.UI
 {
@@ -8,17 +9,22 @@ namespace Muchachos.TideTurner.Runtime.UI
     {
         [SerializeField] private GameObject _pauseWindow;
 
-        private InputController _input;
-        private LevelStateMachine _machine;
+        private IInputController _input;
+        private LevelStateMachine _levelMachine;
         private bool _isPause;
         private Level.Level _level;
+
+        [Inject]
+        public void Construct(LevelStateMachine levelMachine, IInputController input)
+        {
+            _levelMachine = levelMachine;
+            _input = input;
+            _input.OnInputHandled += HandleInput;
+        }
 
         public void Construct()
         {
             _level = FindAnyObjectByType<Level.Level>();
-            _input = FindAnyObjectByType<InputController>();
-            _machine = FindAnyObjectByType<LevelStateMachine>();
-            _input.OnInputHandled += HandleInput;
         }
 
         private void OnDestroy()
@@ -28,7 +34,7 @@ namespace Muchachos.TideTurner.Runtime.UI
 
         private void HandleInput(InputData data)
         {
-            if (data.IsPause && _machine.CurrentState is not WinLevelState && !_level.IsLose())
+            if (data.IsPause && _levelMachine.CurrentState is not WinLevelState && !_level.IsLose())
                 Pause(!_isPause);
         }
 
@@ -40,11 +46,11 @@ namespace Muchachos.TideTurner.Runtime.UI
             _isPause = value;
             if (value)
             {
-                _machine.ChangeState<PauseLevelState>();
+                _levelMachine.ChangeState<PauseLevelState>();
             }
             else
             {
-                _machine.ChangeState<StayLevelState>();
+                _levelMachine.ChangeState<StayLevelState>();
             }
         
             _pauseWindow.SetActive(value);

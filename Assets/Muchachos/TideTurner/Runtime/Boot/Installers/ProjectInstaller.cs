@@ -2,6 +2,7 @@
 using Muchachos.TideTurner.Runtime.Configuration;
 using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Core.GameFsm;
+using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Core.SceneLoading;
 using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
@@ -30,11 +31,48 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindButtonSoundPlayer();
 
             BindSceneLoader();
-            
+            BindInputHandler();
+            BindInputController();
+
             BindStateFactory();
             BindGameStateMachine();
 
             BindProjectInitializer();
+
+            BindMobileInitializer();
+        }
+
+        private void BindInputController()
+        {
+            Container
+                .BindInterfacesTo<InputController>()
+                .AsSingle();
+        }
+
+        private void BindInputHandler()
+        {
+            if (Application.isMobilePlatform)
+            {
+                Container
+                    .Bind<IInputHandler>()
+                    .To<MobileInputHandler>()
+                    .AsSingle();
+            }
+            else
+            {
+                Container
+                    .Bind<IInputHandler>()
+                    .To<PCInputHandler>()
+                    .AsSingle();
+            }
+        }
+
+        private void BindMobileInitializer()
+        {
+            if (Application.isMobilePlatform)
+                Container
+                    .BindInterfacesTo<MobileInitializer>()
+                    .AsSingle();
         }
 
         private void BindSceneLoader()
@@ -56,15 +94,15 @@ namespace Muchachos.TideTurner.Runtime.Boot
         private void BindStateFactory()
         {
             Container
-                .Bind<IStateFactory>()
-                .To<StateFactory>()
+                .Bind<IGameStateFactory>()
+                .To<GameStateFactory>()
                 .AsSingle();
         }
 
         private void BindGameStateMachine()
         {
             Container
-                .Bind<GameStateMachine>()
+                .BindInterfacesAndSelfTo<GameStateMachine>()
                 .AsSingle();
         }
 

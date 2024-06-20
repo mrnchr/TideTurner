@@ -16,5 +16,8 @@
 
         public const string SCENE_MENU = CONFIG_MENU + "Scenes";
         public const string SCENE_NAME = "Scenes";
+
+        public const string MOBILE_MENU = CONFIG_MENU + "Mobile";
+        public const string MOBILE_NAME = "Mobile Settings";
     }
 }

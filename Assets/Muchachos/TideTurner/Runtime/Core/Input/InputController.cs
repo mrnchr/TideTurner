@@ -1,6 +1,7 @@
 ﻿using System;
 using Muchachos.TideTurner.Runtime.Configuration;
 using Muchachos.TideTurner.Runtime.Mobile;
+using TriInspector;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +9,9 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
 {
     public class InputController : MonoBehaviour, IInputController
     {
+        [ShowInInspector]
+        [HideReferencePicker]
+        [ReadOnly]
         public InputData Data { get; } = new InputData();
         public event Action<InputData> OnInputHandled;
 
@@ -23,9 +27,9 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
             _settings = settings;
             _mobileMoon = FindAnyObjectByType<MobileMoon>();
 
-            Data.Platform = Application.isMobilePlatform ? DeviceType.Handheld : DeviceType.Desktop;
+            DeviceType platform = Application.isMobilePlatform ? DeviceType.Handheld : DeviceType.Desktop;
 
-            switch (Data.Platform)
+            switch (platform)
             {
                 case DeviceType.Handheld:
                     UnityEngine.Input.gyro.enabled = true;
@@ -56,7 +60,7 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
         {
             Data.IsPause = UnityEngine.Input.GetKeyDown(KeyCode.Escape);
         
-            if (Data.IsPause || Data.Platform != DeviceType.Desktop)
+            if (Data.IsPause)
                 return;
 
             Data.HorizontalInput = UnityEngine.Input.GetAxis(Idents.InputAxis.MOUSE_X) * _settings.MouseSensitivity;
@@ -65,7 +69,7 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
 
         private void HandleMobileInputs(InputData data)
         {
-            if (Data.IsPause == true || Data.Platform != DeviceType.Handheld)
+            if (Data.IsPause)
                 return;
 
             Data.VerticalInput = _mobileMoon.slider.value;
@@ -99,8 +103,7 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
 
         public void ClearInput()
         {
-            Data.HorizontalInput = 0;
-            Data.VerticalInput = 0;
+            Data.Reset();
         }
     }
 }

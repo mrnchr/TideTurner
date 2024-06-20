@@ -18,7 +18,7 @@ namespace Muchachos.TideTurner.Runtime.UI
 
         public void PlaySound()
         {
-            _player.PlaySound();
+            // _player.PlaySound();
         }
     }
 }

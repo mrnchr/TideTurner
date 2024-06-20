@@ -1,41 +1,20 @@
-﻿using Muchachos.TideTurner.Runtime.Core.GameFsm;
-using Muchachos.TideTurner.Runtime.Level;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Muchachos.TideTurner.Runtime.Core
 {
     public class SceneContext : MonoBehaviour
     {
-        private ProjectContext _ctx;
         private Bootstrap _bootstrap;
-        private GameStateMachine _gameMachine;
-
+        
         private void Awake()
         {
-            _ctx = FindAnyObjectByType<ProjectContext>();
-            if (!_ctx)
-                _ctx = Instantiate(Resources.Load<ProjectContext>("Core"));
-
             _bootstrap = FindAnyObjectByType<Bootstrap>();
             if (_bootstrap)
                 _bootstrap.Construct();
-
-            _gameMachine = FindAnyObjectByType<GameStateMachine>();
         }
 
         private void Start()
         {
-            if(!_ctx.IsInitialized)
-                _ctx.Init();
-        
-            if (_gameMachine)
-            {
-                if(_bootstrap is LevelBootstrap)
-                    _gameMachine.ChangeState<LevelGameState>();
-                else 
-                    _gameMachine.ChangeState<MenuGameState>();
-            }
-        
             if(_bootstrap)
                 _bootstrap.Init();
         }

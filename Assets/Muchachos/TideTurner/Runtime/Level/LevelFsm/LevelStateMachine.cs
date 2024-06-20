@@ -1,0 +1,36 @@
+﻿using System.Collections.Generic;
+using Muchachos.TideTurner.Runtime.Common.Fsm;
+using UnityEngine;
+
+namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
+{
+    public class LevelStateMachine : MonoBehaviour, IStateMachine<LevelStateBase>
+    {
+        private readonly List<LevelStateBase> _states = new List<LevelStateBase>();
+        private LevelStateBase _current;
+
+        public LevelStateBase CurrentState => _current;
+
+        public void Construct()
+        {
+            _states.AddRange(new LevelStateBase[]
+            {
+                new StartLevelState(this),
+                new StayLevelState(this),
+                new PauseLevelState(this),
+                new RestartLevelState(this),
+                new LoseLevelState(this),
+                new WinLevelState(this),
+                new RebornLevelState(this)
+            });
+        }
+        
+        public void ChangeState<T>() where T : LevelStateBase
+        {
+            _current?.Exit();
+
+            _current = _states.Find(x => x is T);
+            _current?.Enter();
+        }
+    }
+}

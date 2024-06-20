@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.Obstacles.Shark
 {
@@ -12,11 +13,18 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles.Shark
         [SerializeField] private Transform _parent;
         private SharkFactory _factory;
         private SharkSpawn[] _spawns;
+        private ILevelUpdater _updater;
 
-        public void Construct(SharkSpawn[] spawns, Water water, LevelUpdater updater, Level level)
+        [Inject]
+        public void Construct(ILevelUpdater updater)
+        {
+            _updater = updater;
+        }
+
+        public void Construct(SharkSpawn[] spawns, Water water, Level level)
         {
             _spawns = spawns;
-            _factory = new SharkFactory(_prefab, _parent, water, updater, level);
+            _factory = new SharkFactory(_prefab, _parent, water, _updater, level);
         }
 
         public void Init()

@@ -10,17 +10,17 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
         private readonly Barrel _prefab;
         private readonly Transform _parent;
         private readonly AbstractMoonData _moonData;
-        private readonly LevelUpdater _updater;
+        private readonly ILevelUpdater _updater;
         private readonly WaterMovement _waterMovement;
-        private readonly global::Muchachos.TideTurner.Runtime.Level.Level _level;
+        private readonly Level _level;
 
         public BarrelFactory(
             Barrel prefab,
             Transform parent,
             AbstractMoonData moonData,
-            LevelUpdater updater,
+            ILevelUpdater updater,
             WaterMovement waterMovement,
-            global::Muchachos.TideTurner.Runtime.Level.Level level)
+            Level level)
         {
             _prefab = prefab;
             _parent = parent;

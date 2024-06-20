@@ -20,11 +20,11 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
         private AbstractMoonData _moon;
         private Rigidbody2D _rb;
         private WaterMovement _waterMovement;
-        private global::Muchachos.TideTurner.Runtime.Level.Level _level;
+        private Level _level;
         private bool _isReset;
         private void Awake()
         {
-            _level = FindAnyObjectByType<global::Muchachos.TideTurner.Runtime.Level.Level>();
+            _level = FindAnyObjectByType<Level>();
             _rb = GetComponent<Rigidbody2D>();
             _rb.drag = 1;
             _rb.angularDrag = 1;

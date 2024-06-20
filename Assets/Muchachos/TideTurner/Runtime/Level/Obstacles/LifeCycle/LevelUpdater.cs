@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle
 {
-    public class LevelUpdater : MonoBehaviour
+    public class LevelUpdater : ITickable, IFixedTickable, ILevelUpdater
     {
         private readonly List<ILevelUpdatable> _updatables = new List<ILevelUpdatable>();
         private bool _isPaused;
@@ -23,13 +24,13 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle
             _isPaused = value;
         }
 
-        private void FixedUpdate()
+        public void FixedTick()
         {
             if(!_isPaused)
                 FixedUpdateLogic();
         }
 
-        private void Update()
+        public void Tick()
         {
             if (!_isPaused)
                 UpdateLogic();
@@ -37,14 +38,16 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle
 
         private void UpdateLogic()
         {
-            foreach (ILevelUpdatable updatable in _updatables)
-                (updatable as IUpdatable)?.UpdateLogic();
+            var copy = new List<IUpdatable>(_updatables.OfType<IUpdatable>());
+            foreach (IUpdatable updatable in copy)
+                updatable.UpdateLogic();
         }
 
         private void FixedUpdateLogic()
         {
-            foreach (ILevelUpdatable updatable in _updatables)
-                (updatable as IFixedUpdatable)?.FixedUpdateLogic();
+            var copy = new List<IFixedUpdatable>(_updatables.OfType<IFixedUpdatable>());
+            foreach (IFixedUpdatable updatable in copy)
+                updatable.FixedUpdateLogic();
         }
     }
 }

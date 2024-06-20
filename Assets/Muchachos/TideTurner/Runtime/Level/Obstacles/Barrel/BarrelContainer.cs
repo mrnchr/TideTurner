@@ -3,6 +3,7 @@ using Muchachos.TideTurner.Runtime.Level.FloatingObjects;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
 using Muchachos.TideTurner.Runtime.Mobile;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.Obstacles
 {
@@ -15,15 +16,21 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
     
         private BarrelFactory _factory;
         private BarrelSpawn[] _spawns;
+        private ILevelUpdater _updater;
+
+        [Inject]
+        public void Construct(ILevelUpdater updater)
+        {
+            _updater = updater;
+        }
 
         public void Construct(
             BarrelSpawn[] spawns,
             AbstractMoonData moonData,
-            LevelUpdater updater,
             WaterMovement waterMovement,
-            global::Muchachos.TideTurner.Runtime.Level.Level level)
+            Level level)
         {
-            _factory = new BarrelFactory(_prefab, _parent, moonData, updater, waterMovement, level);
+            _factory = new BarrelFactory(_prefab, _parent, moonData, _updater, waterMovement, level);
             _spawns = spawns;
         }
 

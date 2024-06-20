@@ -12,6 +12,7 @@ using Muchachos.TideTurner.Runtime.Level.Savings;
 using Muchachos.TideTurner.Runtime.Mobile;
 using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level
 {
@@ -21,11 +22,17 @@ namespace Muchachos.TideTurner.Runtime.Level
         private LevelStateMachine _machine;
         private SharkContainer _sharkContainer;
         private BarrelContainer _barrelContainer;
+        private ILevelUpdater _updater;
+
+        [Inject]
+        public void Construct(ILevelUpdater updater)
+        {
+            _updater = updater;
+        }
 
         public override void Construct()
         {
             var input = FindAnyObjectByType<InputController>();
-            var updater = FindAnyObjectByType<LevelUpdater>();
             var level = FindAnyObjectByType<Level>();
             _machine = FindAnyObjectByType<LevelStateMachine>();
         
@@ -55,7 +62,7 @@ namespace Muchachos.TideTurner.Runtime.Level
             var checkHandler = FindAnyObjectByType<CheckPointHandler>();
             var mobileScreenOrientation = FindAnyObjectByType<MobileScreenOrientation>();
 
-            freezer.Construct(updater, restarter);
+            freezer.Construct(restarter);
 
             moonData.Construct();
             switch (moon)
@@ -79,8 +86,8 @@ namespace Muchachos.TideTurner.Runtime.Level
         
             pause.Construct();
             _ballPool.Construct(level);
-            _sharkContainer.Construct(sharkSpawns, water, updater, level);
-            _barrelContainer.Construct(barrelSpawns, moonData, updater, water.Movement, level);
+            _sharkContainer.Construct(sharkSpawns, water, level);
+            _barrelContainer.Construct(barrelSpawns, moonData, water.Movement, level);
             checkHandler.Construct(checks, level);
         
             foreach (Obstacle obstacle in obstacles)
@@ -98,7 +105,7 @@ namespace Muchachos.TideTurner.Runtime.Level
             foreach (Tentacle tentacle in tentacles)
                 tentacle.Construct(water);
 
-            updater.AddRange(new ILevelUpdatable[] { moon, boat, water, cameraMovement }.Concat(beings).Concat(floatings).Concat(tentacles));
+            _updater.AddRange(new ILevelUpdatable[] { moon, boat, water, cameraMovement }.Concat(beings).Concat(floatings).Concat(tentacles));
         }
 
         public override void Init()

@@ -8,10 +8,10 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles.Shark
         private readonly Shark _prefab;
         private readonly Transform _parent;
         private readonly Water _water;
-        private readonly LevelUpdater _updater;
+        private readonly ILevelUpdater _updater;
         private readonly Level _level;
 
-        public SharkFactory(Shark prefab, Transform parent, Water water, LevelUpdater updater, Level level)
+        public SharkFactory(Shark prefab, Transform parent, Water water, ILevelUpdater updater, Level level)
         {
             _prefab = prefab;
             _parent = parent;

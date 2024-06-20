@@ -8,6 +8,5 @@ namespace Muchachos.TideTurner.Runtime.Mobile
         public float MoonPosition;
     
         public abstract void Init();
-        public abstract void Construct();
     }
 }

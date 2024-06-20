@@ -9,22 +9,22 @@ namespace Muchachos.TideTurner.Runtime.UI
     {
         [SerializeField] private GameObject _pauseWindow;
 
-        private InputController _input;
+        private IInputController _input;
         private LevelStateMachine _levelMachine;
         private bool _isPause;
         private Level.Level _level;
 
         [Inject]
-        public void Construct(LevelStateMachine levelMachine)
+        public void Construct(LevelStateMachine levelMachine, IInputController input)
         {
             _levelMachine = levelMachine;
+            _input = input;
+            _input.OnInputHandled += HandleInput;
         }
 
         public void Construct()
         {
             _level = FindAnyObjectByType<Level.Level>();
-            _input = FindAnyObjectByType<InputController>();
-            _input.OnInputHandled += HandleInput;
         }
 
         private void OnDestroy()

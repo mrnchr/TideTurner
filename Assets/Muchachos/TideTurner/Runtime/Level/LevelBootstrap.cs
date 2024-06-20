@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Muchachos.TideTurner.Runtime.Core;
-using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Level.FloatingObjects;
 using Muchachos.TideTurner.Runtime.Level.Obstacles;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon;
@@ -30,7 +29,6 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         public override void Construct()
         {
-            var input = FindAnyObjectByType<InputController>();
             var level = FindAnyObjectByType<Level>();
         
             AbstractMoon moon = FindFirstObjectByType<AbstractMoon>();
@@ -40,8 +38,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             var boat = FindAnyObjectByType<Boat>();
             var water = FindAnyObjectByType<Water>();
             var pause = FindAnyObjectByType<PauseWindow>();
-            var lose = FindAnyObjectByType<LoseWindow>();
-            var win = FindAnyObjectByType<WinWindow>();
             _ballPool = FindAnyObjectByType<BallPool>();
             var obstacles = FindObjectsByType<Obstacle>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             var cannons = FindObjectsByType<Cannon>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -61,14 +57,13 @@ namespace Muchachos.TideTurner.Runtime.Level
 
             freezer.Construct(restarter);
 
-            moonData.Construct();
             switch (moon)
             {
                 case Moon m:
                     m.Construct((MoonData)moonData);
                     break;
                 case MobileMoon:
-                    mobileScreenOrientation.Construct(moonData, input, cameraMovement);
+                    mobileScreenOrientation.Construct(moonData, cameraMovement);
                     break;
                 default:
                     throw new Exception("Unknown moon");

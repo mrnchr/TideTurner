@@ -20,7 +20,7 @@ namespace Muchachos.TideTurner.Runtime.UI
                 _startButton.onClick.AddListener(() =>
                 {
                     _buttonSoundCaller.PlaySound();
-                    sceneLoader.LoadScene(sceneLoader.PCscene);
+                    sceneLoader.LoadScene(sceneLoader.PCScene);
                 });
             else
                 _startButton.onClick.AddListener(() =>

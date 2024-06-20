@@ -5,7 +5,6 @@ namespace Muchachos.TideTurner.Runtime.Core
 {
     public class ProjectContext : MonoBehaviour
     {
-        private SettingData _settings;
         private bool _isInitialized;
         private GameStateMachine _machine;
 
@@ -15,7 +14,6 @@ namespace Muchachos.TideTurner.Runtime.Core
         {
             DontDestroyOnLoad(this);
 
-            _settings = GetComponentInChildren<SettingData>();
             _machine = GetComponentInChildren<GameStateMachine>();
         
             _machine.Construct();
@@ -31,9 +29,6 @@ namespace Muchachos.TideTurner.Runtime.Core
             if (_isInitialized)
                 return;
         
-            if (_settings)
-                _settings.Init();
-
             _isInitialized = true;
         }
     }

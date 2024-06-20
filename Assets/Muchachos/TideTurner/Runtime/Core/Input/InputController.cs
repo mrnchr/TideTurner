@@ -1,6 +1,8 @@
 ﻿using System;
+using Muchachos.TideTurner.Runtime.Configuration;
 using Muchachos.TideTurner.Runtime.Mobile;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Core.Input
 {
@@ -11,13 +13,14 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
 
         [Range(1, 10)] [SerializeField] private float movementSmoothness = 3f;
 
-        private SettingData _settings;
         private MobileMoon _mobileMoon;
         private ScreenOrientation _currentOrientation, _lastOrientation;
+        private SettingsData _settings;
 
-        public void Construct()
+        [Inject]
+        public void Construct(SettingsData settings)
         {
-            _settings = FindAnyObjectByType<SettingData>();
+            _settings = settings;
             _mobileMoon = FindAnyObjectByType<MobileMoon>();
 
             Data.Platform = Application.isMobilePlatform ? DeviceType.Handheld : DeviceType.Desktop;

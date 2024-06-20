@@ -5,7 +5,7 @@ namespace Muchachos.TideTurner.Runtime.Core
 {
     public class SceneLoader : MonoBehaviour
     {
-        public string PCscene = "New Level 1";
+        public string PCScene = "Level 1";
         public string MobileScene = "MobileScene";
         
         public void LoadScene(string sceneName)

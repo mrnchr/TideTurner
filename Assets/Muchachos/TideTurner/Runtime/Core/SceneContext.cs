@@ -8,7 +8,6 @@ namespace Muchachos.TideTurner.Runtime.Core
     {
         private ProjectContext _ctx;
         private Bootstrap _bootstrap;
-        private SettingsController _settings;
         private GameStateMachine _gameMachine;
 
         private void Awake()
@@ -20,10 +19,6 @@ namespace Muchachos.TideTurner.Runtime.Core
             _bootstrap = FindAnyObjectByType<Bootstrap>();
             if (_bootstrap)
                 _bootstrap.Construct();
-
-            _settings = FindAnyObjectByType<SettingsController>(FindObjectsInactive.Include);
-            if (_settings)
-                _settings.Construct();
 
             _gameMachine = FindAnyObjectByType<GameStateMachine>();
         }
@@ -43,9 +38,6 @@ namespace Muchachos.TideTurner.Runtime.Core
         
             if(_bootstrap)
                 _bootstrap.Init();
-        
-            if(_settings)
-                _settings.Init();
         }
     }
 }

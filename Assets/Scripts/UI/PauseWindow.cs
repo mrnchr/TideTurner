@@ -25,7 +25,7 @@ public class PauseWindow : MonoBehaviour
     private void HandleInput(InputData data)
     {
         if (data.IsPause && _machine.CurrentState is not WinLevelState && !_level.IsLose())
-            Pause(data.IsPause);
+            Pause(!_isPause);
     }
 
     public void Pause(bool value)
@@ -42,7 +42,7 @@ public class PauseWindow : MonoBehaviour
         {
             _machine.ChangeState<StayLevelState>();
         }
-
+        
         _pauseWindow.SetActive(value);
     }
 }

@@ -57,7 +57,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             var checkHandler = FindAnyObjectByType<CheckPointHandler>();
             var mobileScreenOrientation = FindAnyObjectByType<MobileScreenOrientation>();
 
-            input.Construct();
             freezer.Construct(updater, restarter);
 
             moonData.Construct();

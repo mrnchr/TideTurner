@@ -1,5 +1,5 @@
 using System.Collections;
-using Muchachos.TideTurner.Runtime.Core;
+using Muchachos.TideTurner.Runtime.Core.SceneLoading;
 using Muchachos.TideTurner.Runtime.Level.FloatingObjects;
 using Muchachos.TideTurner.Runtime.Level.LevelFsm;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon;
@@ -7,6 +7,7 @@ using Muchachos.TideTurner.Runtime.Level.Savings;
 using Muchachos.TideTurner.Runtime.Mobile;
 using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level
 {
@@ -22,11 +23,17 @@ namespace Muchachos.TideTurner.Runtime.Level
         private Cannon[] _cannons;
         private CameraMovement _cameraMovement;
         private Coroutine _coroutine;
-        private SceneLoader _sceneLoader;
+        private ISceneLoader _sceneLoader;
         private CheckPointHandler _handler;
     
         private LoseWindow _lose;
         private WinWindow _win;
+
+        [Inject]
+        public void Construct(ISceneLoader sceneLoader)
+        {
+            _sceneLoader = sceneLoader;
+        }
 
         public void Construct(LevelStateMachine machine,
             AbstractMoonData moonData,
@@ -37,7 +44,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             WinWindow win,
             Cannon[] cannons,
             CameraMovement cameraMovement,
-            SceneLoader sceneLoader,
             CheckPointHandler handler)
         {
             _machine = machine;
@@ -49,7 +55,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             _win = win;
             _cannons = cannons;
             _cameraMovement = cameraMovement;
-            _sceneLoader = sceneLoader;
             _handler = handler;
         }
 
@@ -93,7 +98,7 @@ namespace Muchachos.TideTurner.Runtime.Level
         public void ToMenu()
         {
             _machine.ChangeState<StayLevelState>();
-            _sceneLoader.LoadScene(0);
+            _sceneLoader.LoadScene(SceneType.Menu);
         }
 
         private void Restart()

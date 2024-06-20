@@ -2,6 +2,7 @@
 using Muchachos.TideTurner.Runtime.Configuration;
 using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Core.GameFsm;
+using Muchachos.TideTurner.Runtime.Core.SceneLoading;
 using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -28,10 +29,20 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindAudioMixerProvider();
             BindButtonSoundPlayer();
 
+            BindSceneLoader();
+            
             BindStateFactory();
             BindGameStateMachine();
 
             BindProjectInitializer();
+        }
+
+        private void BindSceneLoader()
+        {
+            Container
+                .Bind<ISceneLoader>()
+                .To<SceneLoader>()
+                .AsSingle();
         }
 
         private void BindButtonSoundPlayer()

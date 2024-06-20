@@ -50,7 +50,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             _barrelContainer = FindAnyObjectByType<BarrelContainer>();
             var restarter = FindAnyObjectByType<SoundRestarter>();
             var freezer = FindAnyObjectByType<LevelFreezer>();
-            var loader = FindAnyObjectByType<SceneLoader>();
             var tentacles = FindObjectsByType<Tentacle>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             var checks = FindObjectsByType<CheckPoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
             var checkHandler = FindAnyObjectByType<CheckPointHandler>();
@@ -76,7 +75,7 @@ namespace Muchachos.TideTurner.Runtime.Level
             cameraMovement.Construct(boat);
             _machine.Construct();
 
-            level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement, loader, checkHandler);
+            level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement, checkHandler);
         
             pause.Construct();
             _ballPool.Construct(level);
@@ -99,7 +98,7 @@ namespace Muchachos.TideTurner.Runtime.Level
             foreach (Tentacle tentacle in tentacles)
                 tentacle.Construct(water);
 
-            updater.AddRange(new ILevelUpdatable[] { moon, boat, water, cameraMovement }.Concat(beings).Concat<ILevelUpdatable>(floatings).Concat(tentacles));
+            updater.AddRange(new ILevelUpdatable[] { moon, boat, water, cameraMovement }.Concat(beings).Concat(floatings).Concat(tentacles));
         }
 
         public override void Init()

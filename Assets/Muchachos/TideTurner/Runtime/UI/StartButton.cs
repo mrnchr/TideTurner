@@ -1,33 +1,22 @@
-using Muchachos.TideTurner.Runtime.Core;
+using Muchachos.TideTurner.Runtime.Core.SceneLoading;
 using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.UI
 {
     public class StartButton : MonoBehaviour
     {
-        private Button _startButton;
-        private ButtonSoundCaller _buttonSoundCaller;
+        private ISceneLoader _sceneLoader;
 
-        private void Start()
+        [Inject]
+        public void Construct(ISceneLoader sceneLoader)
         {
-            _startButton = GetComponent<Button>();
-            _buttonSoundCaller = GetComponent<ButtonSoundCaller>();
+            _sceneLoader = sceneLoader;
+        }
 
-            SceneLoader sceneLoader = FindAnyObjectByType<SceneLoader>();
-        
-            if (!Application.isMobilePlatform)
-                _startButton.onClick.AddListener(() =>
-                {
-                    _buttonSoundCaller.PlaySound();
-                    sceneLoader.LoadScene(sceneLoader.PCScene);
-                });
-            else
-                _startButton.onClick.AddListener(() =>
-                {
-                    _buttonSoundCaller.PlaySound();
-                    sceneLoader.LoadScene(sceneLoader.MobileScene);
-                });
+        public void OnClick()
+        {
+            _sceneLoader.LoadScene(Application.isMobilePlatform ? SceneType.MobileLevel : SceneType.PCLevel);
         }
     }
 }

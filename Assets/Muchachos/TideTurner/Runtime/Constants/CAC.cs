@@ -13,5 +13,8 @@
 
         public const string SETTINGS_MENU = CONFIG_MENU + "Settings";
         public const string SETTINGS_NAME = "Default Settings";
+
+        public const string SCENE_MENU = CONFIG_MENU + "Scenes";
+        public const string SCENE_NAME = "Scenes";
     }
 }

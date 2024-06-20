@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4b60dd3dc7a45debfc02795037401ed, type: 3}
-  m_Name: Config Provider
+  m_Script: {fileID: 11500000, guid: fd7f9246bc39451099891c4b83a35d50, type: 3}
+  m_Name: Scenes
   m_EditorClassIdentifier: 
-  Configs:
-  - {fileID: 11400000, guid: 8297a3e86b7352a44b0100498c14662f, type: 2}
-  - {fileID: 11400000, guid: 98ca19c591c252243ac4131728382287, type: 2}
+  Scenes:
+  - Id: 1
+    Scene: Assets/Scenes/Menu.unity
+  - Id: 2
+    Scene: Assets/Scenes/Level 1.unity
+  - Id: 3
+    Scene: Assets/Scenes/MobileScene.unity

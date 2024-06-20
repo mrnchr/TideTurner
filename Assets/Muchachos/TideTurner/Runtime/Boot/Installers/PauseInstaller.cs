@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Boot
 {
-    public class SceneInstaller : MonoInstaller
+    public class PauseInstaller : MonoInstaller
     {
         [SerializeField]
         private SettingsView _settingsView;

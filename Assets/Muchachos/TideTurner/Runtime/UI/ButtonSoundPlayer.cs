@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Muchachos.TideTurner.Runtime.UI
 {
-    public class ButtonSoundPlayer : MonoBehaviour
+    public class ButtonSoundPlayer : MonoBehaviour, IButtonSoundPlayer
     {
         [SerializeField] private SoundPlayer _sound;
 

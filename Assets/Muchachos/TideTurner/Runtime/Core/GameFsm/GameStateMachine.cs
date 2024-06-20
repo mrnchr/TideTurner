@@ -1,21 +1,23 @@
 using System.Collections.Generic;
 using Muchachos.TideTurner.Runtime.Common.Fsm;
-using UnityEngine;
 
 namespace Muchachos.TideTurner.Runtime.Core.GameFsm
 {
-    public class GameStateMachine : MonoBehaviour, IStateMachine<GameStateBase>
+    public class GameStateMachine : IStateMachine<GameStateBase>
     {
+        private readonly IStateFactory _factory;
         private readonly List<GameStateBase> _states = new List<GameStateBase>();
 
         public GameStateBase CurrentState { get; private set; }
 
-        public void Construct()
+        public GameStateMachine(IStateFactory factory)
         {
+            _factory = factory;
+            
             _states.AddRange(new GameStateBase[]
             {
-                new MenuGameState(this),
-                new LevelGameState(this)
+                _factory.Create<MenuGameState>(),
+                _factory.Create<LevelGameState>()
             });
         }
 

@@ -1,19 +1,16 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.UI
 {
     public class ButtonSoundCaller : MonoBehaviour
     {
-        private ButtonSoundPlayer _player;
+        private IButtonSoundPlayer _player;
 
-        public void Construct()
+        [Inject]
+        public void Construct(IButtonSoundPlayer player)
         {
-            FindPlayer();
-        }
-
-        private void FindPlayer()
-        {
-            _player = FindAnyObjectByType<ButtonSoundPlayer>();
+            _player = player;
         }
 
         public void PlaySound()

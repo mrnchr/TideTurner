@@ -56,15 +56,15 @@ namespace Muchachos.TideTurner.Runtime.Boot
         private void BindStateFactory()
         {
             Container
-                .Bind<IStateFactory>()
-                .To<StateFactory>()
+                .Bind<IGameStateFactory>()
+                .To<GameStateFactory>()
                 .AsSingle();
         }
 
         private void BindGameStateMachine()
         {
             Container
-                .Bind<GameStateMachine>()
+                .BindInterfacesAndSelfTo<GameStateMachine>()
                 .AsSingle();
         }
 

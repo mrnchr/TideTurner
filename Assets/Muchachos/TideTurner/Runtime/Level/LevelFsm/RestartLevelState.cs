@@ -8,14 +8,16 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
 {
     public class RestartLevelState : LevelStateBase
     {
+        private readonly LevelStateMachine _machine;
         private readonly BallPool _ballPool;
         private readonly Cannon[] _cannons;
         private readonly SharkContainer _sharkContainer;
         private readonly SoundRestarter _sound;
         private readonly BarrelContainer _barrelContainer;
 
-        public RestartLevelState(LevelStateMachine machine) : base(machine)
-        {   
+        public RestartLevelState(LevelStateMachine machine)
+        {
+            _machine = machine;
             _ballPool = Object.FindAnyObjectByType<BallPool>();
             _sharkContainer = Object.FindAnyObjectByType<SharkContainer>();
             _cannons = Object.FindObjectsByType<Cannon>(FindObjectsInactive.Include, FindObjectsSortMode.None);

@@ -3,7 +3,6 @@ using System.Linq;
 using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Level.FloatingObjects;
-using Muchachos.TideTurner.Runtime.Level.LevelFsm;
 using Muchachos.TideTurner.Runtime.Level.Obstacles;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
@@ -19,7 +18,6 @@ namespace Muchachos.TideTurner.Runtime.Level
     public class LevelBootstrap : Bootstrap
     {
         private BallPool _ballPool;
-        private LevelStateMachine _machine;
         private SharkContainer _sharkContainer;
         private BarrelContainer _barrelContainer;
         private ILevelUpdater _updater;
@@ -34,7 +32,6 @@ namespace Muchachos.TideTurner.Runtime.Level
         {
             var input = FindAnyObjectByType<InputController>();
             var level = FindAnyObjectByType<Level>();
-            _machine = FindAnyObjectByType<LevelStateMachine>();
         
             AbstractMoon moon = FindFirstObjectByType<AbstractMoon>();
             AbstractMoonData moonData = FindFirstObjectByType<AbstractMoonData>();
@@ -80,9 +77,8 @@ namespace Muchachos.TideTurner.Runtime.Level
             water.Construct(moonData);
             boat.Construct(moonData, boatSpawn, water.Movement);
             cameraMovement.Construct(boat);
-            _machine.Construct();
 
-            level.Construct(_machine, moonData, moon, boat, water, lose, win, cannons, cameraMovement, checkHandler);
+            level.Construct(moonData, moon, boat, water, cannons, cameraMovement, checkHandler);
         
             pause.Construct();
             _ballPool.Construct(level);
@@ -113,7 +109,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             _ballPool.Init();
             _sharkContainer.Init();
             _barrelContainer.Init();
-            _machine.ChangeState<StartLevelState>();
         }
     }
 }

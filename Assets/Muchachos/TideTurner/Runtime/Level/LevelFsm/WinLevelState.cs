@@ -8,7 +8,7 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         private readonly LevelFreezer _freezer;
         private readonly WinWindow _win;
 
-        public WinLevelState(LevelStateMachine machine) : base(machine)
+        public WinLevelState()
         {
             _freezer = Object.FindAnyObjectByType<LevelFreezer>();
             _win = Object.FindAnyObjectByType<WinWindow>();

@@ -8,7 +8,7 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         private readonly LevelFreezer _freezer;
         private readonly PauseWindow _pause;
 
-        public PauseLevelState(LevelStateMachine machine) : base(machine)
+        public PauseLevelState()
         {
             _freezer = Object.FindAnyObjectByType<LevelFreezer>();
         }

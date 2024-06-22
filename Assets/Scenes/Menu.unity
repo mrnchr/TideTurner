@@ -716,6 +716,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 2900121240495381662, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900121240495381662, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2933491993492938261, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
     m_RemovedGameObjects: []

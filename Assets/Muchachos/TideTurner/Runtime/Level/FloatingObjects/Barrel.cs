@@ -54,12 +54,24 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
             foreach (var floatingObject in floating)
                 floatingObject.SetVelocityRate(_inWater ? _moon.MoonPosition : 0);
 
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -_maxVelocity, _maxVelocity));
+            rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -_maxVelocity, _maxVelocity), Mathf.Clamp(rb.velocity.y, -_maxVelocity, _maxVelocity));
+            rb.angularVelocity = Mathf.Clamp(rb.angularVelocity, -_maxVelocity, _maxVelocity);
+            //TestRot();
         }
 
         private void CheckInWater()
         {
             _inWater = _waterMovement.GetWaterLevel().position.y > transform.position.y;
+        }
+
+        private void TestRot()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                rb.AddTorque(500);
+                rb.AddForce(-Vector3.one, ForceMode2D.Impulse);
+                //Debug.Log("added");
+            }
         }
     }
 }

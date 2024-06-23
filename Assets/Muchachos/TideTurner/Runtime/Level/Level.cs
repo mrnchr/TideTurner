@@ -65,13 +65,13 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         public void Reborn()
         {
-            CheckPoint last = _handler.GetLastCheck();
+            Vector3 spawnPosition = _handler.GetSpawnPosition();
         
             _moonData.Init();
             _moon.Init();
-            _boat.SetPosition(last.transform.position);
+            _boat.SetPosition(spawnPosition);
             _boat.ResetLogic();
-            _water.Movement.SetWaterLevel(last.transform.position);
+            _water.Movement.SetWaterLevel(spawnPosition);
             _cameraMovement.Init();
         
             foreach (Cannon cannon in _cannons)
@@ -80,7 +80,7 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         public void CallReborn()
         {
-            if (!_handler.GetLastCheck())
+            if (!_handler.WasCheckPoint())
                 _levelMachine.ChangeState<RestartLevelState>();
             else
                 _levelMachine.ChangeState<RebornLevelState>();

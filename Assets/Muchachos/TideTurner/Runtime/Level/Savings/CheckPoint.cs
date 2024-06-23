@@ -4,8 +4,12 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
 {
     public class CheckPoint : MonoBehaviour
     {
-        public bool IsChecked { get; set; }
+        [SerializeField]
+        private Transform _spawnPoint;
         private CheckPointHandler _handler;
+        
+        public bool IsChecked { get; set; }
+        public Vector3 SpawnPosition => _spawnPoint.position;
 
         public void Construct(CheckPointHandler handler)
         {

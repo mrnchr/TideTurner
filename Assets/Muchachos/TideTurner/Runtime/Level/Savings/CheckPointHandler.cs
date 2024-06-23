@@ -35,9 +35,14 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
             _checks.Insert(_lastCheckIndex, check);
         }
 
-        public CheckPoint GetLastCheck()
+        public bool WasCheckPoint()
         {
-            return _lastCheckIndex > -1 ? _checks[_lastCheckIndex] : null;
+            return _lastCheckIndex > -1;
+        }
+
+        public Vector3 GetSpawnPosition()
+        {
+            return WasCheckPoint() ? _checks[_lastCheckIndex].SpawnPosition : Vector3.zero;
         }
     }
 }

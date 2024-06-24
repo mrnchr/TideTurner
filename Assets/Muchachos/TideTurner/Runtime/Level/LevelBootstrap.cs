@@ -70,7 +70,7 @@ namespace Muchachos.TideTurner.Runtime.Level
             }
         
             water.Construct(moonData);
-            boat.Construct(moonData, boatSpawn, water.Movement);
+            boat.Construct(boatSpawn, water.Movement);
             cameraMovement.Construct(boat);
 
             level.Construct(moonData, moon, boat, water, cannons, cameraMovement, checkHandler);
@@ -78,7 +78,7 @@ namespace Muchachos.TideTurner.Runtime.Level
             pause.Construct();
             _ballPool.Construct(level);
             _sharkContainer.Construct(sharkSpawns, water, level);
-            _barrelContainer.Construct(barrelSpawns, moonData, water.Movement, level);
+            _barrelContainer.Construct(barrelSpawns);
             checkHandler.Construct(checks, level);
         
             foreach (Obstacle obstacle in obstacles)

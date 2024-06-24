@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1821063744366174468}
   - component: {fileID: 3200135931345961859}
   m_Layer: 0
-  m_Name: Float
+  m_Name: Floating 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,13 +373,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b6322bf38648b880d64894b3c88576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _floatings:
+  Floatings:
   - {fileID: 3200135931345961859}
   - {fileID: 829819869815523830}
   _rb: {fileID: 2881789270198978332}
   _centerOfMass: {fileID: 5107646221604229380}
   _height: 1
   _lightness: 1
+  _centerOfVolume: {fileID: 0}
 --- !u!114 &6775215327994337825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,7 +521,7 @@ GameObject:
   - component: {fileID: 6500016227935978410}
   - component: {fileID: 829819869815523830}
   m_Layer: 0
-  m_Name: Float (1)
+  m_Name: Floating 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

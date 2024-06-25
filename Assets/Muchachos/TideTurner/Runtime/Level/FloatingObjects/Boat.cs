@@ -1,39 +1,50 @@
-﻿using Muchachos.TideTurner.Runtime.Core;
+﻿using System.Collections;
+using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
-using Muchachos.TideTurner.Runtime.Mobile;
+using Muchachos.TideTurner.Runtime.Physics;
 using UnityEngine;
 
 namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
 {
     public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     {
-        [SerializeField] private FloatingObject[] floating;
-        [SerializeField] private Transform _centerOfMass;
-        [SerializeField] private bool _inWater;
-        [SerializeField] private SoundPlayer _sound;
+        [SerializeField]
+        private SoundPlayer _sound;
 
-        [Range(30,180)][SerializeField] private int deathAngle = 45;
-        [Range(1, 2)][SerializeField] private float deathHeight = 1;
-        [Range(2, 5)][SerializeField] private float deathGravity = 3;
+        [Range(30, 180)]
+        [SerializeField]
+        private int deathAngle = 45;
+
+        [Range(1, 2)]
+        [SerializeField]
+        private float deathHeight = 1;
+
+        [Range(2, 5)]
+        [SerializeField]
+        private float deathGravity = 3;
+
+        [SerializeField]
+        private float _deathForce;
+
+        [SerializeField]
+        private FloatingBody _body;
 
         private BoatSpawn _spawn;
-        private AbstractMoonData _moon;
         private Rigidbody2D _rb;
         private WaterMovement _waterMovement;
         private Level _level;
         private bool _isReset;
+
         private void Awake()
         {
             _level = FindAnyObjectByType<Level>();
             _rb = GetComponent<Rigidbody2D>();
             _rb.drag = 1;
             _rb.angularDrag = 1;
-            _rb.centerOfMass = _centerOfMass.position;
         }
 
-        public void Construct(AbstractMoonData moon, BoatSpawn spawn, WaterMovement waterMovement)
+        public void Construct(BoatSpawn spawn, WaterMovement waterMovement)
         {
-            _moon = moon;
             _spawn = spawn;
             _waterMovement = waterMovement;
         }
@@ -62,11 +73,7 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
 
         public void UpdateLogic()
         {
-            CheckInWater();
             Kill();
-        
-            foreach (var floatingObject in floating)
-                floatingObject.SetVelocityRate(_inWater ? _moon.MoonPosition : 0);
         }
 
         private void Kill()
@@ -82,13 +89,10 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
             }
         }
 
-        private void CheckInWater()
-        {
-            _inWater = _waterMovement.GetWaterLevel().position.y > transform.position.y;
-        }
-
         public void SetLoseState()
         {
+            _rb.AddForceAtPosition(Vector3.up * _deathForce, _body.Floatings[0].transform.position,
+                ForceMode2D.Impulse);
             _rb.gravityScale = deathGravity;
             _sound.SetSoundState(SoundState.Play);
         }

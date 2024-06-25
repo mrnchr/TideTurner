@@ -8,6 +8,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
         public event Action OnPlayerCollision;
 
         private Level _level;
+
         public void Construct(Level level)
         {
             _level = level;
@@ -15,18 +16,18 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("Boat") == false)
-                return;
-
-            OnPlayerCollision?.Invoke();
-            _level.Lose();
+            if (other.gameObject.CompareTag("Boat"))
+                OnCollided();
         }
-    
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag("Boat") == false)
-                return;
+            if (other.gameObject.CompareTag("Boat"))
+                OnCollided();
+        }
 
+        private void OnCollided()
+        {
             OnPlayerCollision?.Invoke();
             _level.Lose();
         }

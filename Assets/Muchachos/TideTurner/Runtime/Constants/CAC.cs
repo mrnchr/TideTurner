@@ -19,5 +19,8 @@
 
         public const string MOBILE_MENU = CONFIG_MENU + "Mobile";
         public const string MOBILE_NAME = "Mobile Settings";
+        
+        public const string PREFAB_PROVIDER_MENU = CONFIG_MENU + "Prefab Provider";
+        public const string PREFAB_PROVIDER_FILE = "Prefab Provider";
     }
 }

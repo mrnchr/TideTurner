@@ -77,9 +77,11 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         private void UpdateWaterLevel()
         {
-            waterLevel.transform.position = Vector3.Lerp(waterLevel.transform.position, new Vector3(0, 
-                Mathf.Clamp(waterLevel.transform.position.y + _heightStep * _waterLevelDir, downBorder.position.y , upBorder.position.y), 
-                0f), Time.fixedDeltaTime * lerpVelocity); 
+            var position = waterLevel.transform.position;
+            position = Vector3.Lerp(position, new Vector3(0, 
+                Mathf.Clamp(position.y + _heightStep * _waterLevelDir, downBorder.position.y , upBorder.position.y), 
+                0f), Time.fixedDeltaTime * lerpVelocity);
+            waterLevel.transform.position = position;
         }
 
         public Transform GetWaterLevel()
@@ -111,8 +113,3 @@ namespace Muchachos.TideTurner.Runtime.Level
         }
     }
 }
-/*
-  waterLevel.transform.position = Vector3.Lerp(waterLevel.transform.position, new Vector3(0, 
-            Mathf.Clamp(upBorder.position.y + _heightStep * _waterLevelDir, downBorder.position.y , upBorder.position.y), 
-            0f), Time.deltaTime * lerpVelocity); 
- */

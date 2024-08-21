@@ -4,11 +4,13 @@ using UnityEngine.Rendering.Universal;
 
 namespace Muchachos.TideTurner.Runtime.Level.Buoy
 {
-    public class BuoyLightSwitcher : MonoBehaviour
+    public class BuoySwitcher : MonoBehaviour
     {
+        private static readonly int _float = Animator.StringToHash("Float");
+
         [SerializeField]
         private Light2D _light;
-        
+
         [SerializeField]
         private CheckPoint _checkPoints;
 

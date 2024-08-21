@@ -74,7 +74,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1558939786344219252}
   _attackDelay: 4
-  _collider: {fileID: 8827121303625020464}
 --- !u!114 &1032606782453438603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,7 +401,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -445,8 +444,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5812, y: -1.5932, z: 0}
-  m_LocalScale: {x: 19.818233, y: 18.514246, z: 10}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 21.800056, y: 18.514246, z: 10}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4910056943745492740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

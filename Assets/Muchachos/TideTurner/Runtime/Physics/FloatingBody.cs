@@ -70,7 +70,8 @@ namespace Muchachos.TideTurner.Runtime.Physics
 
         public void FixedUpdateLogic()
         {
-            UpdateFloating();
+            if (enabled)
+                UpdateFloating();
         }
 
         private void UpdateFloating()

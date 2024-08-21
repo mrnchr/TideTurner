@@ -11,7 +11,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
 
         [SerializeField] private Animator _animator;
         [SerializeField] private float _attackDelay;
-        [SerializeField] private Collider2D _collider;
+
         private Water _water;
         private bool _isShown;
         private bool _inWater;
@@ -38,7 +38,6 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
 
         private void Show(bool value)
         {
-            _collider.enabled = value;
             _animator.SetBool(_isShownVar, _isShown);
 
             if (value)

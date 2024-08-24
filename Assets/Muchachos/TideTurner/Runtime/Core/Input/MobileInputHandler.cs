@@ -7,21 +7,20 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
     public class MobileInputHandler : IInputHandler
     {
         private readonly MobileConfig _config;
-        
+        private readonly MobileMoon _mobileMoon;
+
         private ScreenOrientation _currentOrientation;
         private ScreenOrientation _lastOrientation;
         
-        private MobileMoon _mobileMoon;
-
-        public MobileInputHandler(IConfigProvider configProvider)
+        public MobileInputHandler(IConfigProvider configProvider, MobileMoon mobileMoon)
         {
             _config = configProvider.Get<MobileConfig>();
-            _mobileMoon = Object.FindAnyObjectByType<MobileMoon>();
+            _mobileMoon = mobileMoon;
         }
 
         public void HandleInput(InputData data)
         {
-            data.VerticalInput = _mobileMoon.slider.value;
+            data.VerticalInput = _mobileMoon.GetSliderValue;
 
             _currentOrientation = Screen.orientation;
 

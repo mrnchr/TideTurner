@@ -6,6 +6,9 @@ namespace Muchachos.TideTurner.Runtime.UI
 {
     public class StartButton : MonoBehaviour
     {
+        // DEBUG.
+        [SerializeField] private bool isMobileScene;
+        
         private ISceneLoader _sceneLoader;
 
         [Inject]
@@ -16,7 +19,7 @@ namespace Muchachos.TideTurner.Runtime.UI
 
         public void OnClick()
         {
-            _sceneLoader.LoadScene(Application.isMobilePlatform ? SceneType.MobileLevel : SceneType.PCLevel);
+            _sceneLoader.LoadScene(Application.isMobilePlatform || isMobileScene ? SceneType.MobileLevel : SceneType.PCLevel);
         }
     }
 }

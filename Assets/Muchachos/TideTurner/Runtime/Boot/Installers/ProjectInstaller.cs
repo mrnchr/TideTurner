@@ -4,6 +4,7 @@ using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Core.GameFsm;
 using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Core.SceneLoading;
+using Muchachos.TideTurner.Runtime.Mobile;
 using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -13,14 +14,15 @@ namespace Muchachos.TideTurner.Runtime.Boot
 {
     public class ProjectInstaller : MonoInstaller
     {
-        [SerializeField]
-        private ConfigProvider _configProvider;
+        [SerializeField] private ConfigProvider _configProvider;
 
-        [SerializeField]
-        private AudioMixer _mixer;
+        [SerializeField] private AudioMixer _mixer;
 
-        [SerializeField]
-        private ButtonSoundPlayer _soundPlayer;
+        [SerializeField] private ButtonSoundPlayer _soundPlayer;
+        
+        [SerializeField] private MobileMoon _mobileMoon;
+
+        [SerializeField] private bool _isMobileControll;
 
         public override void InstallBindings()
         {
@@ -40,6 +42,9 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindProjectInitializer();
 
             BindMobileInitializer();
+
+            Container.BindInstance(_mobileMoon).AsSingle();
+            Container.Bind<YandexGamesIntegration>().AsSingle();
         }
 
         private void BindInputController()
@@ -51,20 +56,19 @@ namespace Muchachos.TideTurner.Runtime.Boot
 
         private void BindInputHandler()
         {
-            if (Application.isMobilePlatform)
+            if (_isMobileControll || Application.isMobilePlatform) //(Application.isMobilePlatform)
             {
                 Container
                     .Bind<IInputHandler>()
                     .To<MobileInputHandler>()
                     .AsSingle();
+                return;
             }
-            else
-            {
-                Container
-                    .Bind<IInputHandler>()
-                    .To<PCInputHandler>()
-                    .AsSingle();
-            }
+
+            Container
+                .Bind<IInputHandler>()
+                .To<PCInputHandler>()
+                .AsSingle();
         }
 
         private void BindMobileInitializer()

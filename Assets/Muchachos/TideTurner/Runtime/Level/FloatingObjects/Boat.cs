@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Muchachos.TideTurner.Runtime.Core;
+﻿using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
 using Muchachos.TideTurner.Runtime.Physics;
 using UnityEngine;
@@ -8,26 +7,17 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
 {
     public class Boat : MonoBehaviour, ILevelUpdatable, IUpdatable
     {
-        [SerializeField]
-        private SoundPlayer _sound;
+        [SerializeField] private SoundPlayer _sound;
 
-        [Range(30, 180)]
-        [SerializeField]
-        private int deathAngle = 45;
+        [Range(30, 180)] [SerializeField] private int deathAngle = 45;
 
-        [Range(1, 2)]
-        [SerializeField]
-        private float deathHeight = 1;
+        [Range(1, 2)] [SerializeField] private float deathHeight = 1;
 
-        [Range(2, 5)]
-        [SerializeField]
-        private float deathGravity = 3;
+        [Range(2, 5)] [SerializeField] private float deathGravity = 3;
 
-        [SerializeField]
-        private float _deathForce;
+        [SerializeField] private float _deathForce;
 
-        [SerializeField]
-        private FloatingBody _body;
+        [SerializeField] private FloatingBody _body;
 
         private BoatSpawn _spawn;
         private Rigidbody2D _rb;

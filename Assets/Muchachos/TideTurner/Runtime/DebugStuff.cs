@@ -13,12 +13,11 @@ namespace Muchachos.TideTurner.Runtime
     
         private void OnEnable()
         {
-            if (_isEnabled == false)
-                return;
-        
             Application.logMessageReceived += Log;
 
-        
+            if (!_isEnabled)
+                return;
+            
             StartCoroutine(StartLog());
         }
 
@@ -29,10 +28,15 @@ namespace Muchachos.TideTurner.Runtime
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                _isEnabled = !_isEnabled;
-            }
+            if (!Input.GetKeyDown(KeyCode.P)) 
+                return;
+            
+            _isEnabled = !_isEnabled;
+                
+            if (_isEnabled)
+                StartCoroutine(StartLog());
+            else
+                StopCoroutine(StartLog());
         }
     
         private IEnumerator StartLog()

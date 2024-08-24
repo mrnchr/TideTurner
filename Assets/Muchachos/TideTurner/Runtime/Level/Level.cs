@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Muchachos.TideTurner.Runtime.Core.SceneLoading;
 using Muchachos.TideTurner.Runtime.Level.FloatingObjects;
@@ -14,6 +15,8 @@ namespace Muchachos.TideTurner.Runtime.Level
     {
         [SerializeField] private float deathDelay = 1f;
 
+        public event Action OnLose;
+
         private LevelStateMachine _levelMachine;
         private AbstractMoonData _moonData;
         private AbstractMoon _moon;
@@ -24,12 +27,17 @@ namespace Muchachos.TideTurner.Runtime.Level
         private Coroutine _coroutine;
         private ISceneLoader _sceneLoader;
         private CheckPointHandler _handler;
+        private YandexGamesIntegration _yandexGamesIntegration;
     
         [Inject]
-        public void Construct(ISceneLoader sceneLoader, LevelStateMachine levelMachine)
+        public void Construct(ISceneLoader sceneLoader, LevelStateMachine levelMachine, YandexGamesIntegration yaIntegration)
         {
             _sceneLoader = sceneLoader;
             _levelMachine = levelMachine;
+            _yandexGamesIntegration = yaIntegration;
+
+            OnLose += _yandexGamesIntegration.CallAdvWindow;
+            OnLose += _yandexGamesIntegration.CallRateGameWindow;
         }
 
         public void Construct(AbstractMoonData moonData,
@@ -99,6 +107,8 @@ namespace Muchachos.TideTurner.Runtime.Level
 
             _boat.SetLoseState();
             _coroutine = StartCoroutine(StartDeathTimer());
+            
+            OnLose?.Invoke();
         }
 
         public bool IsLose() => _levelMachine.CurrentState is LoseLevelState || _coroutine != null;
@@ -118,6 +128,18 @@ namespace Muchachos.TideTurner.Runtime.Level
                 return;
 
             _levelMachine.ChangeState<WinLevelState>();
+        }
+
+        private void OnDisable()
+        {
+            OnLose -= _yandexGamesIntegration.CallAdvWindow;
+            OnLose -= _yandexGamesIntegration.CallRateGameWindow;
+
+            MobileMoon mobileMoon = _moon as MobileMoon;
+            if (mobileMoon)
+            {
+                mobileMoon.DisableCanvas();
+            }
         }
     }
 }

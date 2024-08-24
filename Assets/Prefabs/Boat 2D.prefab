@@ -101,12 +101,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3832442706029602182}
-  - component: {fileID: 3832442706029602187}
   - component: {fileID: 3832442706029602181}
   - component: {fileID: 3832442706029602180}
   - component: {fileID: 1440424182457667581}
   - component: {fileID: 7192857702963397703}
   - component: {fileID: 6388295546423732447}
+  - component: {fileID: 3832442706029602187}
   m_Layer: 0
   m_Name: Boat 2D
   m_TagString: Boat
@@ -135,24 +135,6 @@ Transform:
   - {fileID: 2419227626814023186}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3832442706029602187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3832442706029602183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d25a8f2fa4b4567951a8508d3834c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sound: {fileID: 7192857702963397703}
-  deathAngle: 80
-  deathHeight: 1.4
-  deathGravity: 5
-  _deathForce: 2.77
-  _body: {fileID: 6388295546423732447}
 --- !u!50 &3832442706029602181
 Rigidbody2D:
   serializedVersion: 4
@@ -356,6 +338,24 @@ MonoBehaviour:
   _height: 1.8
   _lightness: 3
   _centerOfVolume: {fileID: 2419227626814023186}
+--- !u!114 &3832442706029602187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3832442706029602183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d25a8f2fa4b4567951a8508d3834c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: 7192857702963397703}
+  deathAngle: 80
+  deathHeight: 1.4
+  deathGravity: 5
+  _deathForce: 2.77
+  _body: {fileID: 6388295546423732447}
 --- !u!1 &3832442707743161540
 GameObject:
   m_ObjectHideFlags: 0

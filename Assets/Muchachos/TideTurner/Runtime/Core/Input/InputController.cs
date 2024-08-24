@@ -14,7 +14,7 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
         [HideReferencePicker]
         [ReadOnly]
         public InputData Data { get; } = new InputData();
-        
+
         public bool IsPaused { get; set; }
 
         public InputController(IInputHandler handler)
@@ -30,7 +30,7 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
         public void HandleInput()
         {
             _handler.HandleInput(Data);
-            
+
             if (IsPaused)
             {
                 bool paused = Data.IsPause;

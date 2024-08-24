@@ -16,17 +16,13 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
         private BarrelSpawn[] _spawns;
 
         [Inject]
-        public void Construct(IBarrelFactory factory)
+        public void Construct(IBarrelFactory factory, BarrelSpawn[] spawns)
         {
             _factory = factory;
-        }
-
-        public void Construct(BarrelSpawn[] spawns)
-        {
             _spawns = spawns;
         }
 
-        public void Init()
+        public void Start()
         {
             foreach (BarrelSpawn spawn in _spawns)
             {

@@ -3,11 +3,15 @@ using Muchachos.TideTurner.Runtime.Level.FloatingObjects;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
 using Muchachos.TideTurner.Runtime.Mobile;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime
 {
     public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
     {
+        private const float Half = 1f / 2f;
+        private const float Portraitfov = 12f, Normalfov = 5.4f;
+        
         [SerializeField] private Camera childCamera;
     
         [Range(0, 1)] [SerializeField] private float _screenRate;
@@ -15,15 +19,16 @@ namespace Muchachos.TideTurner.Runtime
 
         [Range(0.001f, 0.01f)][SerializeField] private float _approximation;
 
-        private const float HALF = 1f / 2f;
         private Boat _boat;
         private Vector3 _position;
         private Camera _camera;
         private Coroutine _coroutine;
-        private const float Portraitfov = 12f, Normalfov = 5.4f;
+        
+        [Inject]
         public void Construct(Boat boat)
         {
             _boat = boat;
+            
             _camera = GetComponent<Camera>();
         }
 
@@ -70,8 +75,8 @@ namespace Muchachos.TideTurner.Runtime
         {
             var view = _camera.WorldToViewportPoint(_boat.transform.position);
             Vector2 view2d = view;
-            view2d -= Vector2.one * HALF;
-            return view2d.y / HALF;
+            view2d -= Vector2.one * Half;
+            return view2d.y / Half;
         }
 
         private IEnumerator MoveToBoat()

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.Savings
 {
@@ -9,13 +10,12 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
         private int _lastCheckIndex;
         private Level _level;
 
+        [Inject]
         public void Construct(CheckPoint[] checks, Level level)
         {
-            _checks = new List<CheckPoint>(checks);
             _level = level;
-
-            foreach (CheckPoint check in checks)
-                check.Construct(this);
+            
+            _checks = new List<CheckPoint>(checks);
         }
 
         public void Init()

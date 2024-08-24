@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using Muchachos.TideTurner.Runtime.Core;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon
 {
     public class Cannon : MonoBehaviour
     {
-        private static readonly int _attack = Animator.StringToHash("Attack");
+        private static readonly int Attack = Animator.StringToHash("Attack");
     
         [SerializeField] private Transform _ballSpawn;
         [Range(0f, 25f)] [SerializeField] private float _ballSpeed;
@@ -18,6 +19,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon
 
         private BallPool _pool;
 
+        [Inject]
         public void Construct(BallPool pool)
         {
             _pool = pool;
@@ -34,7 +36,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon
             while (true)
             {
                 shotSoundPlayer.SetSoundState(SoundState.Play);
-                _animator.SetTrigger(_attack);
+                _animator.SetTrigger(Attack);
                 _pool.Pop(_ballSpawn, _ballSpeed);
 
                 yield return new WaitForSeconds(_shotDelay);

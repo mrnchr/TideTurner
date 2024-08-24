@@ -1,7 +1,9 @@
-﻿using Muchachos.TideTurner.Runtime.Core;
+﻿using System;
+using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
 using Muchachos.TideTurner.Runtime.Physics;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
 {
@@ -19,24 +21,25 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
 
         [SerializeField] private FloatingBody _body;
 
+        public Action OnLose;
+
         private BoatSpawn _spawn;
         private Rigidbody2D _rb;
         private WaterMovement _waterMovement;
-        private Level _level;
         private bool _isReset;
-
-        private void Awake()
-        {
-            _level = FindAnyObjectByType<Level>();
-            _rb = GetComponent<Rigidbody2D>();
-            _rb.drag = 1;
-            _rb.angularDrag = 1;
-        }
-
+        
+        [Inject]
         public void Construct(BoatSpawn spawn, WaterMovement waterMovement)
         {
             _spawn = spawn;
             _waterMovement = waterMovement;
+        }
+
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody2D>();
+            _rb.drag = 1;
+            _rb.angularDrag = 1;
         }
 
         public void Init()
@@ -68,13 +71,13 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
 
         private void Kill()
         {
-            if (_isReset == false)
+            if (!_isReset)
                 return;
 
             if (Vector3.Angle(Vector3.up, transform.up) > deathAngle ||
                 _waterMovement.GetWaterLevel().position.y - deathHeight > transform.position.y)
             {
-                _level.Lose();
+                OnLose?.Invoke();
                 _isReset = false;
             }
         }

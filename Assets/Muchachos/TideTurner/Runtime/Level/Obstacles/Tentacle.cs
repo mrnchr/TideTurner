@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.Obstacles
 {
     public class Tentacle : MonoBehaviour, ILevelUpdatable, IUpdatable
     {
-        private static readonly int _isShownVar = Animator.StringToHash("IsShown");
-        private static readonly int _attack = Animator.StringToHash("Attack");
+        private static readonly int IsShownVar = Animator.StringToHash("IsShown");
+        private static readonly int Attack = Animator.StringToHash("Attack");
 
         [SerializeField] private Animator _animator;
         [SerializeField] private float _attackDelay;
@@ -16,6 +17,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
         private bool _isShown;
         private bool _inWater;
 
+        [Inject]
         public void Construct(Water water)
         {
             _water = water;
@@ -38,7 +40,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
 
         private void Show(bool value)
         {
-            _animator.SetBool(_isShownVar, _isShown);
+            _animator.SetBool(IsShownVar, _isShown);
 
             if (value)
                 StartCoroutine(AttackRoutine());
@@ -49,7 +51,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
             yield return new WaitForSeconds(_attackDelay);
             while (_isShown)
             {
-                _animator.SetTrigger(_attack);
+                _animator.SetTrigger(Attack);
                 yield return new WaitForSeconds(_attackDelay);
             }
         }

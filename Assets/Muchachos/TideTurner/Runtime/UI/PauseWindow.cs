@@ -15,16 +15,13 @@ namespace Muchachos.TideTurner.Runtime.UI
         private Level.Level _level;
 
         [Inject]
-        public void Construct(LevelStateMachine levelMachine, IInputController input)
+        public void Construct(LevelStateMachine levelMachine, Level.Level level, IInputController input)
         {
             _levelMachine = levelMachine;
             _input = input;
+            _level = level;
+                
             _input.OnInputHandled += HandleInput;
-        }
-
-        public void Construct()
-        {
-            _level = FindAnyObjectByType<Level.Level>();
         }
 
         private void OnDestroy()

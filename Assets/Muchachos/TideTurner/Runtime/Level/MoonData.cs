@@ -19,6 +19,7 @@ namespace Muchachos.TideTurner.Runtime.Level
         public void Construct(IInputController input)
         {
             _input = input;
+            
             _input.OnInputHandled += Move;
         }
     

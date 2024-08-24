@@ -9,6 +9,12 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle
         private readonly List<ILevelUpdatable> _updatables = new List<ILevelUpdatable>();
         private bool _isPaused;
 
+        [Inject]
+        public void Construct(IEnumerable<ILevelUpdatable> updatable)
+        {
+            _updatables.AddRange(updatable);
+        }
+
         public void Add(ILevelUpdatable updatable)
         {
             _updatables.Add(updatable);

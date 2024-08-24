@@ -27,11 +27,15 @@ public class YandexGamesIntegration
 
     public void CallRateGameWindow()
     {
+#if UNITY_WEBGL
         RateGame();
+#endif
     }
 
     public void CallAdvWindow()
     {
+#if UNITY_WEBGL
         ShowAdv();
+#endif
     }
 }

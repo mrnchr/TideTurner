@@ -11,13 +11,9 @@ namespace Muchachos.TideTurner.Runtime.Level
         private SoundRestarter _sound;
 
         [Inject]
-        public void Construct(ILevelUpdater updater)
+        public void Construct(ILevelUpdater updater, SoundRestarter sound)
         {
             _updater = updater;
-        }
-
-        public void Construct(SoundRestarter sound)
-        {
             _sound = sound;
         }
 

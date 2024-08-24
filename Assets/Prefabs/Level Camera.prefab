@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1775923081860010572}
   - component: {fileID: 1775923081860010573}
   - component: {fileID: 1775923081860010570}
-  - component: {fileID: 1775923081860010575}
   - component: {fileID: 817802508}
+  - component: {fileID: 1775923081860010575}
   m_Layer: 0
   m_Name: Level Camera
   m_TagString: MainCamera
@@ -95,22 +95,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775923081860010571}
   m_Enabled: 1
---- !u!114 &1775923081860010575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775923081860010571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0558a55fd0434d1eba277b5a27339b70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  childCamera: {fileID: 0}
-  _screenRate: 0.3
-  _speed: 2
-  _approximation: 0.005
 --- !u!114 &817802508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +139,22 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1775923081860010575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775923081860010571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0558a55fd0434d1eba277b5a27339b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childCamera: {fileID: 6921961116992542612}
+  _screenRate: 0.3
+  _speed: 2
+  _approximation: 0.005
 --- !u!1 &5913554515195016550
 GameObject:
   m_ObjectHideFlags: 0

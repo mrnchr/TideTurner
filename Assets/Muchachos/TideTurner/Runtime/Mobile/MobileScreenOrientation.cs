@@ -15,17 +15,13 @@ namespace Muchachos.TideTurner.Runtime.Mobile
         private IInputController _input;
 
         [Inject]
-        public void Construct(IInputController input)
+        public void Construct(IInputController input, AbstractMoonData data, CameraMovement cameraMovement)
         {
             _input = input;
-            _input.OnInputHandled += UpdateLogic;
-        }
-
-        public void Construct(AbstractMoonData data, CameraMovement cameraMovement)
-        {
             _data = data;
             _cameraMovement = cameraMovement;
-        
+            
+            _input.OnInputHandled += UpdateLogic;
             OnScreenOrientationChange += _data.Init;
         }
     

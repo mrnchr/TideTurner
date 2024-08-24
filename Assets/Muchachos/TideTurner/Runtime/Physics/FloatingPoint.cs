@@ -4,15 +4,12 @@ namespace Muchachos.TideTurner.Runtime.Physics
 {
     public class FloatingPoint : MonoBehaviour
     {
-        [SerializeField]
-        private FloatingBody _body;
+        [SerializeField] private FloatingBody _body;
 
-        [Range(0, 25)]
-        [SerializeField]
-        private float _floatingSpeed = 1f;
+        [Range(0, 25)] [SerializeField] private float _floatingSpeed = 1f;
 
         public bool InWater { get; set; }
-        
+
         public void UpdateFloatingForce()
         {
             float depthRate = _body.GetVolumeRate(transform.position);

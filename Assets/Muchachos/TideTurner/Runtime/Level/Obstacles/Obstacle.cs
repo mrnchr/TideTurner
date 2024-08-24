@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.Obstacles
 {
@@ -9,6 +10,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
 
         private Level _level;
 
+        [Inject]
         public void Construct(Level level)
         {
             _level = level;
@@ -16,13 +18,13 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("Boat"))
+            if (other.gameObject.CompareTag(TagStorage.BoatTag))
                 OnCollided();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag("Boat"))
+            if (other.gameObject.CompareTag(TagStorage.BoatTag))
                 OnCollided();
         }
 

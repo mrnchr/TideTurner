@@ -15,6 +15,7 @@ namespace Muchachos.TideTurner.Runtime.Level
     {
         [SerializeField] private float deathDelay = 1f;
 
+        public event Action OnReborn;
         public event Action OnLose;
 
         private LevelStateMachine _levelMachine;
@@ -22,32 +23,27 @@ namespace Muchachos.TideTurner.Runtime.Level
         private AbstractMoon _moon;
         private Boat _boat;
         private Water _water;
-        private Cannon[] _cannons;
         private CameraMovement _cameraMovement;
         private Coroutine _coroutine;
         private ISceneLoader _sceneLoader;
         private CheckPointHandler _handler;
+        private Cannon[] _cannons;
         private YandexGamesIntegration _yandexGamesIntegration;
     
         [Inject]
-        public void Construct(ISceneLoader sceneLoader, LevelStateMachine levelMachine, YandexGamesIntegration yaIntegration)
-        {
-            _sceneLoader = sceneLoader;
-            _levelMachine = levelMachine;
-            _yandexGamesIntegration = yaIntegration;
-
-            OnLose += _yandexGamesIntegration.CallAdvWindow;
-            OnLose += _yandexGamesIntegration.CallRateGameWindow;
-        }
-
-        public void Construct(AbstractMoonData moonData,
+        public void Construct(ISceneLoader sceneLoader, LevelStateMachine levelMachine,
+            AbstractMoonData moonData,
             AbstractMoon abstractMoon,
             Boat boat,
             Water water,
-            Cannon[] cannons,
             CameraMovement cameraMovement,
-            CheckPointHandler handler)
+            CheckPointHandler handler,
+            Cannon[] cannons,
+            YandexGamesIntegration yaIntegration)
         {
+            _sceneLoader = sceneLoader;
+            _levelMachine = levelMachine;
+            
             _moonData = moonData;
             _moon = abstractMoon;
             _boat = boat;
@@ -55,6 +51,13 @@ namespace Muchachos.TideTurner.Runtime.Level
             _cannons = cannons;
             _cameraMovement = cameraMovement;
             _handler = handler;
+            
+            _yandexGamesIntegration = yaIntegration;
+
+            OnReborn += _yandexGamesIntegration.CallAdvWindow;
+            OnReborn += _yandexGamesIntegration.CallRateGameWindow;
+
+            _boat.OnLose += Lose;
         }
 
         public void Init()
@@ -73,6 +76,8 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         public void Reborn()
         {
+            OnReborn?.Invoke();
+            
             Vector3 spawnPosition = _handler.GetSpawnPosition();
         
             _moonData.Init();
@@ -132,8 +137,10 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         private void OnDisable()
         {
-            OnLose -= _yandexGamesIntegration.CallAdvWindow;
-            OnLose -= _yandexGamesIntegration.CallRateGameWindow;
+            OnReborn -= _yandexGamesIntegration.CallAdvWindow;
+            OnReborn -= _yandexGamesIntegration.CallRateGameWindow;
+            
+            _boat.OnLose -= Lose;
 
             MobileMoon mobileMoon = _moon as MobileMoon;
             if (mobileMoon)

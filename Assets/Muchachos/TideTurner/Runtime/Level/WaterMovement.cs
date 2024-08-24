@@ -21,8 +21,8 @@ namespace Muchachos.TideTurner.Runtime.Level
     
         private float[] _initialVertexPosZ;
         private float _heightStep = 1f;
-        private float _offset = 0f;
-        private float _waterLevelDir = 0;
+        private float _offset;
+        private float _waterLevelDir;
     
         private void Awake()
         {

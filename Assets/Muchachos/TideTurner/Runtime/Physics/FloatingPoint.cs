@@ -8,7 +8,7 @@ namespace Muchachos.TideTurner.Runtime.Physics
 
         [Range(0, 25)] [SerializeField] private float _floatingSpeed = 1f;
 
-        public bool InWater { get; set; }
+        public bool InWater { get; private set; }
 
         public void UpdateFloatingForce()
         {

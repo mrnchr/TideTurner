@@ -89,5 +89,17 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
             _rb.gravityScale = deathGravity;
             _sound.SetSoundState(SoundState.Play);
         }
+
+        #if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (!_waterMovement)
+                return;
+            
+            var leftCorner = new Vector2(-100, _waterMovement.GetWaterLevel().position.y - deathHeight);
+            var rightCorner = new Vector2(100, _waterMovement.GetWaterLevel().position.y - deathHeight);
+            Debug.DrawLine(leftCorner, rightCorner, Color.red);
+        }
+        #endif
     }
 }

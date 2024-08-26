@@ -776,10 +776,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6572025850597094513, guid: 03299a70b3c232143b2924d66cefc182, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6572025850597094513, guid: 03299a70b3c232143b2924d66cefc182, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
       objectReference: {fileID: 0}
@@ -1413,6 +1409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca0a2c81ed8cb749bd93856c2c0c8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMobileScene: 0
 --- !u!224 &7431466129509751880 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6572025850597094513, guid: 03299a70b3c232143b2924d66cefc182, type: 3}

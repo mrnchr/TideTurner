@@ -44,11 +44,6 @@ namespace Muchachos.TideTurner.Runtime.Boot
         [SerializeField] private SharkContainer _sharkContainer;
         [Header("Obstacles")] 
         [SerializeField] private BallPool _ballPool;
-        [SerializeField] private Obstacle[] _obstacles;
-        [SerializeField] private Cannon[] _cannons;
-        [SerializeField] private WaterBeing[] _waterBeings;
-        [SerializeField] private SharkSpawn[] _sharkSpawns;
-        [SerializeField] private BarrelSpawn[] _barrelSpawns;
         [SerializeField] private Tentacle[] _tentacles;
 
         public override void InstallBindings()
@@ -66,13 +61,13 @@ namespace Muchachos.TideTurner.Runtime.Boot
             
             Container.BindInstance(_cameraMovement).AsSingle();
             
-            Container.BindInstance(_level).AsSingle().WithArguments(_cannons);
+            Container.BindInstance(_level).AsSingle();
             
             Container.BindInstance(_ballPool).AsSingle();
             
-            Container.BindInstance(_sharkContainer).AsSingle().WithArguments(_sharkSpawns);
+            Container.BindInstance(_sharkContainer).AsSingle();
             
-            Container.BindInstance(_barrelContainer).AsSingle().WithArguments(_barrelSpawns);
+            Container.BindInstance(_barrelContainer).AsSingle();
             
             Container.BindInstance(_checkPointHandler).AsSingle();
             

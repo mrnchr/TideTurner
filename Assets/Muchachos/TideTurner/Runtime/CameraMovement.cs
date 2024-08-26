@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using Muchachos.TideTurner.Runtime.Level.FloatingObjects;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
-using Muchachos.TideTurner.Runtime.Mobile;
 using UnityEngine;
 using Zenject;
 
@@ -10,25 +9,23 @@ namespace Muchachos.TideTurner.Runtime
     public class CameraMovement : MonoBehaviour, ILevelUpdatable, IUpdatable
     {
         private const float Half = 1f / 2f;
-        private const float Portraitfov = 12f, Normalfov = 5.4f;
-        
-        [SerializeField] private Camera childCamera;
-    
+
         [Range(0, 1)] [SerializeField] private float _screenRate;
         [Range(0, 5)] [SerializeField] private float _speed = 2;
 
-        [Range(0.001f, 0.01f)][SerializeField] private float _approximation;
+        [Range(0.001f, 0.01f)] [SerializeField]
+        private float _approximation;
 
         private Boat _boat;
         private Vector3 _position;
         private Camera _camera;
         private Coroutine _coroutine;
-        
+
         [Inject]
         public void Construct(Boat boat)
         {
             _boat = boat;
-            
+
             _camera = GetComponent<Camera>();
         }
 
@@ -50,21 +47,6 @@ namespace Muchachos.TideTurner.Runtime
                 _coroutine = StartCoroutine(MoveToBoat());
         }
 
-        public void ChangeOrthographicSize(OrthographicSizeType type)
-        {
-            switch (type)
-            {
-                case OrthographicSizeType.PORTAIT:
-                    _camera.orthographicSize = Portraitfov;
-                    childCamera.orthographicSize = Portraitfov;
-                    break;
-                default:
-                    _camera.orthographicSize = Normalfov;
-                    childCamera.orthographicSize = Normalfov;
-                    break;
-            }
-        }
-
         private bool IsOutOfRate()
         {
             float rate = GetViewRate();
@@ -84,7 +66,9 @@ namespace Muchachos.TideTurner.Runtime
             float diffY = _boat.transform.position.y - transform.position.y;
             while (Mathf.Abs(diffY) > _approximation)
             {
-                var posY = transform.position.y + Mathf.Sign(diffY) * Mathf.Clamp(_speed * Time.deltaTime, 0, Mathf.Abs(diffY));
+                var posY = transform.position.y +
+                           Mathf.Sign(diffY) * Mathf.Clamp(_speed * Time.deltaTime, 0, Mathf.Abs(diffY));
+                
                 SetPositionY(posY);
                 yield return null;
                 diffY = _boat.transform.position.y - transform.position.y;

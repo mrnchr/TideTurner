@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1775923081860010570}
   - component: {fileID: 817802508}
   - component: {fileID: 1775923081860010575}
+  - component: {fileID: 8125971218895437103}
   m_Layer: 0
   m_Name: Level Camera
   m_TagString: MainCamera
@@ -82,7 +83,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -151,10 +152,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0558a55fd0434d1eba277b5a27339b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  childCamera: {fileID: 6921961116992542612}
   _screenRate: 0.3
   _speed: 2
   _approximation: 0.005
+--- !u!114 &8125971218895437103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775923081860010571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2163a40b2121045bd857107a581061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultResolution: {x: 1920, y: 1080}
+  _widthOrHeight: 0
 --- !u!1 &5913554515195016550
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +180,7 @@ GameObject:
   - component: {fileID: 5437719304735934014}
   - component: {fileID: 6921961116992542612}
   - component: {fileID: 817802509}
+  - component: {fileID: 7039275858408732293}
   m_Layer: 0
   m_Name: Camera3D
   m_TagString: Untagged
@@ -234,7 +249,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -283,3 +298,17 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &7039275858408732293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5913554515195016550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2163a40b2121045bd857107a581061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultResolution: {x: 1920, y: 1080}
+  _widthOrHeight: 0

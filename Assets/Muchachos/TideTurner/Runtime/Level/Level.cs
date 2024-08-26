@@ -14,6 +14,7 @@ namespace Muchachos.TideTurner.Runtime.Level
     public class Level : MonoBehaviour
     {
         [SerializeField] private float deathDelay = 1f;
+        [SerializeField] private Cannon[] _cannons;
 
         public event Action OnReborn;
         public event Action OnLose;
@@ -27,7 +28,6 @@ namespace Muchachos.TideTurner.Runtime.Level
         private Coroutine _coroutine;
         private ISceneLoader _sceneLoader;
         private CheckPointHandler _handler;
-        private Cannon[] _cannons;
         private YandexGamesIntegration _yandexGamesIntegration;
     
         [Inject]
@@ -38,7 +38,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             Water water,
             CameraMovement cameraMovement,
             CheckPointHandler handler,
-            Cannon[] cannons,
             YandexGamesIntegration yaIntegration)
         {
             _sceneLoader = sceneLoader;
@@ -48,7 +47,6 @@ namespace Muchachos.TideTurner.Runtime.Level
             _moon = abstractMoon;
             _boat = boat;
             _water = water;
-            _cannons = cannons;
             _cameraMovement = cameraMovement;
             _handler = handler;
             

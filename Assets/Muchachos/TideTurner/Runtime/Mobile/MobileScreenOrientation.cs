@@ -38,6 +38,7 @@ namespace Muchachos.TideTurner.Runtime.Mobile
             Cursor.lockState = CursorLockMode.Confined;
         }
     
+        // todo: delete?
         private void HandleOrientationData()
         {
             if (Screen.orientation != _temp)

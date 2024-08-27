@@ -4,6 +4,7 @@
     {
         Menu = 1,
         PCLevel = Menu + 1,
-        MobileLevel = PCLevel + 1
+        MobileLevel = PCLevel + 1,
+        Boot = MobileLevel + 1
     }
 }

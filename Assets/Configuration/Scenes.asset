@@ -19,3 +19,5 @@ MonoBehaviour:
     Scene: Assets/Scenes/Level 1.unity
   - Id: 3
     Scene: Assets/Scenes/MobileScene.unity
+  - Id: 4
+    Scene: Assets/Scenes/Boot.unity

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Muchachos.TideTurner.Runtime.Boot.Initializers;
+using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Level;
 using Muchachos.TideTurner.Runtime.Level.FloatingObjects;
 using Muchachos.TideTurner.Runtime.Level.LevelFsm;
@@ -45,9 +46,14 @@ namespace Muchachos.TideTurner.Runtime.Boot
         [Header("Obstacles")] 
         [SerializeField] private BallPool _ballPool;
         [SerializeField] private Tentacle[] _tentacles;
+        
+        [SerializeField] private bool _isMobileControl;
 
         public override void InstallBindings()
         {
+            BindInputController();
+            BindInputHandler();
+            
             Container.BindInstance(_soundRestarter).AsSingle();
 
             Container.BindInstance(_moon).AsSingle();
@@ -81,6 +87,29 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindBarrelFactory();
 
             BindLevelInitializer();
+        }
+        
+        private void BindInputController()
+        {
+            Container
+                .BindInterfacesTo<InputController>()
+                .AsSingle();
+        }
+        
+        private void BindInputHandler()
+        {
+            if (_isMobileControl || Application.isMobilePlatform)
+            {
+                Container
+                    .BindInterfacesAndSelfTo<MobileInputHandler>()
+                    .AsSingle();
+                return;
+            }
+
+            Container
+                .Bind<IInputHandler>()
+                .To<PCInputHandler>()
+                .AsSingle();
         }
 
         private void BindBarrelFactory()

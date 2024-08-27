@@ -13,7 +13,7 @@ namespace Muchachos.TideTurner.Runtime.Mobile
     
         public override void Init()
         {
-            transform.localScale = Vector3.one;
+            //transform.localScale = Vector3.one;
 
             if (Application.isMobilePlatform || _isMobileScene)
                 _canvas.enabled = true;

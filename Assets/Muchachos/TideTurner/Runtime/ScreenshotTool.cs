@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScreenShotTool : MonoBehaviour
+public class ScreenshotTool : MonoBehaviour
 {
     [SerializeField] private string _screenShotPath;
 

@@ -29,7 +29,7 @@ namespace Muchachos.TideTurner.Runtime.Level
         private ISceneLoader _sceneLoader;
         private CheckPointHandler _handler;
         private YandexGamesIntegration _yandexGamesIntegration;
-    
+
         [Inject]
         public void Construct(ISceneLoader sceneLoader, LevelStateMachine levelMachine,
             AbstractMoonData moonData,
@@ -42,14 +42,14 @@ namespace Muchachos.TideTurner.Runtime.Level
         {
             _sceneLoader = sceneLoader;
             _levelMachine = levelMachine;
-            
+
             _moonData = moonData;
             _moon = abstractMoon;
             _boat = boat;
             _water = water;
             _cameraMovement = cameraMovement;
             _handler = handler;
-            
+
             _yandexGamesIntegration = yaIntegration;
 
             OnReborn += _yandexGamesIntegration.CallAdvWindow;
@@ -75,16 +75,16 @@ namespace Muchachos.TideTurner.Runtime.Level
         public void Reborn()
         {
             OnReborn?.Invoke();
-            
+
             Vector3 spawnPosition = _handler.GetSpawnPosition();
-        
+
             _moonData.Init();
             _moon.Init();
             _boat.SetPosition(spawnPosition);
             _boat.ResetLogic();
             _water.Movement.SetWaterLevel(spawnPosition);
             _cameraMovement.Init();
-        
+
             foreach (Cannon cannon in _cannons)
                 cannon.Init();
         }
@@ -110,7 +110,7 @@ namespace Muchachos.TideTurner.Runtime.Level
 
             _boat.SetLoseState();
             _coroutine = StartCoroutine(StartDeathTimer());
-            
+
             OnLose?.Invoke();
         }
 
@@ -137,14 +137,10 @@ namespace Muchachos.TideTurner.Runtime.Level
         {
             OnReborn -= _yandexGamesIntegration.CallAdvWindow;
             OnReborn -= _yandexGamesIntegration.CallRateGameWindow;
-            
+
             _boat.OnLose -= Lose;
 
-            MobileMoon mobileMoon = _moon as MobileMoon;
-            if (mobileMoon)
-            {
-                mobileMoon.DisableCanvas();
-            }
+            (_moon as MobileMoon)?.DisableCanvas();
         }
     }
 }

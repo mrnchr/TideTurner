@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 3942597848528839109}
   - component: {fileID: 1963841006817196289}
   - component: {fileID: 2866257719232166593}
+  - component: {fileID: 3832528287467290538}
   m_Layer: 0
   m_Name: MobileMoonScroll
   m_TagString: Untagged
@@ -256,7 +257,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -277,9 +278,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -302,6 +303,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3832528287467290538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000693513569898047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d1474eebeb4284b8be3ad72ca854df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 759080679260734742}
+  _canvas: {fileID: 3942597848528839109}
+  _isMobileScene: 0
 --- !u!1 &4136001637453809295
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +441,6 @@ GameObject:
   - component: {fileID: 3660912354792230979}
   - component: {fileID: 2765124729067816085}
   - component: {fileID: 3482078236451644724}
-  - component: {fileID: 5820774864462472583}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -442,7 +457,7 @@ RectTransform:
   m_GameObject: {fileID: 7126147614907876432}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5904796548019425704}
@@ -490,18 +505,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5820774864462472583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7126147614907876432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82d1474eebeb4284b8be3ad72ca854df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _slider: {fileID: 759080679260734742}
-  _canvas: {fileID: 3942597848528839109}
-  _isMobileScene: 0

@@ -20,13 +20,9 @@ namespace Muchachos.TideTurner.Runtime.Boot
 
         [SerializeField] private ButtonSoundPlayer _soundPlayer;
         
-        [SerializeField] private MobileMoon _mobileMoon;
-        
         [SerializeField] private GlobalSceneLoader _globalSceneLoader;
         [SerializeField] private BlackScreen _blackScreen;
-
-        [SerializeField] private bool _isMobileControll;
-
+        
         public override void InstallBindings()
         {
             BindConfigProvider();
@@ -36,8 +32,6 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindButtonSoundPlayer();
 
             BindSceneLoader();
-            BindInputHandler();
-            BindInputController();
 
             BindStateFactory();
             BindGameStateMachine();
@@ -45,36 +39,11 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindProjectInitializer();
 
             BindMobileInitializer();
-
-            Container.BindInstance(_mobileMoon).AsSingle();
+            
             Container.Bind<YandexGamesIntegration>().AsSingle();
 
             Container.BindInstance(_globalSceneLoader).AsSingle();
             Container.BindInstance(_blackScreen).AsSingle();
-        }
-
-        private void BindInputController()
-        {
-            Container
-                .BindInterfacesTo<InputController>()
-                .AsSingle();
-        }
-
-        private void BindInputHandler()
-        {
-            if (_isMobileControll || Application.isMobilePlatform)
-            {
-                Container
-                    .Bind<IInputHandler>()
-                    .To<MobileInputHandler>()
-                    .AsSingle();
-                return;
-            }
-
-            Container
-                .Bind<IInputHandler>()
-                .To<PCInputHandler>()
-                .AsSingle();
         }
 
         private void BindMobileInitializer()

@@ -1,6 +1,7 @@
 ﻿using Muchachos.TideTurner.Runtime.Configuration;
 using Muchachos.TideTurner.Runtime.Mobile;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Core.Input
 {
@@ -12,10 +13,11 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
         private ScreenOrientation _currentOrientation;
         private ScreenOrientation _lastOrientation;
         
-        public MobileInputHandler(IConfigProvider configProvider, MobileMoon mobileMoon)
+        [Inject]
+        public MobileInputHandler(IConfigProvider configProvider, AbstractMoon mobileMoon)
         {
             _config = configProvider.Get<MobileConfig>();
-            _mobileMoon = mobileMoon;
+            _mobileMoon = mobileMoon as MobileMoon;
         }
 
         public void HandleInput(InputData data)

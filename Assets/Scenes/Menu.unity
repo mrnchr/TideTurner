@@ -1521,7 +1521,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 226761099394455698, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1395225905744888239, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
       propertyPath: m_fontSize
@@ -1673,7 +1673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8120191430661647443, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8120191430661647443, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1681,7 +1681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8120191430661647443, guid: c805c29e58c5aec45b6eda93843bc5a9, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

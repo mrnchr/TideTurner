@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Russian 256x256_0: -3258131445993480846
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

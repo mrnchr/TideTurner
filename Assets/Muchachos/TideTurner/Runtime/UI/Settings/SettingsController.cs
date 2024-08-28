@@ -6,6 +6,9 @@ namespace Muchachos.TideTurner.Runtime.UI
 {
     public class SettingsController : IInitializable, ISettingsController
     {
+        private const float Max = 20;//1f;
+        private const float Min = -80;//0.0001f;
+        
         private readonly SettingsView _view;
         private readonly SettingsData _settings;
         private readonly IAudioMixerProvider _mixerProvider;
@@ -25,7 +28,7 @@ namespace Muchachos.TideTurner.Runtime.UI
             _view.SetMusicVolume(_settings.MusicVolume);
             _view.SetSoundVolume(_settings.SoundVolume);
             
-            UpdateMusicVolume(_settings.MusicVolume);
+            UpdateMusicVolume(-30f);
             UpdateSoundVolume(_settings.SoundVolume);
         }
 
@@ -36,19 +39,19 @@ namespace Muchachos.TideTurner.Runtime.UI
 
         public void UpdateMusicVolume(float value)
         {
-            _settings.MusicVolume = Mathf.Clamp(value, 0.0001f, 1);
+            _settings.MusicVolume = Mathf.Clamp(value, Min, Max);
             SetVolume(Idents.AudioMixerParameters.MUSIC_VOLUME, _settings.MusicVolume);
         }
 
         public void UpdateSoundVolume(float value)
         {
-            _settings.SoundVolume = Mathf.Clamp(value, 0.0001f, 1);
+            _settings.SoundVolume = Mathf.Clamp(value, Min, Max);
             SetVolume(Idents.AudioMixerParameters.SOUND_VOLUME, _settings.MusicVolume);
         }
 
         private void SetVolume(string volume, float value)
         {
-            _mixerProvider.Mixer.SetFloat(volume, Mathf.Log10(value) * 20);
+            _mixerProvider.Mixer.SetFloat(volume, value); //Mathf.Log10(value) * 20);
         }
     }
 }

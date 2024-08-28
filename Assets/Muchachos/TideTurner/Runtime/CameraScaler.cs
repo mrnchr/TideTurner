@@ -3,18 +3,17 @@ using UnityEngine;
 
 public class CameraScaler : MonoBehaviour
 {
+    private const float Portraitfov = 12f, Normalfov = 5.4f;
+    
     [SerializeField] private Vector2 _defaultResolution;
     [Range(0f, 1f)] [SerializeField] private float _widthOrHeight;
 
     private Camera _camera;
     private float _initialSize;
     private float _targetAspect;
-
     private float _initialFov;
     private float _horizontalFov = 120f;
     
-    private const float Portraitfov = 12f, Normalfov = 5.4f;
-
     private void Start()
     {
         _camera = GetComponent<Camera>();

@@ -1,5 +1,6 @@
 ﻿using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
 {
@@ -8,7 +9,8 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         private readonly LevelFreezer _freezer;
         private readonly LoseWindow _lose;
 
-        public LoseLevelState()
+        [Inject]
+        public LoseLevelState(LevelFreezer levelFreezer)
         {
             _freezer = Object.FindAnyObjectByType<LevelFreezer>();
             _lose = Object.FindAnyObjectByType<LoseWindow>();

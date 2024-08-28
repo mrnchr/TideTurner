@@ -2,36 +2,40 @@ mergeInto(LibraryManager.library, {
 
   Hello: function () {
     window.alert("Hello, world!");
-  },
+    window.addEventListener('scroll', function(event) {
+      window.scrollTo(0, 0);
+      event.preventDefault(); 
+    }, false);
+},
 
 RateGame : function(){
-ysdk.feedback.canReview()
-        .then(({ value, reason }) => {
-            if (value) {
-                ysdk.feedback.requestReview()
-                    .then(({ feedbackSent }) => {
-                        console.log(feedbackSent);
-                    })
-            } else {
-                console.log(reason)
-            }
-        })
+    ysdk.feedback.canReview()
+    .then(({ value, reason }) => {
+        if (value) {
+            ysdk.feedback.requestReview()
+            .then(({ feedbackSent }) => {
+                console.log(feedbackSent);
+            })
+        } else {
+            console.log(reason)
+        }
+    })
 },
 
 
 ShowAdv : function(){
-		ysdk.adv.showFullscreenAdv({
-        callbacks: {
+  ysdk.adv.showFullscreenAdv({
+    callbacks: {
         onClose: function(wasShown) {
-				console.log("-------------- closed -------");
+            console.log("-------------- closed -------");
         // some action after close
-      },
+        },
         onError: function(error) {
         // some action on error
-		console.log(error);
+          console.log(error);
       }
-    }
-		})
+  }
+})
 },
 
 

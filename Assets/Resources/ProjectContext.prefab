@@ -80,7 +80,6 @@ MonoBehaviour:
   _configProvider: {fileID: 11400000, guid: 93cd0a1ce32082641a1e3f01a8cc85b9, type: 2}
   _mixer: {fileID: 24100000, guid: baa1970a09314ba4ea3e5fed6da083b9, type: 2}
   _soundPlayer: {fileID: 1079800254833372760}
-  _mobileMoon: {fileID: 0}
   _globalSceneLoader: {fileID: 6764771258836726846}
   _blackScreen: {fileID: 6625344802800810664}
 --- !u!1 &8427262249060709731

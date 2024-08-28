@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Ru-eng_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: ad0bcc65cddedd24589e04a22b6c9598, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 8735678464
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86745538560
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 181989793792
+    m_Localized: Control
+    m_Metadata:
+      m_Items: []
+  - m_Id: 226067734528
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 267125776384
+    m_Localized: Loading...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 487129604096
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 575004467200
+    m_Localized: Sounds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 622387519488
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 761508388864
+    m_Localized: Mouse sens.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 926390673408
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12045217947648
+    m_Localized: Reborn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13233707540480
+    m_Localized: Drowned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14339552567296
+    m_Localized: Level completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15707487068160
+    m_Localized: Mouse movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15901947584512
+    m_Localized: Moving the moon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16260392804352
+    m_Localized: Mouse wheel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16296048582656
+    m_Localized: The approach/the distance of the moon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17448748179456
+    m_Localized: Lord of the Seas
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

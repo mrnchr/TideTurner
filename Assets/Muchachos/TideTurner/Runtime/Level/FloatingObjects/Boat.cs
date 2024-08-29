@@ -1,6 +1,7 @@
 ﻿using System;
 using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
+using Muchachos.TideTurner.Runtime.Level.Savings;
 using Muchachos.TideTurner.Runtime.Physics;
 using UnityEngine;
 using Zenject;
@@ -26,13 +27,18 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
         private BoatSpawn _spawn;
         private Rigidbody2D _rb;
         private WaterMovement _waterMovement;
+        private CheckPointHandler _handler;
+        private UserData _userData;
         private bool _isReset;
         
         [Inject]
-        public void Construct(BoatSpawn spawn, WaterMovement waterMovement)
+        public void Construct(BoatSpawn spawn, WaterMovement waterMovement, 
+            CheckPointHandler handler, UserData userData)
         {
             _spawn = spawn;
             _waterMovement = waterMovement;
+            _handler = handler;
+            _userData = userData;
         }
 
         private void Awake()
@@ -44,7 +50,9 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
 
         public void Init()
         {
-            SetPosition(_spawn.transform.position);
+            var spawnPos = _handler.GetSpawnPosition();
+
+            SetPosition(_userData.CurrentInd < 0 ? _spawn.transform.position : spawnPos);
 
             ResetLogic();
         }

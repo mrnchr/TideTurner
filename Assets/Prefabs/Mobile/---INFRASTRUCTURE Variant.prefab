@@ -267,7 +267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7373561938886979732, guid: 6c094231a8bdf9343afac477c5f0fc95, type: 3}
       propertyPath: _sharkSpawns.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7373561939919981802, guid: 6c094231a8bdf9343afac477c5f0fc95, type: 3}
       propertyPath: m_AnchorMax.x

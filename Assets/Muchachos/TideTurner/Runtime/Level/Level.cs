@@ -60,12 +60,16 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         public void Init()
         {
+            Vector3 spawnPosition = _handler.GetSpawnPosition();
+
             _moonData.Init();
             _moon.Init();
             _water.Init();
             _boat.Init();
             _cameraMovement.Init();
+            _water.Movement.SetWaterLevel(spawnPosition);
 
+            
             foreach (Cannon cannon in _cannons)
                 cannon.Init();
 

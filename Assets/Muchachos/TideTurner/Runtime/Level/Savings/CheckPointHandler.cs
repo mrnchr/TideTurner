@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -6,38 +7,46 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
 {
     public class CheckPointHandler : MonoBehaviour
     {
-        private List<CheckPoint> _checks;
-        private int _lastCheckIndex;
+        private const int DefaultCheckIndex = -1;
+
+        [SerializeField] private List<CheckPoint> _checks;
+
+        public event Action<int> OnNewCheckPoint;
+
+        private int _lastCheckIndex = DefaultCheckIndex;
         private Level _level;
+        private UserData _userData;
 
         [Inject]
-        public void Construct(CheckPoint[] checks, Level level)
+        public void Construct(Level level, UserData userData)
         {
             _level = level;
-            
-            _checks = new List<CheckPoint>(checks);
+            _userData = userData;
+
+            _lastCheckIndex = _userData.CurrentInd;
         }
 
         public void Init()
         {
             foreach (CheckPoint check in _checks)
                 check.IsChecked = false;
-            _lastCheckIndex = -1;
         }
 
         public void Check(CheckPoint check)
         {
             if (_level.IsLose())
                 return;
-        
+
             check.IsChecked = true;
             _lastCheckIndex++;
             _checks.Insert(_lastCheckIndex, check);
+
+            OnNewCheckPoint?.Invoke(_lastCheckIndex);
         }
 
         public bool WasCheckPoint()
         {
-            return _lastCheckIndex > -1;
+            return _lastCheckIndex > DefaultCheckIndex;
         }
 
         public Vector3 GetSpawnPosition()

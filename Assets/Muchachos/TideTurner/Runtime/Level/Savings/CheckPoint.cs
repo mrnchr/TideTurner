@@ -6,10 +6,10 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
     public class CheckPoint : MonoBehaviour
     {
         [SerializeField] private Transform _spawnPoint;
-        
+
         public bool IsChecked { get; set; }
         public Vector3 SpawnPosition => _spawnPoint.position;
-        
+
         private CheckPointHandler _handler;
 
         [Inject]

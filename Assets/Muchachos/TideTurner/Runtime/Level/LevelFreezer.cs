@@ -7,14 +7,14 @@ namespace Muchachos.TideTurner.Runtime.Level
 {
     public class LevelFreezer : MonoBehaviour
     {
-        private ILevelUpdater _updater;
-        private SoundRestarter _sound;
+        private ILevelUpdater _levelUpdater;
+        private SoundRestarter _soundRestarter;
 
         [Inject]
         public void Construct(ILevelUpdater updater, SoundRestarter sound)
         {
-            _updater = updater;
-            _sound = sound;
+            _levelUpdater = updater;
+            _soundRestarter = sound;
         }
 
         public void Freeze()
@@ -23,16 +23,16 @@ namespace Muchachos.TideTurner.Runtime.Level
                 Cursor.lockState = CursorLockMode.Confined;
         
             Time.timeScale = 0;
-            _updater.SetPause(true);
-            _sound.CachePlayedSound();
-            _sound.SetSoundAllPlayed(SoundState.Pause);
+            _levelUpdater.SetPause(true);
+            _soundRestarter.CachePlayedSound();
+            _soundRestarter.SetSoundAllPlayed(SoundState.Pause);
         }
 
         public void Unfreeze()
         {
             Time.timeScale = 1;
-            _updater.SetPause(false);
-            _sound.SetSoundAllPlayed(SoundState.Play);
+            _levelUpdater.SetPause(false);
+            _soundRestarter.SetSoundAllPlayed(SoundState.Play);
         }
     }
 }

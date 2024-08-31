@@ -52,7 +52,9 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         {
             switch (data.IsPause)
             {
-                case true when CurrentState is not PauseLevelState:
+                case true when CurrentState is not PauseLevelState && 
+                               CurrentState is not LoseLevelState&& 
+                               CurrentState is not WinLevelState:
                     ChangeState<PauseLevelState>();
                     //Debug.Log("Pause");
                     break;

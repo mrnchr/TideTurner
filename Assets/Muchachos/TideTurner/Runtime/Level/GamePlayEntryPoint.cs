@@ -32,12 +32,8 @@ public class GamePlayEntryPoint : MonoBehaviour
         _levelStateMachine.OnChangeState += _yandexGamesIntegration.HandleGamePlayAPI;
     }
 
-    private void WrappedUpdateData(int ind)
-    {
-        _currentInd = ind;
-        _user.UpdateData(new UserData(_currentInd));
-    }
-
+    private void WrappedUpdateData(int ind) => _user.UpdateData(new UserData(ind)); 
+    
     private void OnDisable()
     {
         _checkPointHandler.OnNewCheckPoint -= WrappedUpdateData;

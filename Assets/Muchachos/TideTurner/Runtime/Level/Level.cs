@@ -74,12 +74,9 @@ namespace Muchachos.TideTurner.Runtime.Level
             _boat.Init();
             _cameraMovement.Init();
             _water.Movement.SetWaterLevel(spawnPosition);
-
             
             foreach (Cannon cannon in _cannons)
                 cannon.Init();
-
-            _handler.Init();
         }
 
         public void Reborn()
@@ -109,7 +106,6 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         public void ToMenu()
         {
-            //_levelMachine.ChangeState<StayLevelState>();
             _levelFreezer.Unfreeze();
             _sceneLoader.LoadScene(SceneType.Menu);
         }

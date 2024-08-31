@@ -34,14 +34,18 @@ namespace Muchachos.TideTurner.Runtime.UI
         private void HandleInput(InputData data)
         {
             if (_levelMachine.CurrentState is WinLevelState 
-                || _level.IsLose())
+                || _level.IsLose()
+                || data.IsPause == _pauseWindow.activeSelf)
                 return;
+            
+            Debug.Log(_levelMachine.CurrentState);
 
-            Pause(data.IsPause);
+            _pauseWindow.SetActive(data.IsPause);
         }
 
         public void Pause(bool value)
         {
+            _input.Data.IsPause = value;
             _pauseWindow.SetActive(value);
         }
     }

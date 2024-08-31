@@ -26,17 +26,17 @@ public class YandexGamesIntegration : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void StopGameplay();
 
-    private UserData _userData;
+    private User _user;
     private ApplicationFocusHandler _applicationFocusHandler;
 
     [Inject]
-    public void Construct(UserData userData, ApplicationFocusHandler applicationFocusHandler)
+    public void Construct(User user, ApplicationFocusHandler applicationFocusHandler)
     {
-        _userData = userData;
+        _user = user;
         _applicationFocusHandler = applicationFocusHandler;
 
         _applicationFocusHandler.OnFocusChange += CheckFocus;
-        _userData.OnDataUpdate += SaveData;
+        _user.OnDataUpdate += Save;
     }
 
     public void Start()
@@ -62,22 +62,22 @@ public class YandexGamesIntegration : MonoBehaviour
 #endif
     }
 
-    private void SaveData()
+    private void Save()
     {
-        string data = JsonUtility.ToJson(_userData);
+        string data = JsonUtility.ToJson(_user.Data);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         SendDataToServer(data);
 #endif
-        Debug.Log("Data saved: " + _userData.CurrentInd);
+        Debug.Log("Data saved: " + _user.Data.CurrentInd);
     }
 
     public void SetData(string data)
     {
-        int ind = JsonUtility.FromJson<UserData>(data).CurrentInd;
-        _userData.UpdateCheckPointIndex(ind);
+        var userData = JsonUtility.FromJson<UserData>(data);
+        _user.UpdateData(userData);
         
-        Debug.Log("Data loaded: " + ind);
+        Debug.Log("Data loaded: " + userData.CurrentInd);
     }
 
     public void HandleGamePlayAPI(LevelStateBase gameStateBase)
@@ -127,9 +127,9 @@ public class YandexGamesIntegration : MonoBehaviour
 
     public void OnDisable()
     {
-        _userData.OnDataUpdate -= SaveData;
+        _user.OnDataUpdate -= Save;
         _applicationFocusHandler.OnFocusChange -= CheckFocus;
         
-        SaveData();
+        Save();
     }
 }

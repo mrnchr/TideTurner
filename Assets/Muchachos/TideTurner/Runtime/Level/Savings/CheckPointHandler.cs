@@ -15,21 +15,25 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
 
         private int _lastCheckIndex = DefaultCheckIndex;
         private Level _level;
-        private UserData _userData;
+        private User _user;
 
         [Inject]
-        public void Construct(Level level, UserData userData)
+        public void Construct(Level level, User user)
         {
             _level = level;
-            _userData = userData;
+            _user = user;
 
             UpdateCheckPointIndex();
         }
 
         public void Init()
         {
+            int i = 0;
             foreach (CheckPoint check in _checks)
+            {
                 check.IsChecked = false;
+                check.index = i++;
+            }
         }
 
         public void Check(CheckPoint check)
@@ -38,7 +42,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
                 return;
 
             check.IsChecked = true;
-            _lastCheckIndex++;
+            _lastCheckIndex = check.index;
             _checks.Insert(_lastCheckIndex, check);
 
             OnNewCheckPoint?.Invoke(_lastCheckIndex);
@@ -51,7 +55,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
 
         public void UpdateCheckPointIndex()
         {
-            _lastCheckIndex = _userData.CurrentInd;
+            _lastCheckIndex = _user.Data.CurrentInd;
         }
 
         public Vector3 GetSpawnPosition()

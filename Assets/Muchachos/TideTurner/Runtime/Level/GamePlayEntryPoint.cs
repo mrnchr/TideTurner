@@ -7,33 +7,40 @@ using Zenject;
 public class GamePlayEntryPoint : MonoBehaviour
 {
     private CheckPointHandler _checkPointHandler;
-    private UserData _userData;
+    private User _user;
 
     private YandexGamesIntegration _yandexGamesIntegration;
     private LevelStateMachine _levelStateMachine;
+    private int _currentInd;
 
     [Inject]
     public void Construct(
         CheckPointHandler checkPointHandler,
-        UserData userData,
-        IInputController inputController, 
+        User user,
+        IInputController inputController,
         YandexGamesIntegration yandexGamesIntegration,
         LevelStateMachine levelStateMachine
     )
     {
         _checkPointHandler = checkPointHandler;
-        _userData = userData;
+        _user = user;
         _yandexGamesIntegration = yandexGamesIntegration;
         _levelStateMachine = levelStateMachine;
 
-        checkPointHandler.OnNewCheckPoint += userData.UpdateCheckPointIndex;
-        userData.OnDataUpdate += checkPointHandler.UpdateCheckPointIndex;
+        checkPointHandler.OnNewCheckPoint += WrappedUpdateData;
+        user.OnDataUpdate += checkPointHandler.UpdateCheckPointIndex;
         _levelStateMachine.OnChangeState += _yandexGamesIntegration.HandleGamePlayAPI;
+    }
+
+    private void WrappedUpdateData(int ind)
+    {
+        _currentInd = ind;
+        _user.UpdateData(new UserData(_currentInd));
     }
 
     private void OnDisable()
     {
-        _checkPointHandler.OnNewCheckPoint -= _userData.UpdateCheckPointIndex;
-        _userData.OnDataUpdate -= _checkPointHandler.UpdateCheckPointIndex;
+        _checkPointHandler.OnNewCheckPoint -= WrappedUpdateData;
+        _user.OnDataUpdate -= _checkPointHandler.UpdateCheckPointIndex;
     }
 }

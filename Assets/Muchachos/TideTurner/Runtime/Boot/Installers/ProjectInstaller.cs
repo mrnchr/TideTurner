@@ -42,7 +42,7 @@ namespace Muchachos.TideTurner.Runtime.Boot
 
             BindMobileInitializer();
             
-            Container.Bind<UserData>().AsSingle();
+            Container.Bind<User>().AsSingle();
             Container.BindInstance(_yandexGamesIntegration).AsSingle();
 
             Container.BindInstance(_globalSceneLoader).AsSingle();

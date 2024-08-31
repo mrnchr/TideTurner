@@ -6,7 +6,7 @@ mergeInto(LibraryManager.library, {
     window.addEventListener('scroll', function(event) {
       window.scrollTo(0, 0);
       event.preventDefault(); 
-    }, false);
+  }, false);
 },
 
 RateGame : function(){
@@ -40,18 +40,27 @@ ShowAdv : function(){
 },
 
 
- SendDataToServer: function (data) {
+SendDataToServer: function (data) {
     var dateString = UTF8ToString(data);
     var myobj = JSON.parse(dateString);
     player.setData(myobj);
-  },
+},
 
 LoadData: function () {
     player.getData().then (_data => 
     {
       const myJSON = JSON.stringify(_data);
       myGameInstance.SendMessage('YandexGamesIntegration', 'SetData', myJSON);
-    });
-  },
+  });
+},
+
+
+StartGameplay: function () {
+    ysdk.features.GameplayAPI.start();
+},
+
+StopGameplay: function () {
+    ysdk.features.GameplayAPI.stop();
+},
 
 });

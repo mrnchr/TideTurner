@@ -2,9 +2,7 @@
 using Muchachos.TideTurner.Runtime.Configuration;
 using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Core.GameFsm;
-using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Core.SceneLoading;
-using Muchachos.TideTurner.Runtime.Mobile;
 using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -22,9 +20,13 @@ namespace Muchachos.TideTurner.Runtime.Boot
         
         [SerializeField] private GlobalSceneLoader _globalSceneLoader;
         [SerializeField] private BlackScreen _blackScreen;
+        [SerializeField] private YandexGamesIntegration _yandexGamesIntegration;
+        [SerializeField] private ApplicationFocusHandler _applicationFocusHandler;
         
         public override void InstallBindings()
         {
+            Container.BindInstance(_applicationFocusHandler).AsSingle();
+            
             BindConfigProvider();
             BindSettingData();
 
@@ -41,7 +43,7 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindMobileInitializer();
             
             Container.Bind<UserData>().AsSingle();
-            Container.Bind<YandexGamesIntegration>().AsSingle();
+            Container.BindInstance(_yandexGamesIntegration).AsSingle();
 
             Container.BindInstance(_globalSceneLoader).AsSingle();
             Container.BindInstance(_blackScreen).AsSingle();

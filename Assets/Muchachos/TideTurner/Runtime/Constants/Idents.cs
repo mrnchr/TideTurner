@@ -13,5 +13,11 @@
             public const string MUSIC_VOLUME = "MusicVolume";
             public const string SOUND_VOLUME = "SoundVolume";
         }
+
+        public static class AudioParameters
+        {
+            public const float MaxVolume = 20;
+            public const float MinVolume = -80;
+        }
     }
 }

@@ -10,10 +10,10 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         private readonly LoseWindow _lose;
 
         [Inject]
-        public LoseLevelState(LevelFreezer levelFreezer)
+        public LoseLevelState(LevelFreezer levelFreezer, LoseWindow loseWindow)
         {
-            _freezer = Object.FindAnyObjectByType<LevelFreezer>();
-            _lose = Object.FindAnyObjectByType<LoseWindow>();
+            _freezer = levelFreezer;
+            _lose = loseWindow;
         }
 
         public override void Enter()

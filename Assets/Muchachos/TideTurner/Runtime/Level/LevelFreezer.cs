@@ -19,7 +19,7 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         public void Freeze()
         {
-            if (Application.isMobilePlatform == false) 
+            if (!Application.isMobilePlatform) 
                 Cursor.lockState = CursorLockMode.Confined;
         
             Time.timeScale = 0;

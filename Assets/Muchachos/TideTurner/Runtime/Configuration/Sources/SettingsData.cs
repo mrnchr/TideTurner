@@ -8,10 +8,10 @@ namespace Muchachos.TideTurner.Runtime.Configuration
     {
         public float MouseSensitivity;
 
-        [Range(0.0001f, 1)]
+        [Range(Idents.AudioParameters.MinVolume, Idents.AudioParameters.MaxVolume)]
         public float MusicVolume;
 
-        [Range(0.0001f, 1)]
+        [Range(Idents.AudioParameters.MinVolume, Idents.AudioParameters.MaxVolume)]
         public float SoundVolume;
 
         public void CopyFrom(SettingsData from)

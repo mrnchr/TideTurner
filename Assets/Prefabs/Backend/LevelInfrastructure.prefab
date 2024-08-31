@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 2578782685828976097}
   - component: {fileID: 1151215251884409074}
   m_Layer: 0
-  m_Name: CheckHandler
+  m_Name: CheckPointHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -435,6 +435,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50080e9ca01496c9bbbe584f9c9272d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _checks:
+  - {fileID: 2419947553034010935}
+  - {fileID: 6616528358944444764}
+  - {fileID: 845499159309220275}
+  - {fileID: 2779445743830167705}
+  - {fileID: 5517040234504025431}
+  - {fileID: 9196037724736292239}
+  - {fileID: 6671898172816728138}
+  - {fileID: 6978911696653026068}
+  - {fileID: 8438004308207607507}
+  - {fileID: 5916912710512829357}
 --- !u!1 &6287609684532457526
 GameObject:
   m_ObjectHideFlags: 0
@@ -5176,6 +5187,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a880ea3c25a40cf9591b8597c2d0650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5916912710512829357 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6366594433341313447, guid: b04574c705f1ce24f95249c125ef6940, type: 3}
+  m_PrefabInstance: {fileID: 740762033692455434}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a880ea3c25a40cf9591b8597c2d0650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6523900419448044606 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5822657308104937012, guid: b04574c705f1ce24f95249c125ef6940, type: 3}
@@ -5702,6 +5724,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1af78e142014027a8f2c754b44f3504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8438004308207607507 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9177886422512413913, guid: b04574c705f1ce24f95249c125ef6940, type: 3}
+  m_PrefabInstance: {fileID: 740762033692455434}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a880ea3c25a40cf9591b8597c2d0650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8494437084407053953 stripped
@@ -6420,6 +6453,10 @@ PrefabInstance:
     - target: {fileID: 318415298987278180, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
       propertyPath: m_Name
       value: LoseWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480931833803211524, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7606617199690420537, guid: 296b5de5942ae3c45bb89c14ae283d13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -7440,6 +7477,10 @@ PrefabInstance:
       propertyPath: _boatSpawn
       value: 
       objectReference: {fileID: 5982089769644686822}
+    - target: {fileID: 5348947976812014097, guid: 07d6d1d83f7ec284c853505125e7d0b6, type: 3}
+      propertyPath: _loseWindow
+      value: 
+      objectReference: {fileID: 7373561938093059733}
     - target: {fileID: 5348947976812014097, guid: 07d6d1d83f7ec284c853505125e7d0b6, type: 3}
       propertyPath: _pauseWindow
       value: 

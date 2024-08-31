@@ -23,7 +23,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
             _level = level;
             _userData = userData;
 
-            _lastCheckIndex = _userData.CurrentInd;
+            UpdateCheckPointIndex();
         }
 
         public void Init()
@@ -47,6 +47,11 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
         public bool WasCheckPoint()
         {
             return _lastCheckIndex > DefaultCheckIndex;
+        }
+
+        public void UpdateCheckPointIndex()
+        {
+            _lastCheckIndex = _userData.CurrentInd;
         }
 
         public Vector3 GetSpawnPosition()

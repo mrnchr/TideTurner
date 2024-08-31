@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel;
+using UnityEngine;
 
 [Serializable]
 public class UserData
@@ -9,10 +11,15 @@ public class UserData
 
     public void UpdateCheckPointIndex(int ind)
     {
-        if (ind < 0)
-            throw new IndexOutOfRangeException();
+        if (ind <= CurrentInd)
+        {
+            Debug.Log($"Index {ind} <= CurrentIndex {CurrentInd}");
+            return;
+        }
         
         CurrentInd = ind;
+        
+        Debug.Log("Data updated");
         
         OnDataUpdate?.Invoke();
     }

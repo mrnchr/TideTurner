@@ -16,6 +16,8 @@ namespace Muchachos.TideTurner.Runtime.Level
         [SerializeField] private float deathDelay = 1f;
         [SerializeField] private Cannon[] _cannons;
 
+        public Cannon[] Cannons => _cannons;
+
         public event Action OnReborn;
         public event Action OnLose;
 
@@ -28,20 +30,24 @@ namespace Muchachos.TideTurner.Runtime.Level
         private Coroutine _coroutine;
         private ISceneLoader _sceneLoader;
         private CheckPointHandler _handler;
+        private LevelFreezer _levelFreezer;
         private YandexGamesIntegration _yandexGamesIntegration;
 
         [Inject]
-        public void Construct(ISceneLoader sceneLoader, LevelStateMachine levelMachine,
+        public void Construct(ISceneLoader sceneLoader, 
+            LevelStateMachine levelMachine,
             AbstractMoonData moonData,
             AbstractMoon abstractMoon,
             Boat boat,
             Water water,
             CameraMovement cameraMovement,
             CheckPointHandler handler,
+            LevelFreezer levelFreezer,
             YandexGamesIntegration yaIntegration)
         {
             _sceneLoader = sceneLoader;
             _levelMachine = levelMachine;
+            _levelFreezer = levelFreezer;
 
             _moonData = moonData;
             _moon = abstractMoon;
@@ -103,7 +109,8 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         public void ToMenu()
         {
-            _levelMachine.ChangeState<StayLevelState>();
+            //_levelMachine.ChangeState<StayLevelState>();
+            _levelFreezer.Unfreeze();
             _sceneLoader.LoadScene(SceneType.Menu);
         }
 

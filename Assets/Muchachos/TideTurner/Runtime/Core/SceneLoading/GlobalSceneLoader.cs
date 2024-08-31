@@ -9,6 +9,8 @@ using Zenject;
 
 public class GlobalSceneLoader : MonoBehaviour, ISceneLoader
 {
+    private const float FixedDeltaTime = 0.02f;
+    
     private readonly Queue<Action> _beforeLoadingQueue = new Queue<Action>();
     private readonly Queue<Action> _afterLoadingQueue = new Queue<Action>();
 
@@ -40,11 +42,11 @@ public class GlobalSceneLoader : MonoBehaviour, ISceneLoader
     private IEnumerator LoadSceneAsync(SceneType id)
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(_scenes.Get(SceneType.Boot));
-
+        
         while (!asyncOperation.isDone)
         {
-            Debug.Log("Loading boot...");
-            yield return new WaitForSeconds(Time.fixedDeltaTime);
+            Debug.Log("Loading boot... " + Time.timeScale);
+            yield return new WaitForSeconds(FixedDeltaTime);
         }
 
         while (_beforeLoadingQueue.Count > 0)

@@ -30,6 +30,7 @@ namespace Muchachos.TideTurner.Runtime.Boot
         [SerializeField] private Water _water;
         [SerializeField] private WaterMovement _waterMovement;
         [SerializeField] private PauseWindow _pauseWindow;
+        [SerializeField] private LoseWindow _loseWindow;
         [SerializeField] private SoundRestarter _soundRestarter;
         [SerializeField] private LevelFreezer _levelFreezer;
         [SerializeField] private CameraMovement _cameraMovement;
@@ -87,6 +88,9 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindBarrelFactory();
 
             BindLevelInitializer();
+            
+            Container.BindInstance(_pauseWindow).AsSingle();
+            Container.BindInstance(_loseWindow).AsSingle();
         }
         
         private void BindInputController()
@@ -107,8 +111,7 @@ namespace Muchachos.TideTurner.Runtime.Boot
             }
 
             Container
-                .Bind<IInputHandler>()
-                .To<PCInputHandler>()
+                .BindInterfacesAndSelfTo<PCInputHandler>()
                 .AsSingle();
         }
 

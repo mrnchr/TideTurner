@@ -52,7 +52,7 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
         {
             var spawnPos = _handler.GetSpawnPosition();
 
-            SetPosition(_user.Data.CurrentInd < 0 ? _spawn.transform.position : spawnPos);
+            SetPosition(_user.Data.CurrentInd <= 0 ? _spawn.transform.position : spawnPos);
 
             ResetLogic();
         }

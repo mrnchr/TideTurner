@@ -48,6 +48,17 @@ public class YandexGamesIntegration : MonoBehaviour
         Debug.Log("Data loaded");
     }
 
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            _user.Reset();
+            Save();
+            Debug.Log("Reset");
+        }
+    }
+
     public void CallRateGameWindow()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -88,13 +99,13 @@ public class YandexGamesIntegration : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
                 StopGameplay();
 #endif
-                Debug.Log("LoseLevelState");
+                //Debug.Log("LoseLevelState");
                 break;
             case PauseLevelState:
 #if UNITY_WEBGL && !UNITY_EDITOR
                 StopGameplay();
 #endif
-                Debug.Log("PauseLevelState");
+                //Debug.Log("PauseLevelState");
                 break;
             case RebornLevelState:
                 break;
@@ -106,7 +117,7 @@ public class YandexGamesIntegration : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
                 StartGameplay();
 #endif
-                Debug.Log("StayLevelState");
+                //Debug.Log("StayLevelState");
                 break;
             case WinLevelState:
                 break;

@@ -45,7 +45,7 @@ public class GlobalSceneLoader : MonoBehaviour, ISceneLoader
         
         while (!asyncOperation.isDone)
         {
-            Debug.Log("Loading boot... " + Time.timeScale);
+            //Debug.Log("Loading boot... " + Time.timeScale);
             yield return new WaitForSeconds(FixedDeltaTime);
         }
 

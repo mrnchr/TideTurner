@@ -36,7 +36,6 @@ namespace Muchachos.TideTurner.Runtime.Boot
         [SerializeField] private CameraMovement _cameraMovement;
         [SerializeField] private MobileScreenOrientation _mobileScreenOrientation;
         [Header("CheckPoints")] 
-        [SerializeField] private CheckPoint[] _checkPoints;
         [SerializeField] private CheckPointHandler _checkPointHandler;
         [Header("Boat")] 
         [SerializeField] private BoatSpawn _boatSpawn;

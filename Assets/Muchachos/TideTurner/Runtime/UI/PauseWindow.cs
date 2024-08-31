@@ -38,7 +38,7 @@ namespace Muchachos.TideTurner.Runtime.UI
                 || data.IsPause == _pauseWindow.activeSelf)
                 return;
             
-            Debug.Log(_levelMachine.CurrentState);
+            //Debug.Log(_levelMachine.CurrentState);
 
             _pauseWindow.SetActive(data.IsPause);
         }

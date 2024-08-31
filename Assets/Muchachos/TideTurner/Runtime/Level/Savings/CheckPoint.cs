@@ -21,8 +21,12 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag(TagStorage.BoatTag) && !IsChecked)
-                _handler.Check(this);
+            bool isBoat = other.CompareTag(TagStorage.BoatTag);
+            if (!isBoat || IsChecked)
+                return;
+
+            _handler.Check(this);
+            Debug.Log(other.name);
         }
     }
 }

@@ -21,6 +21,11 @@ public class User
         
         OnDataUpdate?.Invoke();
     }
+
+    public void Reset()
+    {
+        Data = new UserData();
+    }
 }
 
 [Serializable]

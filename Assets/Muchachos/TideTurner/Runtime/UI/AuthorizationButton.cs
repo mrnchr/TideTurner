@@ -6,9 +6,15 @@ public class AuthorizationButton : MonoBehaviour
     private YandexGamesIntegration _integration;
     
     [Inject]
-    public void Construct(YandexGamesIntegration integration)
+    public void Construct(YandexGamesIntegration integration, User user)
     {
         _integration = integration;
+
+        if (user.Data.Authorised)
+        {
+            Disable();
+            return;
+        }
 
         _integration.OnAuth += Disable;
     }

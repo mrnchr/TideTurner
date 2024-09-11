@@ -54,7 +54,12 @@ public class YandexGamesIntegration : MonoBehaviour
     public void Authorize()
     {
         Debug.Log("Authorizing");
-#if UNITY_WEBGL && !UNITY_EDITOR
+
+#if UNITY_2023
+        SetNick("GRAS");
+#endif
+        
+#if !UNITY_EDITOR
         Auth();
         CheckLoginState();
         if (_authFlag == "false")
@@ -70,14 +75,14 @@ public class YandexGamesIntegration : MonoBehaviour
 
     public void Start()
     {
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR
         StopGameplay();
 #endif
     }
 
     public void ResetData()
     {
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR
         _user.Reset();
         Save();
 #endif
@@ -86,14 +91,14 @@ public class YandexGamesIntegration : MonoBehaviour
 
     public void CallRateGameWindow()
     {
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR
         RateGame();
 #endif
     }
 
     public void CallAdvWindow()
     {
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR
         ShowAdv();
 #endif
     }
@@ -102,7 +107,7 @@ public class YandexGamesIntegration : MonoBehaviour
     {
         string data = JsonUtility.ToJson(_user.Data);
 
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR
         SendDataToServer(data);
 #endif
         Debug.Log("Data saved: " + _user.Data.CurrentInd);
@@ -135,13 +140,13 @@ public class YandexGamesIntegration : MonoBehaviour
         switch (gameStateBase)
         {
             case LoseLevelState:
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR
                 StopGameplay();
 #endif
                 //Debug.Log("LoseLevelState");
                 break;
             case PauseLevelState:
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR
                 StopGameplay();
 #endif
                 //Debug.Log("PauseLevelState");
@@ -153,7 +158,7 @@ public class YandexGamesIntegration : MonoBehaviour
             case StartLevelState:
                 break;
             case StayLevelState:
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR
                 StartGameplay();
 #endif
                 //Debug.Log("StayLevelState");
@@ -170,7 +175,7 @@ public class YandexGamesIntegration : MonoBehaviour
         if (hasFocus)
             return;
 
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR
         StopGameplay();
 #endif
     }

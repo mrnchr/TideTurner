@@ -6,7 +6,8 @@ public class User
     public event Action OnDataUpdate;
     public event Action<string> OnNickUpdate;
 
-    public UserData Data { get; private set; } = new UserData("null", -1);
+    public UserData Data => _data;
+    private UserData _data = new UserData("null", -1, false);
 
     public void UpdateData(UserData data)
     {
@@ -16,7 +17,7 @@ public class User
             return;
         }
 
-        Data = data;
+        _data = data;
 
         Debug.Log("Data updated");
 
@@ -25,14 +26,16 @@ public class User
 
     public void UpdateNick(string nick)
     {
-        Data.UpdateNick(nick);
+        _data.Nick = nick;
+
+        _data.Authorised = true;
         
         OnNickUpdate?.Invoke(nick);
     }
 
     public void Reset()
     {
-        Data = new UserData();
+        _data = new UserData();
     }
 }
 
@@ -41,12 +44,12 @@ public struct UserData
 {
     public int CurrentInd;
     public string Nick;
+    public bool Authorised;
 
-    public UserData(string nick, int ind)
+    public UserData(string nick, int ind, bool authorised)
     {
         CurrentInd = ind;
         Nick = nick;
+        Authorised = authorised;
     }
-
-    public void UpdateNick(string nick) => Nick = nick;
 }

@@ -90,6 +90,22 @@ MonoBehaviour:
     m_Localized: Lord of the Seas
     m_Metadata:
       m_Items: []
+  - m_Id: 5177033195458560
+    m_Localized: Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5188128169725952
+    m_Localized: Authorization
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5189262015926272
+    m_Localized: Please log in to access cloud saves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5211964927840256
+    m_Localized: Greetings {0}
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

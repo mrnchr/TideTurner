@@ -26,11 +26,23 @@ public class YandexGamesIntegration : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void StopGameplay();
 
+
+    [DllImport("__Internal")]
+    private static extern void Auth();
+
+
+    [DllImport("__Internal")]
+    private static extern void CheckLoginState();
+
+    public event Action OnAuth;
+
     private User _user;
     private ApplicationFocusHandler _applicationFocusHandler;
+    private string _authFlag;
 
     [Inject]
-    public void Construct(User user, ApplicationFocusHandler applicationFocusHandler)
+    public void Construct(User user,
+        ApplicationFocusHandler applicationFocusHandler)
     {
         _user = user;
         _applicationFocusHandler = applicationFocusHandler;
@@ -39,24 +51,37 @@ public class YandexGamesIntegration : MonoBehaviour
         _user.OnDataUpdate += Save;
     }
 
+    public void Authorize()
+    {
+        Debug.Log("Authorizing");
+#if UNITY_WEBGL && !UNITY_EDITOR
+        Auth();
+        CheckLoginState();
+        if (_authFlag == "false")
+        {
+            Debug.Log("Player is not authorized");
+            return;
+        }
+        LoadData();
+        Debug.Log("Data loaded");
+#endif
+        OnAuth?.Invoke();
+    }
+
     public void Start()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
-        LoadData();
         StopGameplay();
 #endif
-        Debug.Log("Data loaded");
     }
 
-
-    private void Update()
+    public void ResetData()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            _user.Reset();
-            Save();
-            Debug.Log("Reset");
-        }
+#if UNITY_WEBGL && !UNITY_EDITOR
+        _user.Reset();
+        Save();
+#endif
+        Debug.Log("Reset");
     }
 
     public void CallRateGameWindow()
@@ -83,12 +108,26 @@ public class YandexGamesIntegration : MonoBehaviour
         Debug.Log("Data saved: " + _user.Data.CurrentInd);
     }
 
+    // call from js
     public void SetData(string data)
     {
         var userData = JsonUtility.FromJson<UserData>(data);
         _user.UpdateData(userData);
-        
+
         Debug.Log("Data loaded: " + userData.CurrentInd);
+    }
+
+    // call from js
+    public void SetNick(string nick)
+    {
+        _user.UpdateNick(nick);
+    }
+
+    public void CheckAuth(string state)
+    {
+        _authFlag = state;
+
+        Debug.Log("Auth state: " + state);
     }
 
     public void HandleGamePlayAPI(LevelStateBase gameStateBase)
@@ -130,7 +169,7 @@ public class YandexGamesIntegration : MonoBehaviour
     {
         if (hasFocus)
             return;
-        
+
 #if UNITY_WEBGL && !UNITY_EDITOR
         StopGameplay();
 #endif
@@ -140,7 +179,7 @@ public class YandexGamesIntegration : MonoBehaviour
     {
         _user.OnDataUpdate -= Save;
         _applicationFocusHandler.OnFocusChange -= CheckFocus;
-        
+
         Save();
     }
 }

@@ -108,7 +108,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5211964927840256
-    m_Localized: "\u041F\u0440\u0438\u0432\u0435\u0442 {0}"
+    m_Localized: "\u041F\u0440\u0438\u0432\u0435\u0442, {0}"
     m_Metadata:
       m_Items:
       - rid: 8891427539956006991

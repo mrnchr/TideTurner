@@ -82,6 +82,10 @@ CheckLoginState:function(){
     }
 },
 
+LoadApiReady: function () {
+    ysdk.features.LoadingAPI.ready();
+},
+
 
 StartGameplay: function () {
     ysdk.features.GameplayAPI.start();

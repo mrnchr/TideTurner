@@ -33,6 +33,9 @@ public class YandexGamesIntegration : MonoBehaviour
 
     [DllImport("__Internal")]
     private static extern void CheckLoginState();
+    
+    [DllImport("__Internal")]
+    private static extern void LoadApiReady();
 
     public event Action OnAuth;
 
@@ -76,14 +79,15 @@ public class YandexGamesIntegration : MonoBehaviour
     public void Start()
     {
 #if !UNITY_EDITOR
+        LoadApiReady();
         StopGameplay();
 #endif
     }
 
     public void ResetData()
     {
-#if !UNITY_EDITOR
         _user.Reset();
+#if !UNITY_EDITOR
         Save();
 #endif
         Debug.Log("Reset");

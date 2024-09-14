@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class User
 {
+    public const int DefaultInd = -1;
+    
     public event Action OnDataUpdate;
     public event Action<string> OnNickUpdate;
 
     public UserData Data => _data;
-    private UserData _data = new UserData("null", -1, false);
+    private UserData _data = new UserData("null", DefaultInd, false);
 
     public void UpdateData(UserData data)
     {
@@ -35,7 +37,7 @@ public class User
 
     public void Reset()
     {
-        _data = new UserData();
+        _data.CurrentInd = DefaultInd;
     }
 }
 

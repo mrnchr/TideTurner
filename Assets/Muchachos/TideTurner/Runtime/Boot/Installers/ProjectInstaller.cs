@@ -22,6 +22,7 @@ namespace Muchachos.TideTurner.Runtime.Boot
         [SerializeField] private BlackScreen _blackScreen;
         [SerializeField] private YandexGamesIntegration _yandexGamesIntegration;
         [SerializeField] private ApplicationFocusHandler _applicationFocusHandler;
+        [SerializeField] private LocalizationController _localizationController;
         
         public override void InstallBindings()
         {
@@ -47,6 +48,8 @@ namespace Muchachos.TideTurner.Runtime.Boot
 
             Container.BindInstance(_globalSceneLoader).AsSingle();
             Container.BindInstance(_blackScreen).AsSingle();
+
+            Container.BindInstance(_localizationController).AsSingle();
         }
 
         private void BindMobileInitializer()

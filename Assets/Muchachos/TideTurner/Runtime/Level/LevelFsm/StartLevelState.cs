@@ -11,11 +11,11 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         private readonly LevelMusic _music;
 
         [Inject]
-        public StartLevelState(LevelStateMachine machine, Level level)
+        public StartLevelState(LevelStateMachine machine, Level level, LevelMusic levelMusic)
         {
             _machine = machine;
             _level = level;
-            _music = Object.FindAnyObjectByType<LevelMusic>();
+            _music = levelMusic;
         }
 
         public override void Enter()

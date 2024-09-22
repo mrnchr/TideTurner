@@ -108,6 +108,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8891427539956006990
+  - m_Id: 9183624060145664
+    m_Localized: Russian language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9183925316030464
+    m_Localized: English language
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

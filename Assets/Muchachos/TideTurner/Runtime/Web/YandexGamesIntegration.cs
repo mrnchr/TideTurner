@@ -29,51 +29,36 @@ public class YandexGamesIntegration : MonoBehaviour
 
     [DllImport("__Internal")]
     private static extern void Auth();
-
-
-    [DllImport("__Internal")]
-    private static extern void CheckLoginState();
     
     [DllImport("__Internal")]
     private static extern void LoadApiReady();
+    
+    [DllImport("__Internal")]
+    private static extern void Language();
 
     public event Action OnAuth;
+    public event Action OnAdv;
+    public event Action OnAdvEnd;
 
     private User _user;
     private ApplicationFocusHandler _applicationFocusHandler;
+    private LocalizationController _localizationController;
     private string _authFlag;
 
     [Inject]
     public void Construct(User user,
-        ApplicationFocusHandler applicationFocusHandler)
+        ApplicationFocusHandler applicationFocusHandler,
+        LocalizationController localizationController)
     {
         _user = user;
         _applicationFocusHandler = applicationFocusHandler;
+        _localizationController = localizationController;
 
         _applicationFocusHandler.OnFocusChange += CheckFocus;
         _user.OnDataUpdate += Save;
-    }
-
-    public void Authorize()
-    {
-        Debug.Log("Authorizing");
-
-#if UNITY_2023
-        SetNick("GRAS");
-#endif
-        
-#if !UNITY_EDITOR
-        Auth();
-        CheckLoginState();
-        if (_authFlag == "false")
-        {
-            Debug.Log("Player is not authorized");
-            return;
-        }
-        LoadData();
-        Debug.Log("Data loaded");
-#endif
-        OnAuth?.Invoke();
+        OnAuth += LoadData;
+        // refactor
+        OnAuth += () => Debug.Log("Auth completed");
     }
 
     public void Start()
@@ -81,6 +66,9 @@ public class YandexGamesIntegration : MonoBehaviour
 #if !UNITY_EDITOR
         LoadApiReady();
         StopGameplay();
+
+        Debug.Log("Initialize lang");
+        Language();
 #endif
     }
 
@@ -92,6 +80,15 @@ public class YandexGamesIntegration : MonoBehaviour
 #endif
         Debug.Log("Reset");
     }
+    
+    public void Authorize()
+    {
+        Debug.Log("Authorizing");
+        
+#if !UNITY_EDITOR
+        Auth();
+#endif
+    }
 
     public void CallRateGameWindow()
     {
@@ -102,6 +99,7 @@ public class YandexGamesIntegration : MonoBehaviour
 
     public void CallAdvWindow()
     {
+        OnAdv?.Invoke();
 #if !UNITY_EDITOR
         ShowAdv();
 #endif
@@ -132,11 +130,29 @@ public class YandexGamesIntegration : MonoBehaviour
         _user.UpdateNick(nick);
     }
 
+    // call from js
     public void CheckAuth(string state)
     {
         _authFlag = state;
+        
+        if (_authFlag == "true")
+            OnAuth?.Invoke();
 
-        Debug.Log("Auth state: " + state);
+        Debug.Log("Auth state: " + _authFlag);
+    }
+    
+    // call from js
+    public void SetLanguage(string lang)
+    {
+        Debug.Log("Current lang: " + lang);
+        
+        _localizationController.SetLang(lang);
+    }
+    
+    // call from js
+    public void AdvFinished()
+    {
+        OnAdvEnd?.Invoke();
     }
 
     public void HandleGamePlayAPI(LevelStateBase gameStateBase)
@@ -188,6 +204,7 @@ public class YandexGamesIntegration : MonoBehaviour
     {
         _user.OnDataUpdate -= Save;
         _applicationFocusHandler.OnFocusChange -= CheckFocus;
+        OnAuth -= LoadData;
 
         Save();
     }

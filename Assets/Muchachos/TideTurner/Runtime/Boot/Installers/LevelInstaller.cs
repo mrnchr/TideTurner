@@ -22,6 +22,8 @@ namespace Muchachos.TideTurner.Runtime.Boot
 
         [SerializeField] private Transform _barrelParent;
         
+        [SerializeField] private LevelMusic _levelMusic;
+        
         [Header("Moon")] 
         [SerializeField] private AbstractMoon _moon;
         [SerializeField] private AbstractMoonData _moonData;
@@ -90,6 +92,8 @@ namespace Muchachos.TideTurner.Runtime.Boot
             
             Container.BindInstance(_pauseWindow).AsSingle();
             Container.BindInstance(_loseWindow).AsSingle();
+            
+            Container.BindInstance(_levelMusic).AsSingle();
         }
         
         private void BindInputController()

@@ -21,94 +21,77 @@ mergeInto(LibraryManager.library,
 
     ShowAdv : function()
     {
-      ysdk.adv.showFullscreenAdv(
-      {
-        callbacks: 
+        console.log("Start Adv");
+        ysdk.adv.showFullscreenAdv(
         {
-            onClose: function(wasShown) 
+            callbacks: 
             {
-                console.log("-------------- closed -------");
+                onClose: function(wasShown) 
+                {
+                    console.log("-------------- closed -------");
                     // some action after close
-            },
-            onError: function(error) 
-            {
+                },
+                onError: function(error) 
+                {
                     // some action on error
-              console.log(error);
+                  console.log(error);
+              }
           }
-      }
-  })
-  },
+      })
+    },
 
 
-SendDataToServer: function (data) {
-    var dateString = UTF8ToString(data);
-    var myobj = JSON.parse(dateString);
-    player.setData(myobj);
-},
+    SendDataToServer: function (data) {
+        var dateString = UTF8ToString(data);
+        var myobj = JSON.parse(dateString);
+        player.setData(myobj);
+    },
 
-LoadData: function () {    
-    player.getData().then (_data => 
-    {
-        const myJSON = JSON.stringify(_data);
-        myGameInstance.SendMessage('YandexGamesIntegration', 'SetData', myJSON);
-        myGameInstance.SendMessage('YandexGamesIntegration', 'SetNick', player.getName());
-    });
-},
-
-CheckLoginState:function(){
-    if(!player)
-    {
-        myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "false");
-        return;
-    }
-
-    if (player.getMode() === 'lite') 
-    {
-        myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "false");
-        ysdk.auth.openAuthDialog().then(() => 
+    LoadData: function () {    
+        player.getData().then (_data => 
         {
-            // Игрок успешно авторизован.
-            myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "true");
-            InitPlayer().catch(err => 
-            {
-                // Ошибка при инициализации объекта Player.
-                myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "false");
-            });
-        }).catch(() => 
-        {
-            // Игрок не авторизован.
-            myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "false");
+            const myJSON = JSON.stringify(_data);
+            myGameInstance.SendMessage('YandexGamesIntegration', 'SetData', myJSON);
+            myGameInstance.SendMessage('YandexGamesIntegration', 'SetNick', player.getName());
         });
-    }
-},
+    },
 
-LoadApiReady: function () {
-    ysdk.features.LoadingAPI.ready();
-},
+    LoadApiReady: function () {
+        ysdk.features.LoadingAPI.ready();
+    },
 
 
-StartGameplay: function () {
-    ysdk.features.GameplayAPI.start();
-},
+    StartGameplay: function () {
+        ysdk.features.GameplayAPI.start();
+    },
 
-StopGameplay: function () {
-    ysdk.features.GameplayAPI.stop();
-},
+    StopGameplay: function () {
+        ysdk.features.GameplayAPI.stop();
+    },
 
-Auth: function() 
-{
-    if (player.getMode() === 'lite') {
-        console.log("Игрок не авторизован.");
-        ysdk.auth.openAuthDialog().then(() => {
-            console.log("Игрок успешно авторизован.");
+    Auth: function() 
+    {
+        initPlayer().then(_player =>
+        { 
+            player = _player
 
-            InitPlayer().catch(err => {
-                console.log("Ошибка при инициализации объекта Player.");
-            });
-        }).catch(() => {
-            console.log("Игрок не авторизован.");
+            if (player.getMode() === 'lite') {
+                console.log("Игрок не авторизован.");
+                ysdk.auth.openAuthDialog().then(() => {
+                    console.log("Игрок успешно авторизован.");
+                    myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "true");
+                }).catch(() => {
+                    myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "false");
+                });
+            }else{
+                myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "true");
+            }
         });
-    }
-},
+    },
+
+    Language: function(){
+        console.log("ysdk.environment.i18n.lang: " + ysdk.environment.i18n.lang);
+        myGameInstance.SendMessage('YandexGamesIntegration', 'SetLanguage', ysdk.environment.i18n.lang);
+    },
 
 });

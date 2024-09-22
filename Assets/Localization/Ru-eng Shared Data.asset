@@ -103,6 +103,14 @@ MonoBehaviour:
     m_Key: Greetings
     m_Metadata:
       m_Items: []
+  - m_Id: 9183624060145664
+    m_Key: Russian language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9183925316030464
+    m_Key: English language
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

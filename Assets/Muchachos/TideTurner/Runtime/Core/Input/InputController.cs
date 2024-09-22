@@ -41,9 +41,6 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
             {
                 Data.HorizontalInput = 0;
                 Data.VerticalInput = 0;
-                //bool paused = Data.IsPause;
-                //ClearInput();
-                //Data.IsPause = paused;
             }
 
             OnInputHandled?.Invoke(Data);

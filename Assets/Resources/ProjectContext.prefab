@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &859985934146871229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3159827388657673540}
+  - component: {fileID: 4859923810805767509}
+  m_Layer: 0
+  m_Name: LocalizationController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3159827388657673540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859985934146871229}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 480349353428957862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4859923810805767509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859985934146871229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a8532c291e6644bafd136d99895c3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localizationSettings: {fileID: 11400000, guid: 63569e3fde7d7c343879db6c23a0c791, type: 2}
+  _ruLocale: {fileID: 11400000, guid: cc60ccbfd3642ae439b3da5f61971044, type: 2}
+  _engLocale: {fileID: 11400000, guid: bc44d2d2305843644a44310e8a1d0d47, type: 2}
 --- !u!1 &1456877963766224915
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,6 +83,7 @@ Transform:
   - {fileID: 5344448755500622777}
   - {fileID: 3024756603688246475}
   - {fileID: 8822544754424325945}
+  - {fileID: 3159827388657673540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &672146325172617596
@@ -86,6 +134,7 @@ MonoBehaviour:
   _blackScreen: {fileID: 6625344802800810664}
   _yandexGamesIntegration: {fileID: 8602003866000714839}
   _applicationFocusHandler: {fileID: 5020326772658739346}
+  _localizationController: {fileID: 4859923810805767509}
 --- !u!1 &2944268308862247823
 GameObject:
   m_ObjectHideFlags: 0

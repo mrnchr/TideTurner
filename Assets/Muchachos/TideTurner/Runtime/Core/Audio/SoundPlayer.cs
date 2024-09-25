@@ -9,7 +9,6 @@ namespace Muchachos.TideTurner.Runtime.Core
         [SerializeField] private bool isSound3D;
 
         public bool IsPlaying => _sound.isPlaying;
-        public float SoundLength => _sound.clip.length;
 
         private AudioSource _sound;
 
@@ -17,11 +16,6 @@ namespace Muchachos.TideTurner.Runtime.Core
         {
             _sound = GetComponent<AudioSource>();
             _sound.spatialBlend = isSound3D ? 1 : 0;
-        }
-
-        public void SetVolume(float volume)
-        {
-            _sound.volume = Mathf.Clamp(volume, 0f, 1f);
         }
 
         public void SetSoundState(SoundState state)

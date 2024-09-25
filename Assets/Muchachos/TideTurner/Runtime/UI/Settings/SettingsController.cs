@@ -25,7 +25,6 @@ namespace Muchachos.TideTurner.Runtime.UI
             _view.SetMusicVolume(_settings.MusicVolume);
             _view.SetSoundVolume(_settings.SoundVolume);
             
-            UpdateMusicVolume(-30f);
             UpdateSoundVolume(_settings.SoundVolume);
         }
 

@@ -27,8 +27,8 @@ public class GamePlayEntryPoint : MonoBehaviour
         _yandexGamesIntegration = yandexGamesIntegration;
         _levelStateMachine = levelStateMachine;
 
-        checkPointHandler.OnNewCheckPoint += WrappedUpdateData;
-        user.OnDataUpdate += checkPointHandler.UpdateCheckPointIndex;
+        _checkPointHandler.OnNewCheckPoint += WrappedUpdateData;
+        _user.OnDataUpdate += checkPointHandler.UpdateCheckPointIndex;
         _levelStateMachine.OnChangeState += _yandexGamesIntegration.HandleGamePlayAPI;
     }
 

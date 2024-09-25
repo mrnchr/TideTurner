@@ -12,15 +12,9 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
     {
         [SerializeField] private SoundPlayer _sound;
 
-        [Range(30, 180)] [SerializeField] private int deathAngle = 45;
-
-        [Range(1, 2)] [SerializeField] private float deathHeight = 1;
-
-        [Range(2, 5)] [SerializeField] private float deathGravity = 3;
-
-        [SerializeField] private float _deathForce;
-
         [SerializeField] private FloatingBody _body;
+        
+        [SerializeField] private BoatConfig _boatConfig;
 
         public Action OnLose;
 
@@ -32,8 +26,11 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
         private bool _isReset;
         
         [Inject]
-        public void Construct(BoatSpawn spawn, WaterMovement waterMovement, 
-            CheckPointHandler handler, User user)
+        public void Construct(
+            BoatSpawn spawn, 
+            WaterMovement waterMovement, 
+            CheckPointHandler handler, 
+            User user)
         {
             _spawn = spawn;
             _waterMovement = waterMovement;
@@ -50,7 +47,7 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
 
         public void Init()
         {
-            var spawnPos = _handler.GetSpawnPosition();
+            Vector3 spawnPos = _handler.GetSpawnPosition();
 
             SetPosition(_user.Data.CurrentInd <= 0 ? _spawn.transform.position : spawnPos);
 
@@ -82,8 +79,8 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
             if (!_isReset)
                 return;
 
-            if (Vector3.Angle(Vector3.up, transform.up) > deathAngle ||
-                _waterMovement.GetWaterLevel().position.y - deathHeight > transform.position.y)
+            if (Vector3.Angle(Vector3.up, transform.up) > _boatConfig.DeathAngle ||
+                _waterMovement.GetWaterLevel().position.y - _boatConfig.DeathHeight > transform.position.y)
             {
                 OnLose?.Invoke();
                 _isReset = false;
@@ -92,9 +89,9 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
 
         public void SetLoseState()
         {
-            _rb.AddForceAtPosition(Vector3.up * _deathForce, _body.Floatings[0].transform.position,
+            _rb.AddForceAtPosition(Vector3.up * _boatConfig.DeathForce, _body.Floatings[0].transform.position,
                 ForceMode2D.Impulse);
-            _rb.gravityScale = deathGravity;
+            _rb.gravityScale = _boatConfig.DeathGravity;
             _sound.SetSoundState(SoundState.Play);
         }
 
@@ -104,8 +101,8 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
             if (!_waterMovement)
                 return;
             
-            var leftCorner = new Vector2(-100, _waterMovement.GetWaterLevel().position.y - deathHeight);
-            var rightCorner = new Vector2(100, _waterMovement.GetWaterLevel().position.y - deathHeight);
+            Vector2 leftCorner = new Vector2(-100, _waterMovement.GetWaterLevel().position.y - _boatConfig.DeathHeight);
+            Vector2 rightCorner = new Vector2(100, _waterMovement.GetWaterLevel().position.y - _boatConfig.DeathHeight);
             Debug.DrawLine(leftCorner, rightCorner, Color.red);
         }
         #endif

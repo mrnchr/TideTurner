@@ -10,7 +10,7 @@ namespace Muchachos.TideTurner.Runtime.Level
         private SoundPlayer[] _sounds;
         private List<SoundPlayer> _played;
 
-        public void FindAll()   
+        private void FindAll()   
         {
             _sounds = FindObjectsByType<SoundPlayer>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         }

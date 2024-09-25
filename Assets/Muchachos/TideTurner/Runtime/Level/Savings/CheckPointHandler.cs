@@ -53,6 +53,6 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
         public bool WasCheckPoint() => _lastCheckIndex > DefaultCheckIndex;
         public void UpdateCheckPointIndex() => _lastCheckIndex = _user.Data.CurrentInd;
 
-        public Vector3 GetSpawnPosition() => WasCheckPoint() ? _checks[_lastCheckIndex - 1].SpawnPosition : Vector3.zero;
+        public Vector3 GetSpawnPosition() => WasCheckPoint() ? _checks[_lastCheckIndex].SpawnPosition : Vector3.zero;
     }
 }

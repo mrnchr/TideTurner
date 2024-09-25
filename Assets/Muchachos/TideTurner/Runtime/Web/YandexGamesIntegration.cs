@@ -43,7 +43,7 @@ public class YandexGamesIntegration : MonoBehaviour
     private User _user;
     private ApplicationFocusHandler _applicationFocusHandler;
     private LocalizationController _localizationController;
-    private string _authFlag;
+    private bool _authFlag;
 
     [Inject]
     public void Construct(User user,
@@ -56,29 +56,19 @@ public class YandexGamesIntegration : MonoBehaviour
 
         _applicationFocusHandler.OnFocusChange += CheckFocus;
         _user.OnDataUpdate += Save;
+        _user.OnReset += Save;
         OnAuth += LoadData;
-        // refactor
-        OnAuth += () => Debug.Log("Auth completed");
     }
 
     public void Start()
     {
 #if !UNITY_EDITOR
         LoadApiReady();
-        StopGameplay();
 
         Debug.Log("Initialize lang");
         Language();
 #endif
-    }
-
-    public void ResetData()
-    {
-        _user.Reset();
-#if !UNITY_EDITOR
-        Save();
-#endif
-        Debug.Log("Reset");
+        Debug.Log("Initialize completed");
     }
     
     public void Authorize()
@@ -107,6 +97,9 @@ public class YandexGamesIntegration : MonoBehaviour
 
     private void Save()
     {
+        if (!_authFlag)
+            return;
+        
         string data = JsonUtility.ToJson(_user.Data);
 
 #if !UNITY_EDITOR
@@ -131,12 +124,15 @@ public class YandexGamesIntegration : MonoBehaviour
     }
 
     // call from js
-    public void CheckAuth(string state)
+    public void CheckAuth(bool state)
     {
         _authFlag = state;
-        
-        if (_authFlag == "true")
+
+        if (_authFlag)
+        {
             OnAuth?.Invoke();
+            Debug.Log("Auth completed");
+        }
 
         Debug.Log("Auth state: " + _authFlag);
     }
@@ -203,6 +199,7 @@ public class YandexGamesIntegration : MonoBehaviour
     public void OnDisable()
     {
         _user.OnDataUpdate -= Save;
+        _user.OnReset -= Save;
         _applicationFocusHandler.OnFocusChange -= CheckFocus;
         OnAuth -= LoadData;
 

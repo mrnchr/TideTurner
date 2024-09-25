@@ -15,14 +15,20 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         private readonly SoundRestarter _sound;
         private readonly BarrelContainer _barrelContainer;
 
-        public RestartLevelState(LevelStateMachine machine)
+        public RestartLevelState(
+            LevelStateMachine machine, 
+            BallPool ballPool, 
+            SharkContainer sharkContainer,
+            SoundRestarter soundRestarter,
+            BarrelContainer barrelContainer)
         {
             _machine = machine;
-            _ballPool = Object.FindAnyObjectByType<BallPool>();
-            _sharkContainer = Object.FindAnyObjectByType<SharkContainer>();
+            _ballPool = ballPool;
+            _sharkContainer = sharkContainer;
+            _sound = soundRestarter;
+            _barrelContainer = barrelContainer;
+
             _cannons = Object.FindObjectsByType<Cannon>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            _sound = Object.FindAnyObjectByType<SoundRestarter>();
-            _barrelContainer = Object.FindAnyObjectByType<BarrelContainer>();
         }
 
         public override void Enter()

@@ -1978,6 +1978,10 @@ PrefabInstance:
       propertyPath: m_ShadowMesh.m_Mesh
       value: 
       objectReference: {fileID: 540681699}
+    - target: {fileID: 6477457894661749987, guid: 6c094231a8bdf9343afac477c5f0fc95, type: 3}
+      propertyPath: _boatConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 0152b8fc0343f68469dc621edf40ec7d, type: 2}
     - target: {fileID: 7373561938325333986, guid: 6c094231a8bdf9343afac477c5f0fc95, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

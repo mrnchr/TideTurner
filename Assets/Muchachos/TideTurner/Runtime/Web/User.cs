@@ -7,6 +7,7 @@ public class User
     
     public event Action OnDataUpdate;
     public event Action<string> OnNickUpdate;
+    public event Action OnReset;
 
     public UserData Data => _data;
     private UserData _data = new UserData("null", DefaultInd, false);
@@ -38,6 +39,10 @@ public class User
     public void Reset()
     {
         _data.CurrentInd = DefaultInd;
+        
+        OnReset?.Invoke();
+        
+        Debug.Log("Reset completed");
     }
 }
 

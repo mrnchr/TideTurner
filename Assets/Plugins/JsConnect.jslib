@@ -30,11 +30,13 @@ mergeInto(LibraryManager.library,
                 {
                     console.log("-------------- closed -------");
                     // some action after close
+                    myGameInstance.SendMessage('YandexGamesIntegration', 'AdvFinished');
                 },
                 onError: function(error) 
                 {
                     // some action on error
-                  console.log(error);
+                    console.log(error);
+                    myGameInstance.SendMessage('YandexGamesIntegration', 'AdvFinished');
               }
           }
       })
@@ -79,12 +81,12 @@ mergeInto(LibraryManager.library,
                 console.log("Игрок не авторизован.");
                 ysdk.auth.openAuthDialog().then(() => {
                     console.log("Игрок успешно авторизован.");
-                    myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "true");
+                    myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', true);
                 }).catch(() => {
-                    myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "false");
+                    myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', false);
                 });
             }else{
-                myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "true");
+                myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', true);
             }
         });
     },

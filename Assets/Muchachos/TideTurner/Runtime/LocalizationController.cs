@@ -20,7 +20,7 @@ public class LocalizationController : MonoBehaviour
     {
         if (!_isInitialized)
             yield return LocalizationSettings.InitializationOperation;
-
+        
         _isInitialized = true;
 
         HandleLang(lang);

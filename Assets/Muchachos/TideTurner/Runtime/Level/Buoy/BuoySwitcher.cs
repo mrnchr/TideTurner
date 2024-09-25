@@ -8,11 +8,9 @@ namespace Muchachos.TideTurner.Runtime.Level.Buoy
     {
         private static readonly int _float = Animator.StringToHash("Float");
 
-        [SerializeField]
-        private Light2D _light;
+        [SerializeField] private Light2D _light;
 
-        [SerializeField]
-        private CheckPoint _checkPoints;
+        [SerializeField] private CheckPoint _checkPoints;
 
         private void Start()
         {

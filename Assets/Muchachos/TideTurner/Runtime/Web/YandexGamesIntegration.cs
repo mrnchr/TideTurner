@@ -65,7 +65,7 @@ public class YandexGamesIntegration : MonoBehaviour
 #if !UNITY_EDITOR
         LoadApiReady();
 
-        Debug.Log("Initialize lang");
+        Debug.Log("Initializing lang");
         Language();
 #endif
         Debug.Log("Initialize completed");

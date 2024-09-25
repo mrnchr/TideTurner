@@ -49,24 +49,14 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
         {
             Vector3 spawnPos = _handler.GetSpawnPosition();
 
-            SetPosition(_user.Data.CurrentInd <= 0 ? _spawn.transform.position : spawnPos);
+            SetPosition(spawnPos);
 
-            ResetLogic();
+            Reset();
         }
 
         public void SetPosition(Vector3 position)
         {
             transform.position = position;
-        }
-
-        public void ResetLogic()
-        {
-            _rb.gravityScale = 1;
-            _rb.rotation = 0;
-            _rb.angularVelocity = 0;
-            _rb.velocity = Vector2.zero;
-            transform.eulerAngles = new Vector3(0, 0, 0);
-            _isReset = true;
         }
 
         public void UpdateLogic()
@@ -93,6 +83,16 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
                 ForceMode2D.Impulse);
             _rb.gravityScale = _boatConfig.DeathGravity;
             _sound.SetSoundState(SoundState.Play);
+        }
+        
+        public void Reset()
+        {
+            _rb.gravityScale = 1;
+            _rb.rotation = 0;
+            _rb.angularVelocity = 0;
+            _rb.velocity = Vector2.zero;
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            _isReset = true;
         }
 
         #if UNITY_EDITOR

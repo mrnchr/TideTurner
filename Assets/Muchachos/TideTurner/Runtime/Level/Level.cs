@@ -88,7 +88,7 @@ namespace Muchachos.TideTurner.Runtime.Level
             _moonData.Init();
             _moon.Init();
             _boat.SetPosition(spawnPosition);
-            _boat.ResetLogic();
+            _boat.Reset();
             _water.Movement.SetWaterLevel(spawnPosition);
             _cameraMovement.Init();
 

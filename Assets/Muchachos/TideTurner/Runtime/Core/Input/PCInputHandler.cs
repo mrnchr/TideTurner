@@ -1,5 +1,5 @@
 ﻿using Muchachos.TideTurner.Runtime.Configuration;
-using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Core.Input
 {
@@ -7,6 +7,7 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
     {
         private readonly SettingsData _settings;
 
+        [Inject]
         public PCInputHandler(SettingsData settings)
         {
             _settings = settings;
@@ -14,7 +15,10 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
 
         public void HandleInput(InputData data)
         {
-            data.IsPause = UnityEngine.Input.GetKeyDown(KeyCode.Escape);
+            if (UnityEngine.Input.GetKeyDown(GlobalVariables.Escape))
+            {
+                data.IsPause = !data.IsPause;
+            }
         
             data.HorizontalInput = UnityEngine.Input.GetAxis(Idents.InputAxis.MOUSE_X) * _settings.MouseSensitivity;
             data.VerticalInput = UnityEngine.Input.GetAxis(Idents.InputAxis.SCROLL_WHEEL);

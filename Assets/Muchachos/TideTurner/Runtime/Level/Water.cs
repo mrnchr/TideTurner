@@ -2,6 +2,7 @@
 using Muchachos.TideTurner.Runtime.Level.Obstacles.LifeCycle;
 using Muchachos.TideTurner.Runtime.Mobile;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level
 {
@@ -13,10 +14,11 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         public WaterMovement Movement { get; private set; }
 
-        public void Construct(AbstractMoonData moon)
+        [Inject]
+        public void Construct(AbstractMoonData moon, WaterMovement waterMovement)
         {
             _moon = moon;
-            Movement = FindAnyObjectByType<WaterMovement>();
+            Movement = waterMovement;
         }
 
         public void Init()

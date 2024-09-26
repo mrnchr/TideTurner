@@ -21,18 +21,18 @@ namespace Muchachos.TideTurner.Runtime.Level
     
         private float[] _initialVertexPosZ;
         private float _heightStep = 1f;
-        private float _offset = 0f;
-        private float _waterLevelDir = 0;
+        private float _offset;
+        private float _waterLevelDir;
     
         private void Awake()
         {
-            int length = waterGraphic.mesh.vertices.Length;
+            int verticesLength = waterGraphic.mesh.vertices.Length;
 
-            _initialVertexPosZ = new float[length];
+            _initialVertexPosZ = new float[verticesLength];
         
             Vector3[] vertices = waterGraphic.mesh.vertices;
         
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < verticesLength; i++)
             {
                 _initialVertexPosZ[i] = vertices[i].z;
             }
@@ -84,10 +84,7 @@ namespace Muchachos.TideTurner.Runtime.Level
             waterLevel.transform.position = position;
         }
 
-        public Transform GetWaterLevel()
-        {
-            return waterLevel;
-        }
+        public Transform GetWaterLevel() => waterLevel;
     
         public void ChangeWaterLevel(float changeValue)
         {

@@ -8,15 +8,12 @@ namespace Muchachos.TideTurner.Runtime.Mobile
     {
         [SerializeField] private Button menuButton;
         [SerializeField] private Button continueButton;
-    
-        private PauseWindow _pauseWindow;
+        [SerializeField] private PauseWindow pauseWindow;
 
         private void Awake()
         {
-            _pauseWindow = FindAnyObjectByType<PauseWindow>();
-            
-            menuButton.onClick.AddListener(() => _pauseWindow.Pause(true));
-            continueButton.onClick.AddListener(() => _pauseWindow.Pause(false));
+            menuButton.onClick.AddListener(() => pauseWindow.Pause(true));
+            continueButton.onClick.AddListener(() => pauseWindow.Pause(false));
         }
     }
 }

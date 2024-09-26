@@ -8,12 +8,12 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
     public class BarrelContainer : MonoBehaviour
     {
         private readonly List<Barrel> _barrels = new List<Barrel>();
-    
+
         [SerializeField] private Barrel _prefab;
         [SerializeField] private Transform _parent;
-    
+        [SerializeField] private BarrelSpawn[] _spawns;
+
         private IBarrelFactory _factory;
-        private BarrelSpawn[] _spawns;
 
         [Inject]
         public void Construct(IBarrelFactory factory)
@@ -21,12 +21,7 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles
             _factory = factory;
         }
 
-        public void Construct(BarrelSpawn[] spawns)
-        {
-            _spawns = spawns;
-        }
-
-        public void Init()
+        public void Start()
         {
             foreach (BarrelSpawn spawn in _spawns)
             {

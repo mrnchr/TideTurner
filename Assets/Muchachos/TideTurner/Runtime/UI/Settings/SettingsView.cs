@@ -36,34 +36,11 @@ namespace Muchachos.TideTurner.Runtime.UI
             _soundVolume.onValueChanged.AddListener(UpdateSoundVolume);
         }
 
-        public void SetMouseX(float value)
-        {
-            _mouseX.value = value;
-        }
-
-        public void SetMusicVolume(float value)
-        {
-            _musicVolume.value = value;
-        }
-
-        public void SetSoundVolume(float value)
-        {
-            _soundVolume.value = value;
-        }
-
-        private void UpdateMouseX(float value)
-        {
-            _controller.UpdateMouseX(value);
-        }
-
-        private void UpdateMusicVolume(float value)
-        {
-            _controller.UpdateMusicVolume(value);
-        }
-
-        private void UpdateSoundVolume(float value)
-        {
-            _controller.UpdateSoundVolume(value);
-        }
+        public void SetMouseX(float value) => _mouseX.value = value;
+        public void SetMusicVolume(float value) => _musicVolume.value = value;
+        public void SetSoundVolume(float value) => _soundVolume.value = value;
+        private void UpdateMouseX(float value) => _controller.UpdateMouseX(value);
+        private void UpdateMusicVolume(float value)=>_controller.UpdateMusicVolume(value);
+        private void UpdateSoundVolume(float value) =>_controller.UpdateSoundVolume(value);
     }
 }

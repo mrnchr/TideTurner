@@ -39,15 +39,12 @@ namespace Muchachos.TideTurner.Runtime.Physics
         public bool InWater => _inWater;
 
         [Inject]
-        public void Construct(ILevelUpdater updater)
+        public void Construct(ILevelUpdater updater, AbstractMoonData abstractMoonData, WaterMovement waterMovement)
         {
+            _moon = abstractMoonData;
+            _waterMovement = waterMovement;
+            
             updater.Add(this);
-        }
-
-        public void Awake()
-        {
-            _moon = FindAnyObjectByType<AbstractMoonData>();
-            _waterMovement = FindAnyObjectByType<WaterMovement>();
         }
 
         private void Start()

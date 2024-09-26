@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Muchachos.TideTurner.Runtime.Common.Fsm;
 using Zenject;
@@ -10,7 +11,8 @@ namespace Muchachos.TideTurner.Runtime.Core.GameFsm
         private readonly List<GameStateBase> _states = new List<GameStateBase>();
 
         public GameStateBase CurrentState { get; private set; }
-
+        public event Action<GameStateBase> OnStateChange;
+        
         public GameStateMachine(IGameStateFactory factory)
         {
             _factory = factory;
@@ -31,6 +33,8 @@ namespace Muchachos.TideTurner.Runtime.Core.GameFsm
 
             CurrentState = _states.Find(x => x is T);
             CurrentState?.Enter();
+            
+            OnStateChange?.Invoke(CurrentState);
         }
     }
 }

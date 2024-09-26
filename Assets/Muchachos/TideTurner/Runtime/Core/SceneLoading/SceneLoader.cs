@@ -1,20 +1,17 @@
-﻿using Muchachos.TideTurner.Runtime.Configuration;
-using UnityEngine.SceneManagement;
-
-namespace Muchachos.TideTurner.Runtime.Core.SceneLoading
+﻿namespace Muchachos.TideTurner.Runtime.Core.SceneLoading
 {
     public class SceneLoader : ISceneLoader
     {
-        private readonly SceneConfig _scenes;
+        private GlobalSceneLoader _globalSceneLoader;
 
-        public SceneLoader(IConfigProvider configProvider)
+        public SceneLoader(GlobalSceneLoader globalSceneLoader)
         {
-            _scenes = configProvider.Get<SceneConfig>();
+            _globalSceneLoader = globalSceneLoader;
         }
-        
+
         public void LoadScene(SceneType id)
         {
-            SceneManager.LoadScene(_scenes.Get(id));
+            _globalSceneLoader.LoadScene(id);
         }
     }
 }

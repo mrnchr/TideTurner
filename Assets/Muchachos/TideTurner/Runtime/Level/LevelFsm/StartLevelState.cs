@@ -1,5 +1,6 @@
 ﻿using Muchachos.TideTurner.Runtime.Core;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
 {
@@ -9,11 +10,12 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         private readonly Level _level;
         private readonly LevelMusic _music;
 
-        public StartLevelState(LevelStateMachine machine)
+        [Inject]
+        public StartLevelState(LevelStateMachine machine, Level level, LevelMusic levelMusic)
         {
             _machine = machine;
-            _level = Object.FindAnyObjectByType<Level>();
-            _music = Object.FindAnyObjectByType<LevelMusic>();
+            _level = level;
+            _music = levelMusic;
         }
 
         public override void Enter()

@@ -2,7 +2,6 @@
 using Muchachos.TideTurner.Runtime.Configuration;
 using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Core.GameFsm;
-using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Core.SceneLoading;
 using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
@@ -13,17 +12,22 @@ namespace Muchachos.TideTurner.Runtime.Boot
 {
     public class ProjectInstaller : MonoInstaller
     {
-        [SerializeField]
-        private ConfigProvider _configProvider;
+        [SerializeField] private ConfigProvider _configProvider;
 
-        [SerializeField]
-        private AudioMixer _mixer;
+        [SerializeField] private AudioMixer _mixer;
 
-        [SerializeField]
-        private ButtonSoundPlayer _soundPlayer;
-
+        [SerializeField] private ButtonSoundPlayer _soundPlayer;
+        
+        [SerializeField] private GlobalSceneLoader _globalSceneLoader;
+        [SerializeField] private BlackScreen _blackScreen;
+        [SerializeField] private YandexGamesIntegration _yandexGamesIntegration;
+        [SerializeField] private ApplicationFocusHandler _applicationFocusHandler;
+        [SerializeField] private LocalizationController _localizationController;
+        
         public override void InstallBindings()
         {
+            Container.BindInstance(_applicationFocusHandler).AsSingle();
+            
             BindConfigProvider();
             BindSettingData();
 
@@ -31,8 +35,6 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindButtonSoundPlayer();
 
             BindSceneLoader();
-            BindInputHandler();
-            BindInputController();
 
             BindStateFactory();
             BindGameStateMachine();
@@ -40,31 +42,14 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindProjectInitializer();
 
             BindMobileInitializer();
-        }
+            
+            Container.Bind<User>().AsSingle();
+            Container.BindInstance(_yandexGamesIntegration).AsSingle();
 
-        private void BindInputController()
-        {
-            Container
-                .BindInterfacesTo<InputController>()
-                .AsSingle();
-        }
+            Container.BindInstance(_globalSceneLoader).AsSingle();
+            Container.BindInstance(_blackScreen).AsSingle();
 
-        private void BindInputHandler()
-        {
-            if (Application.isMobilePlatform)
-            {
-                Container
-                    .Bind<IInputHandler>()
-                    .To<MobileInputHandler>()
-                    .AsSingle();
-            }
-            else
-            {
-                Container
-                    .Bind<IInputHandler>()
-                    .To<PCInputHandler>()
-                    .AsSingle();
-            }
+            Container.BindInstance(_localizationController).AsSingle();
         }
 
         private void BindMobileInitializer()

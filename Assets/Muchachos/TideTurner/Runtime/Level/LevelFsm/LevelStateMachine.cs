@@ -1,19 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Muchachos.TideTurner.Runtime.Common.Fsm;
+using Muchachos.TideTurner.Runtime.Core.Input;
 using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
 {
-    public class LevelStateMachine : IStateMachine<LevelStateBase>, IInitializable
+    public class LevelStateMachine : IStateMachine<LevelStateBase>, IInitializable, IDisposable
     {
         private readonly ILevelStateFactory _factory;
         private readonly List<LevelStateBase> _states = new List<LevelStateBase>();
+        private readonly IInputController _inputController;
+        private readonly YandexGamesIntegration _yandexGamesIntegration;
 
         public LevelStateBase CurrentState { get; private set; }
-
-        public LevelStateMachine(ILevelStateFactory factory)
+        public event Action<LevelStateBase> OnChagneState;
+        
+        public LevelStateMachine(
+            ILevelStateFactory factory, 
+            IInputController inputController,
+            YandexGamesIntegration yandexGamesIntegration)
         {
             _factory = factory;
+            _inputController = inputController;
+            _yandexGamesIntegration = yandexGamesIntegration;
+            
+            _inputController.OnInputHandled += HandleInput;
+            OnChagneState += yandexGamesIntegration.HandleGamePlayAPI;
         }
 
         public void Initialize()
@@ -36,6 +49,33 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
 
             CurrentState = _states.Find(x => x is T);
             CurrentState?.Enter();
+
+            OnChagneState?.Invoke(CurrentState);
+        }
+
+        private void HandleInput(InputData data)
+        {
+            switch (data.IsPause)
+            {
+                case true when CurrentState is not PauseLevelState && 
+                               CurrentState is not LoseLevelState&& 
+                               CurrentState is not WinLevelState:
+                    ChangeState<PauseLevelState>();
+                    //Debug.Log("Pause");
+                    break;
+                case false when CurrentState is not StayLevelState && 
+                                CurrentState is not LoseLevelState && 
+                                CurrentState is not WinLevelState:
+                    ChangeState<StayLevelState>();
+                    //Debug.Log("Stay");
+                    break;
+            }
+        }
+
+        public void Dispose()
+        {
+            _inputController.OnInputHandled -= HandleInput;
+            OnChagneState -= _yandexGamesIntegration.HandleGamePlayAPI;
         }
     }
 }

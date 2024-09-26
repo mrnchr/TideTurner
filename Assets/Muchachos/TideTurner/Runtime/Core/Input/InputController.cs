@@ -7,6 +7,7 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
     public class InputController : IInputController, ITickable
     {
         private readonly IInputHandler _handler;
+        private readonly ApplicationFocusHandler _applicationFocusHandler;
 
         public event Action<InputData> OnInputHandled;
 
@@ -14,12 +15,15 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
         [HideReferencePicker]
         [ReadOnly]
         public InputData Data { get; } = new InputData();
-        
-        public bool IsPaused { get; set; }
 
-        public InputController(IInputHandler handler)
+        public bool IsPaused { get; set; }
+        
+        private bool _wasntFocused;
+
+        public InputController(IInputHandler handler, ApplicationFocusHandler applicationFocusHandler)
         {
             _handler = handler;
+            _applicationFocusHandler = applicationFocusHandler;
         }
 
         public void Tick()
@@ -30,15 +34,32 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
         public void HandleInput()
         {
             _handler.HandleInput(Data);
-            
+
+            HandleFocus();
+
             if (IsPaused)
             {
-                bool paused = Data.IsPause;
-                ClearInput();
-                Data.IsPause = paused;
+                Data.HorizontalInput = 0;
+                Data.VerticalInput = 0;
             }
 
             OnInputHandled?.Invoke(Data);
+        }
+
+        private void HandleFocus()
+        {
+            if (_wasntFocused)
+            {
+                Data.IsPause = !Data.IsPause;
+                _wasntFocused = false;
+            }
+            
+            if (_applicationFocusHandler.IsFocused)
+                return;
+            
+            Data.IsPause = true;
+
+            _wasntFocused = true;
         }
 
         public void ClearInput()

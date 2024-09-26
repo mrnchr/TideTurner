@@ -5,8 +5,9 @@ namespace Muchachos.TideTurner.Runtime.UI
 {
     public class MenuStack : MonoBehaviour
     {
-        [SerializeField] private Menu _default;
         private readonly Stack<Menu> _menus = new Stack<Menu>();
+        
+        [SerializeField] private Menu _default;
 
         private void OnEnable()
         {

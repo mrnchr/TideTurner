@@ -1,7 +1,7 @@
 ﻿using Muchachos.TideTurner.Runtime.Level.Obstacles;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon;
 using Muchachos.TideTurner.Runtime.Level.Obstacles.Shark;
-using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
 {
@@ -14,14 +14,19 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         private readonly BarrelContainer _barrelContainer;
         private readonly Level _level;
 
-        public RebornLevelState(LevelStateMachine machine)
+        [Inject]
+        public RebornLevelState(LevelStateMachine machine,
+            BallPool ballPool,
+            SharkContainer sharkContainer,
+            BarrelContainer barrelContainer,
+            Level level)
         {
             _machine = machine;
-            _ballPool = Object.FindAnyObjectByType<BallPool>();
-            _sharkContainer = Object.FindAnyObjectByType<SharkContainer>();
-            _cannons = Object.FindObjectsByType<Cannon>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            _barrelContainer = Object.FindAnyObjectByType<BarrelContainer>();
-            _level = Object.FindAnyObjectByType<Level>();
+            _ballPool = ballPool;   
+            _sharkContainer = sharkContainer;
+            _barrelContainer = barrelContainer;
+            _level = level;
+            _cannons = level.Cannons;
         }
 
         public override void Enter()
@@ -31,7 +36,7 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
             _barrelContainer.Respawn();
             foreach (Cannon cannon in _cannons)
                 cannon.Stop();
-        
+
             _level.Reborn();
             _machine.ChangeState<StayLevelState>();
         }

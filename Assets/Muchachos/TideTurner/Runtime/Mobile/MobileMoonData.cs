@@ -18,6 +18,7 @@ namespace Muchachos.TideTurner.Runtime.Mobile
         public void Construct(IInputController input)
         {
             _input = input;
+            
             _input.OnInputHandled += Move;
         }
 

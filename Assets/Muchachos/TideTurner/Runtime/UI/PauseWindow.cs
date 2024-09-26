@@ -15,16 +15,15 @@ namespace Muchachos.TideTurner.Runtime.UI
         private Level.Level _level;
 
         [Inject]
-        public void Construct(LevelStateMachine levelMachine, IInputController input)
+        public void Construct(LevelStateMachine levelMachine, 
+            Level.Level level, 
+            IInputController input)
         {
             _levelMachine = levelMachine;
             _input = input;
-            _input.OnInputHandled += HandleInput;
-        }
+            _level = level;
 
-        public void Construct()
-        {
-            _level = FindAnyObjectByType<Level.Level>();
+            _input.OnInputHandled += HandleInput;
         }
 
         private void OnDestroy()
@@ -34,25 +33,19 @@ namespace Muchachos.TideTurner.Runtime.UI
 
         private void HandleInput(InputData data)
         {
-            if (data.IsPause && _levelMachine.CurrentState is not WinLevelState && !_level.IsLose())
-                Pause(!_isPause);
+            if (_levelMachine.CurrentState is WinLevelState 
+                || _level.IsLose()
+                || data.IsPause == _pauseWindow.activeSelf)
+                return;
+            
+            //Debug.Log(_levelMachine.CurrentState);
+
+            _pauseWindow.SetActive(data.IsPause);
         }
 
         public void Pause(bool value)
         {
-            if (_isPause == value)
-                return;
-
-            _isPause = value;
-            if (value)
-            {
-                _levelMachine.ChangeState<PauseLevelState>();
-            }
-            else
-            {
-                _levelMachine.ChangeState<StayLevelState>();
-            }
-        
+            _input.Data.IsPause = value;
             _pauseWindow.SetActive(value);
         }
     }

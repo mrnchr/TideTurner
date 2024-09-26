@@ -6,7 +6,7 @@ namespace Muchachos.TideTurner.Runtime.Core.GameFsm
     {
         public override void Enter()
         {
-            if (Application.isMobilePlatform == false)
+            if (!Application.isMobilePlatform)
                 Cursor.lockState = CursorLockMode.Confined;
         }
 

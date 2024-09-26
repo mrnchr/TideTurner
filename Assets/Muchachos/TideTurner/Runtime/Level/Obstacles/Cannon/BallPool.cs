@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon
 {
@@ -11,12 +12,15 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles.Cannon
         [SerializeField] private int _size;
         private BallFactory _factory;
 
+        [Inject]
         public void Construct(Level level)
         {
             _factory = new BallFactory(_prefab, _ballParent, level);
+
+            Init();
         }
 
-        public void Init()
+        private void Init()
         {
             for (int i = 0; i < _size; i++)
             {

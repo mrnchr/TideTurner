@@ -1,6 +1,5 @@
 ﻿using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.UI;
-using UnityEngine;
 
 namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
 {
@@ -10,10 +9,10 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         private readonly LevelFreezer _freezer;
         private readonly PauseWindow _pause;
 
-        public PauseLevelState(IInputController input)
+        public PauseLevelState(IInputController input, LevelFreezer levelFreezer)
         {
             _input = input;
-            _freezer = Object.FindAnyObjectByType<LevelFreezer>();
+            _freezer = levelFreezer;
         }
 
         public override void Enter()

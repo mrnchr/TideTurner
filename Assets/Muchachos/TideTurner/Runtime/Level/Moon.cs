@@ -2,6 +2,7 @@
 using Muchachos.TideTurner.Runtime.Mobile;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Level
 {
@@ -9,11 +10,13 @@ namespace Muchachos.TideTurner.Runtime.Level
     {
         [SerializeField] private Slider _slider;
         [SerializeField] private Vector2 BoundMoonSize;
+        
         private MoonData _data;
 
-        public void Construct(MoonData data)
+        [Inject]
+        public void Construct(AbstractMoonData data)
         {
-            _data = data;
+            _data = (MoonData)data;
         }
 
         public override void Init()

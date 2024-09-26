@@ -10,22 +10,18 @@ namespace Muchachos.TideTurner.Runtime.Mobile
         public event Action OnScreenOrientationChange;
 
         private AbstractMoonData _data;
-        private CameraMovement _cameraMovement;
+        private CameraScaler[] _cameraScalers;
         private ScreenOrientation _temp;
         private IInputController _input;
 
         [Inject]
-        public void Construct(IInputController input)
+        public void Construct(IInputController input, AbstractMoonData data, CameraScaler[] cameraScalers)
         {
             _input = input;
-            _input.OnInputHandled += UpdateLogic;
-        }
-
-        public void Construct(AbstractMoonData data, CameraMovement cameraMovement)
-        {
             _data = data;
-            _cameraMovement = cameraMovement;
-        
+            _cameraScalers = cameraScalers;
+            
+            _input.OnInputHandled += UpdateLogic;
             OnScreenOrientationChange += _data.Init;
         }
     
@@ -42,6 +38,7 @@ namespace Muchachos.TideTurner.Runtime.Mobile
             Cursor.lockState = CursorLockMode.Confined;
         }
     
+        // todo: delete?
         private void HandleOrientationData()
         {
             if (Screen.orientation != _temp)
@@ -49,10 +46,14 @@ namespace Muchachos.TideTurner.Runtime.Mobile
                 OnScreenOrientationChange?.Invoke();
             }
 
-            _cameraMovement.ChangeOrthographicSize(
-                Screen.orientation == ScreenOrientation.Portrait
-                    ? OrthographicSizeType.PORTAIT
-                    : OrthographicSizeType.NORMAL);
+            OrthographicSizeType orthographicSizeType = Screen.orientation == ScreenOrientation.Portrait
+                ? OrthographicSizeType.PORTAIT
+                : OrthographicSizeType.NORMAL;
+
+            foreach (var cameraScaler in _cameraScalers)
+            {
+                cameraScaler.ChangeOrthographicSize(orthographicSizeType);
+            }
 
             _temp = Screen.orientation;
         }

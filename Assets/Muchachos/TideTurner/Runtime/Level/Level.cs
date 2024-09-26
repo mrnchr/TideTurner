@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Muchachos.TideTurner.Runtime.Core.SceneLoading;
 using Muchachos.TideTurner.Runtime.Level.FloatingObjects;
@@ -13,67 +14,87 @@ namespace Muchachos.TideTurner.Runtime.Level
     public class Level : MonoBehaviour
     {
         [SerializeField] private float deathDelay = 1f;
+        [SerializeField] private Cannon[] _cannons;
+
+        public Cannon[] Cannons => _cannons;
+
+        public event Action OnReborn;
+        public event Action OnLose;
 
         private LevelStateMachine _levelMachine;
         private AbstractMoonData _moonData;
         private AbstractMoon _moon;
         private Boat _boat;
         private Water _water;
-        private Cannon[] _cannons;
         private CameraMovement _cameraMovement;
         private Coroutine _coroutine;
         private ISceneLoader _sceneLoader;
         private CheckPointHandler _handler;
-    
-        [Inject]
-        public void Construct(ISceneLoader sceneLoader, LevelStateMachine levelMachine)
-        {
-            _sceneLoader = sceneLoader;
-            _levelMachine = levelMachine;
-        }
+        private LevelFreezer _levelFreezer;
+        private YandexGamesIntegration _yandexGamesIntegration;
 
-        public void Construct(AbstractMoonData moonData,
+        [Inject]
+        public void Construct(ISceneLoader sceneLoader, 
+            LevelStateMachine levelMachine,
+            AbstractMoonData moonData,
             AbstractMoon abstractMoon,
             Boat boat,
             Water water,
-            Cannon[] cannons,
             CameraMovement cameraMovement,
-            CheckPointHandler handler)
+            CheckPointHandler handler,
+            LevelFreezer levelFreezer,
+            YandexGamesIntegration yaIntegration)
         {
+            _sceneLoader = sceneLoader;
+            _levelMachine = levelMachine;
+            _levelFreezer = levelFreezer;
+
             _moonData = moonData;
             _moon = abstractMoon;
             _boat = boat;
             _water = water;
-            _cannons = cannons;
             _cameraMovement = cameraMovement;
             _handler = handler;
+
+            _yandexGamesIntegration = yaIntegration;
+
+            OnReborn += _yandexGamesIntegration.CallAdvWindow;
+            OnReborn += _yandexGamesIntegration.CallRateGameWindow;
+
+            _boat.OnLose += Lose;
         }
 
         public void Init()
         {
+            _handler.Init();
+            Vector3 spawnPosition = _handler.GetSpawnPosition();
+            
             _moonData.Init();
             _moon.Init();
+            
             _water.Init();
+            _water.Movement.SetWaterLevel(spawnPosition);
+            
             _boat.Init();
             _cameraMovement.Init();
-
+            
             foreach (Cannon cannon in _cannons)
                 cannon.Init();
-
-            _handler.Init();
         }
 
         public void Reborn()
         {
+            OnReborn?.Invoke();
+
             Vector3 spawnPosition = _handler.GetSpawnPosition();
-        
+
             _moonData.Init();
             _moon.Init();
             _boat.SetPosition(spawnPosition);
-            _boat.ResetLogic();
+            _boat.Reset();
             _water.Movement.SetWaterLevel(spawnPosition);
             _cameraMovement.Init();
-        
+
             foreach (Cannon cannon in _cannons)
                 cannon.Init();
         }
@@ -88,7 +109,7 @@ namespace Muchachos.TideTurner.Runtime.Level
 
         public void ToMenu()
         {
-            _levelMachine.ChangeState<StayLevelState>();
+            _levelFreezer.Unfreeze();
             _sceneLoader.LoadScene(SceneType.Menu);
         }
 
@@ -99,6 +120,8 @@ namespace Muchachos.TideTurner.Runtime.Level
 
             _boat.SetLoseState();
             _coroutine = StartCoroutine(StartDeathTimer());
+
+            OnLose?.Invoke();
         }
 
         public bool IsLose() => _levelMachine.CurrentState is LoseLevelState || _coroutine != null;
@@ -118,6 +141,16 @@ namespace Muchachos.TideTurner.Runtime.Level
                 return;
 
             _levelMachine.ChangeState<WinLevelState>();
+        }
+
+        private void OnDisable()
+        {
+            OnReborn -= _yandexGamesIntegration.CallAdvWindow;
+            OnReborn -= _yandexGamesIntegration.CallRateGameWindow;
+
+            _boat.OnLose -= Lose;
+
+            (_moon as MobileMoon)?.DisableCanvas();
         }
     }
 }

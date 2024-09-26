@@ -11,25 +11,24 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles.Shark
     
         [SerializeField] private Shark _prefab;
         [SerializeField] private Transform _parent;
+        [SerializeField] private SharkSpawn[] _sharkSpawns;
+        
         private SharkFactory _factory;
-        private SharkSpawn[] _spawns;
         private ILevelUpdater _updater;
 
         [Inject]
-        public void Construct(ILevelUpdater updater)
+        public void Construct(ILevelUpdater updater, Water water, Level level)
         {
             _updater = updater;
-        }
-
-        public void Construct(SharkSpawn[] spawns, Water water, Level level)
-        {
-            _spawns = spawns;
+            
             _factory = new SharkFactory(_prefab, _parent, water, _updater, level);
+
+            Init();
         }
 
-        public void Init()
+        private void Init()
         {
-            foreach (SharkSpawn spawn in _spawns)
+            foreach (SharkSpawn spawn in _sharkSpawns)
             {
                 var instance = _factory.Create(spawn.transform);
                 instance.Init();
@@ -39,8 +38,8 @@ namespace Muchachos.TideTurner.Runtime.Level.Obstacles.Shark
 
         public void Respawn()
         {
-            for (int i = 0; i < _spawns.Length; i++)
-                RespawnShark(_sharks[i], _spawns[i]);
+            for (int i = 0; i < _sharkSpawns.Length; i++)
+                RespawnShark(_sharks[i], _sharkSpawns[i]);
 
             return;
 

@@ -6,21 +6,25 @@ namespace Muchachos.TideTurner.Runtime.Level.Buoy
 {
     public class BuoySwitcher : MonoBehaviour
     {
-        private static readonly int _float = Animator.StringToHash("Float");
-
         [SerializeField] private Light2D _light;
 
         [SerializeField] private CheckPoint _checkPoints;
 
-        private void Start()
+        private void Awake()
         {
             _light.enabled = false;
+
+            _checkPoints.OnChecked += EnableLight;
         }
 
-        private void Update()
+        private void EnableLight()
         {
-            if (_checkPoints.IsChecked)
-                _light.enabled = true;
+            _light.enabled = true;
+        }
+
+        private void OnDestroy()
+        {
+            _checkPoints.OnChecked -= EnableLight;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.Core
 {
@@ -11,6 +12,19 @@ namespace Muchachos.TideTurner.Runtime.Core
         public bool IsPlaying => _sound.isPlaying;
 
         private AudioSource _sound;
+        private YandexGamesIntegration _yandexGamesIntegration;
+
+        private Action _cachedStart;
+
+        [Inject]
+        public void Construct(YandexGamesIntegration yandexGamesIntegration)
+        {
+            _yandexGamesIntegration = yandexGamesIntegration;
+
+            _cachedStart += () => SetSoundState(SoundState.Stop);
+
+            _yandexGamesIntegration.OnAdv += _cachedStart.Invoke;
+        }
 
         private void Awake()
         {
@@ -34,6 +48,11 @@ namespace Muchachos.TideTurner.Runtime.Core
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }
+        }
+
+        private void OnDestroy()
+        {
+            _yandexGamesIntegration.OnAdv -= _cachedStart.Invoke;
         }
     }
 

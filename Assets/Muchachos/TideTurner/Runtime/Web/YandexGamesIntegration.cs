@@ -43,7 +43,7 @@ public class YandexGamesIntegration : MonoBehaviour
     private User _user;
     private ApplicationFocusHandler _applicationFocusHandler;
     private LocalizationController _localizationController;
-    private bool _authFlag;
+    private string _authFlag = "false";
 
     [Inject]
     public void Construct(User user,
@@ -57,7 +57,9 @@ public class YandexGamesIntegration : MonoBehaviour
         _applicationFocusHandler.OnFocusChange += CheckFocus;
         _user.OnDataUpdate += Save;
         _user.OnReset += Save;
+#if !UNITY_EDITOR
         OnAuth += LoadData;
+#endif
     }
 
     public void Start()
@@ -78,6 +80,10 @@ public class YandexGamesIntegration : MonoBehaviour
 #if !UNITY_EDITOR
         Auth();
 #endif
+#if UNITY_EDITOR
+        CheckAuth("true");
+        SetNick("USERNAME");
+#endif
     }
 
     public void CallRateGameWindow()
@@ -97,7 +103,7 @@ public class YandexGamesIntegration : MonoBehaviour
 
     private void Save()
     {
-        if (!_authFlag)
+        if (_authFlag == "false")
             return;
         
         string data = JsonUtility.ToJson(_user.Data);
@@ -107,34 +113,35 @@ public class YandexGamesIntegration : MonoBehaviour
 #endif
         Debug.Log("Data saved: " + _user.Data.CurrentInd);
     }
-
+    
     // call from js
-    public void SetData(string data)
-    {
-        var userData = JsonUtility.FromJson<UserData>(data);
-        _user.UpdateData(userData);
-
-        Debug.Log("Data loaded: " + userData.CurrentInd);
-    }
-
-    // call from js
-    public void SetNick(string nick)
-    {
-        _user.UpdateNick(nick);
-    }
-
-    // call from js
-    public void CheckAuth(bool state)
+    public void CheckAuth(string state)
     {
         _authFlag = state;
 
-        if (_authFlag)
+        if (_authFlag == "true")
         {
             OnAuth?.Invoke();
             Debug.Log("Auth completed");
         }
 
         Debug.Log("Auth state: " + _authFlag);
+    }
+
+    // call from js
+    public void SetData(string data)
+    {
+        var userData = JsonUtility.FromJson<UserData>(data);
+        
+        Debug.Log("Data loaded: " + userData.CurrentInd);
+        
+        _user.UpdateData(userData);
+    }
+
+    // call from js
+    public void SetNick(string nick)
+    {
+        _user.UpdateNick(nick);
     }
     
     // call from js

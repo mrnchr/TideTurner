@@ -42,7 +42,7 @@ namespace Muchachos.TideTurner.Runtime.UI
         public void UpdateSoundVolume(float value)
         {
             _settings.SoundVolume = Mathf.Clamp(value, Idents.AudioParameters.MinVolume, Idents.AudioParameters.MaxVolume);
-            SetVolume(Idents.AudioMixerParameters.SOUND_VOLUME, _settings.MusicVolume);
+            SetVolume(Idents.AudioMixerParameters.SOUND_VOLUME, _settings.SoundVolume);
         }
 
         private void SetVolume(string volume, float value)

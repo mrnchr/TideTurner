@@ -3222,8 +3222,8 @@ Transform:
   - {fileID: 8275860287616903108}
   - {fileID: 6913167511971786478}
   - {fileID: 3887280239260789536}
-  - {fileID: 503542800974945272}
   - {fileID: 1853232494946295139}
+  - {fileID: 503542800974945272}
   - {fileID: 2735173837363559997}
   - {fileID: 899526005318779044}
   - {fileID: 3134235780511366618}
@@ -9819,10 +9819,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FixedBuoy (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8791848393562897700, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.68
@@ -12467,14 +12463,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FixedBuoy
       objectReference: {fileID: 0}
-    - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5344798944815444499, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime0
-      value: 10409
-      objectReference: {fileID: 0}
     - target: {fileID: 8791848393562897700, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.76
@@ -12846,10 +12834,6 @@ PrefabInstance:
     - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_Name
       value: FixedBuoy (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8791848393562897700, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16961,10 +16945,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FixedBuoy (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8791848393562897700, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.84
@@ -17025,15 +17005,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_Name
-      value: FixedBuoy (9)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8494346782869057249, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
+      value: FixedBuoy 9
       objectReference: {fileID: 0}
     - target: {fileID: 8791848393562897700, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17997,10 +17969,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FixedBuoy (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8791848393562897700, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.68
@@ -18569,15 +18537,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_Name
-      value: FixedBuoy (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8494346782869057249, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
+      value: FixedBuoy 7
       objectReference: {fileID: 0}
     - target: {fileID: 8791848393562897700, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18965,11 +18925,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_Name
-      value: FixedBuoy (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: FixedBuoy 5
       objectReference: {fileID: 0}
     - target: {fileID: 8791848393562897700, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20513,15 +20469,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_Name
-      value: FixedBuoy (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8494346782869057249, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
+      value: FixedBuoy 8
       objectReference: {fileID: 0}
     - target: {fileID: 8791848393562897700, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20829,21 +20777,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1829564396265948813}
     m_Modifications:
-    - target: {fileID: 337120018014728477, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_Distance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1917326965378720846, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_Name
-      value: FixedBuoy (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3107286555813204577, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: FixedBuoy 6
       objectReference: {fileID: 0}
     - target: {fileID: 8791848393562897700, guid: ed6cf65269b70834bb1a915178f2e58e, type: 3}
       propertyPath: m_LocalPosition.x

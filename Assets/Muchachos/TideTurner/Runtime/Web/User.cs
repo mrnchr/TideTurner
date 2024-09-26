@@ -21,10 +21,10 @@ public class User
         }
 
         _data = data;
-
-        Debug.Log("Data updated");
-
+        
         OnDataUpdate?.Invoke();
+        
+        Debug.Log("Data updated");
     }
 
     public void UpdateNick(string nick)

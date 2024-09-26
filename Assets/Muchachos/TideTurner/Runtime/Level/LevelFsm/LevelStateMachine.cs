@@ -10,18 +10,23 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
     {
         private readonly ILevelStateFactory _factory;
         private readonly List<LevelStateBase> _states = new List<LevelStateBase>();
+        private readonly IInputController _inputController;
+        private readonly YandexGamesIntegration _yandexGamesIntegration;
 
         public LevelStateBase CurrentState { get; private set; }
-        public event Action<LevelStateBase> OnChangeState;
-
-        private readonly IInputController _inputController;
-
-        public LevelStateMachine(ILevelStateFactory factory, IInputController inputController)
+        public event Action<LevelStateBase> OnChagneState;
+        
+        public LevelStateMachine(
+            ILevelStateFactory factory, 
+            IInputController inputController,
+            YandexGamesIntegration yandexGamesIntegration)
         {
             _factory = factory;
             _inputController = inputController;
+            _yandexGamesIntegration = yandexGamesIntegration;
             
             _inputController.OnInputHandled += HandleInput;
+            OnChagneState += yandexGamesIntegration.HandleGamePlayAPI;
         }
 
         public void Initialize()
@@ -45,7 +50,7 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
             CurrentState = _states.Find(x => x is T);
             CurrentState?.Enter();
 
-            OnChangeState?.Invoke(CurrentState);
+            OnChagneState?.Invoke(CurrentState);
         }
 
         private void HandleInput(InputData data)
@@ -70,6 +75,7 @@ namespace Muchachos.TideTurner.Runtime.Level.LevelFsm
         public void Dispose()
         {
             _inputController.OnInputHandled -= HandleInput;
+            OnChagneState -= _yandexGamesIntegration.HandleGamePlayAPI;
         }
     }
 }

@@ -81,12 +81,12 @@ mergeInto(LibraryManager.library,
                 console.log("Игрок не авторизован.");
                 ysdk.auth.openAuthDialog().then(() => {
                     console.log("Игрок успешно авторизован.");
-                    myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', true);
+                    myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "true");
                 }).catch(() => {
-                    myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', false);
+                    myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "false");
                 });
             }else{
-                myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', true);
+                myGameInstance.SendMessage('YandexGamesIntegration', 'CheckAuth', "true");
             }
         });
     },

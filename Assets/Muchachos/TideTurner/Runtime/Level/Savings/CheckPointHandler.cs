@@ -22,23 +22,28 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
         {
             _level = level;
             _user = user;
-
-            UpdateCheckPointIndex();
-
-            Init();
+            
+            _user.OnDataUpdate += UpdateCheckPointIndex;
+            OnNewCheckPoint += WrappedUpdateData;
         }
 
-        private void Init()
+        public void Init()
         {
             int i = 0;
+
+            string checkedPoints = "Checked points: ";
+            
             foreach (CheckPoint check in _checks)
             {
-                check.IsChecked = i < _user.Data.CurrentInd;
-
-                check.index = i++;
+                bool isCheched = i <= _user.Data.CurrentInd;
+                check.Init(isCheched, i++);
+                
+                checkedPoints += isCheched ? i + " " : string.Empty;
             }
+            
+            Debug.Log(checkedPoints);
 
-            _lastCheckIndex = _user.Data.CurrentInd;
+            UpdateCheckPointIndex();
         }
 
         public void Check(CheckPoint check)
@@ -47,14 +52,23 @@ namespace Muchachos.TideTurner.Runtime.Level.Savings
                 return;
 
             check.IsChecked = true;
-            _lastCheckIndex = check.index;
-            _checks.Insert(_lastCheckIndex, check);
+            _lastCheckIndex = check.Index;
+            //_checks.Insert(_lastCheckIndex, check);
 
             OnNewCheckPoint?.Invoke(_lastCheckIndex);
         }
+        
+        private void WrappedUpdateData(int ind) => 
+            _user.UpdateData(new UserData(_user.Data.Nick, ind, _user.Data.Authorised)); 
 
-        public void UpdateCheckPointIndex() => _lastCheckIndex = _user.Data.CurrentInd;
+        private void UpdateCheckPointIndex() => _lastCheckIndex = _user.Data.CurrentInd;
         public bool WasCheckPoint() => _lastCheckIndex > DefaultCheckIndex;
         public Vector3 GetSpawnPosition() => WasCheckPoint() ? _checks[_lastCheckIndex].SpawnPosition : Vector3.zero;
+
+        private void OnDestroy()
+        {
+            _user.OnDataUpdate -= UpdateCheckPointIndex;
+            OnNewCheckPoint -= WrappedUpdateData;
+        }
     }
 }

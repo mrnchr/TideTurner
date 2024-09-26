@@ -18,24 +18,18 @@ namespace Muchachos.TideTurner.Runtime.Level.FloatingObjects
 
         public Action OnLose;
 
-        private BoatSpawn _spawn;
         private Rigidbody2D _rb;
         private WaterMovement _waterMovement;
         private CheckPointHandler _handler;
-        private User _user;
         private bool _isReset;
         
         [Inject]
         public void Construct(
-            BoatSpawn spawn, 
             WaterMovement waterMovement, 
-            CheckPointHandler handler, 
-            User user)
+            CheckPointHandler handler)
         {
-            _spawn = spawn;
             _waterMovement = waterMovement;
             _handler = handler;
-            _user = user;
         }
 
         private void Awake()

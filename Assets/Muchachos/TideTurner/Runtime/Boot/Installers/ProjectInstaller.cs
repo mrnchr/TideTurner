@@ -4,6 +4,7 @@ using Muchachos.TideTurner.Runtime.Core;
 using Muchachos.TideTurner.Runtime.Core.GameFsm;
 using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Core.SceneLoading;
+using Muchachos.TideTurner.Runtime.Debugging;
 using Muchachos.TideTurner.Runtime.UI;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -27,10 +28,13 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindConfigProvider();
             BindSettingData();
 
+            BindLoggerController();
+
             BindAudioMixerProvider();
             BindButtonSoundPlayer();
 
             BindSceneLoader();
+            BindRawMobileInputData();
             BindInputHandler();
             BindInputController();
 
@@ -42,6 +46,21 @@ namespace Muchachos.TideTurner.Runtime.Boot
             BindMobileInitializer();
         }
 
+        private void BindLoggerController()
+        {
+            Container
+                .Bind<ILoggerController>()
+                .To<LoggerController>()
+                .AsSingle();
+        }
+
+        private void BindRawMobileInputData()
+        {
+            Container
+                .Bind<RawMobileInputData>()
+                .AsSingle();
+        }
+
         private void BindInputController()
         {
             Container
@@ -51,28 +70,26 @@ namespace Muchachos.TideTurner.Runtime.Boot
 
         private void BindInputHandler()
         {
-            if (Application.isMobilePlatform)
-            {
-                Container
-                    .Bind<IInputHandler>()
-                    .To<MobileInputHandler>()
-                    .AsSingle();
-            }
-            else
-            {
+#if UNITY_ANDROID
+            Container
+                .Bind<IInputHandler>()
+                .To<MobileInputHandler>()
+                .AsSingle();
+#elif UNITY_STANDALONE
                 Container
                     .Bind<IInputHandler>()
                     .To<PCInputHandler>()
                     .AsSingle();
-            }
+#endif
         }
 
         private void BindMobileInitializer()
         {
-            if (Application.isMobilePlatform)
-                Container
-                    .BindInterfacesTo<MobileInitializer>()
-                    .AsSingle();
+#if UNITY_ANDROID
+            Container
+                .BindInterfacesTo<MobileInitializer>()
+                .AsSingle();
+#endif
         }
 
         private void BindSceneLoader()

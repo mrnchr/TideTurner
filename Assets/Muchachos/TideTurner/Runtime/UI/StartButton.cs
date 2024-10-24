@@ -16,7 +16,13 @@ namespace Muchachos.TideTurner.Runtime.UI
 
         public void OnClick()
         {
-            _sceneLoader.LoadScene(Application.isMobilePlatform ? SceneType.MobileLevel : SceneType.PCLevel);
+            _sceneLoader.LoadScene(
+#if UNITY_ANDROID
+                SceneType.MobileLevel
+#elif UNITY_STANDALONE
+                SceneType.PCLevel
+#endif
+            );
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Muchachos.TideTurner.Runtime.Core.Input;
 using Muchachos.TideTurner.Runtime.Level.LevelFsm;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Muchachos.TideTurner.Runtime.UI

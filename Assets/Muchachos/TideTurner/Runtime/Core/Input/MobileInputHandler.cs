@@ -1,27 +1,28 @@
 ﻿using Muchachos.TideTurner.Runtime.Configuration;
-using Muchachos.TideTurner.Runtime.Mobile;
+using Muchachos.TideTurner.Runtime.Debugging;
 using UnityEngine;
 
 namespace Muchachos.TideTurner.Runtime.Core.Input
 {
     public class MobileInputHandler : IInputHandler
     {
+        private readonly RawMobileInputData _rawInputData;
+        private readonly ILoggerController _logger;
         private readonly MobileConfig _config;
         
         private ScreenOrientation _currentOrientation;
         private ScreenOrientation _lastOrientation;
         
-        private MobileMoon _mobileMoon;
-
-        public MobileInputHandler(IConfigProvider configProvider)
+        public MobileInputHandler(IConfigProvider configProvider, RawMobileInputData rawInputData, ILoggerController logger)
         {
+            _rawInputData = rawInputData;
+            _logger = logger;
             _config = configProvider.Get<MobileConfig>();
-            _mobileMoon = Object.FindAnyObjectByType<MobileMoon>();
         }
 
         public void HandleInput(InputData data)
         {
-            data.VerticalInput = _mobileMoon.slider.value;
+            data.VerticalInput = _rawInputData.VerticalMovement;
 
             _currentOrientation = Screen.orientation;
 
@@ -31,18 +32,12 @@ namespace Muchachos.TideTurner.Runtime.Core.Input
             }
 
             _lastOrientation = _currentOrientation;
-
-            switch (Screen.orientation)
-            {
-                case ScreenOrientation.Portrait:
-                    _currentOrientation = ScreenOrientation.Portrait;
-                    data.HorizontalInput = UnityEngine.Input.acceleration.x / _config.MovementSmoothness;
-                    break;
-                default:
-                    _currentOrientation = ScreenOrientation.LandscapeLeft;
-                    data.HorizontalInput = UnityEngine.Input.acceleration.y / _config.MovementSmoothness;
-                    break;
-            }
+            
+            data.HorizontalInput = UnityEngine.Input.acceleration.x / _config.MovementSmoothness;
+            _currentOrientation = Screen.orientation;
+            
+            _logger.Log(data.HorizontalInput);
+            _logger.Log(data.VerticalInput);
         }
     }
 }
